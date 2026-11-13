@@ -1,5 +1,6 @@
 """Run the hybrid agent on every bundled dataset with a live model, saving answers to llm_cache.json.
 Afterwards the app can replay them offline ("Use recorded LLM answers")."""
+from __future__ import annotations
 import sys
 import time
 from pathlib import Path

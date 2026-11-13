@@ -1,4 +1,5 @@
 """Find spelling, case, spacing and alias variants of the same category value."""
+from __future__ import annotations
 import difflib
 import re
 

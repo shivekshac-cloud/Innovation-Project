@@ -23,10 +23,9 @@ No GPU, no internet and no paid API needed.
 **Presenting?** Follow `DEMO_GUIDE.md`: step-by-step setup on Windows, a 7-minute demo script, likely questions
 and fixes. Evaluators: see `EVALUATOR_NOTES.md`. LLM answers: see `LLM_SETUP.md`.
 
-The optional LLM uses **Ollama with `qwen2.5:1.5b`** (about 1 GB download, about 1.5 GB RAM, CPU only). In hybrid mode the
-LLM is asked only a few short questions per file (rare values the rules could not match), which suits a slow CPU.
-Run `record_llm_answers.bat` once at home: it records every answer to `llm_cache.json`, so during the presentation the
-app can replay them with no model running (tick *Use recorded LLM answers*).
+The LLM answers (gpt-oss-20b, recorded on an M5 MacBook Air) ship in `llm_cache.json`; the app replays them offline
+(tick *Use recorded LLM answers*). To run a model live on an 8 GB laptop, use a small one such as `qwen2.5:1.5b`
+via Ollama or LM Studio (`LLM_SETUP.md`).
 
 ## How the agent works
 
@@ -58,7 +57,7 @@ streamlit run app/streamlit_app.py            # demo app
 python -m cleanagent data/real/startup_funding.csv -o cleaned.csv    # clean any CSV
 python -m cleanagent.benchmark [--quick] [--llm]                     # synthetic benchmark -> reports/
 python -m cleanagent.realeval                                        # real-data evaluation -> reports/real/
-pytest -q tests                                                      # 22 tests
+pytest -q tests                                                      # 24 tests
 ```
 
 ## Results on synthetic data (known truth)
@@ -194,8 +193,36 @@ Run once with the code frozen (fingerprint `7a376f4a6226`) before anyone looked 
 
 
 
+# Results with a real LLM
+
+**Model: gpt-oss-20b, run locally in LM Studio on an M5 MacBook Air.** Its answers were recorded once
+(`llm_cache.json`) and are replayed by the app and the scripts, so every number below is reproducible without the model.
+The demo laptop (i3, 8 GB RAM) cannot run a 20B model live; it replays the recorded answers offline. Full tables:
+`reports/RESULTS_llm.md` (synthetic) and `reports/real/LLM_REAL_RESULTS.md` (real).
+
+| Setting | Rules only | Rules + LLM (hybrid) | LLM plans everything |
+|---|---|---|---|
+| Synthetic: fixable errors fixed | 99.1% | **99.9%** | 10.4% |
+| Synthetic: old city names not in the rule dictionary (`Poona`, `Cochin`, `Vizag`...) | 0% | **94.7%** | 0% |
+| Synthetic, unseen formats: fixable errors fixed | 66.0% | 68.2% | not run |
+| Real startup data: 140 gold rows correct | **100%** (development score) | 98.8% | fell back to rules |
+| Clean values damaged (any setting) | 0% | 0% | 0% |
+| LLM questions per file | 0 | about 3-6 | 10+ long prompts |
+
+- **Hybrid is the right design.** The LLM adds world knowledge the rules lack (old city names, `Kormangala` → `Bengaluru`)
+  and is asked only a few short questions per file. Rules do the mechanical work reliably.
+- **An LLM planning alone is poor.** Left to plan the whole cleaning, gpt-oss-20b proposed a few steps and stopped,
+  fixing about 10% of errors. It damaged nothing only because every step passed validation and the guardrails.
+- **The LLM over-merges categories.** On real data it merged distinct funding-round labels (`Seed Round` → `Seed Funding`,
+  and wrongly `Crowd funding` → `Debt Funding`), which is why hybrid scores 98.8% against 100% for rules there.
+- **Real data improved the design.** The first hybrid version put LLM merges in the same step as rule merges, so a
+  guardrail rejected the whole city step (91.2%), and it accepted LLM merges that collapse `Bangalore / USA` into
+  `Bangalore`. LLM suggestions are now a separate step and obey the same safety rules as the rules themselves.
+
 ## What the numbers say
 
+- **LLM: useful for knowledge, not for planning.** Hybrid mode fixes 95% of old city names the rules miss; an LLM
+  planning alone fixes 10%. See *Results with a real LLM*.
 - **Known formats: near-perfect and safe.** 99% of fixable synthetic errors fixed, no correct value damaged, no row
   silently deleted.
 - **Unseen formats: 66%.** On formats the rules were never written for, the agent fixes two thirds and still damages
@@ -221,7 +248,7 @@ Run once with the code frozen (fingerprint `7a376f4a6226`) before anyone looked 
 | Rules were written knowing the error types | **Measured.** Unseen-format test (66% fixed) and blind hold-out (only trivial fixes; unit columns missed). A generic unit tool was added *after* the hold-out and is reported separately. |
 | Day-first dates assumed | **Fixed.** Date order is detected from the data (a day above 12 is proof), with the evidence in the log; tested on a month-first file. |
 | Downstream metric did not move | **Explained** with real data: equal accuracy, more coverage, and the row-filtering lesson above. |
-| No LLM results | **Ready, not yet measured.** No model could be downloaded from the build machine. Run `record_llm_answers.bat` on the laptop (Ollama + qwen2.5:1.5b) to produce `reports/RESULTS_llm.md` and the offline cache. |
+| No LLM results | **Fixed.** Measured with gpt-oss-20b (local, LM Studio): hybrid helps on unknown names, LLM-only planning is poor; see *Results with a real LLM*. |
 
 Still open, and worth saying in the presentation:
 
@@ -230,7 +257,8 @@ Still open, and worth saying in the presentation:
   (`New Delhi` → `Delhi`), so a lenient city score is also reported. See `EVALUATOR_NOTES.md`.
 - The startup and house files were used during development, so their scores are development scores. Only the CarDekho
   run is blind.
-- Mixed units (`kmpl` with `km/kg`) and old names missing from the dictionary (`Poona`) are left for a human or the LLM.
+- Mixed units (`kmpl` with `km/kg`) are left for a human. Old names missing from the dictionary need the LLM (hybrid mode).
+- LLM results come from one model (gpt-oss-20b) and 2 synthetic datasets in `--quick` mode; another model may differ.
 - Outlier detection is deliberately conservative (96% of synthetic extra-zero errors caught) so that genuine extreme
   values in real data survive.
 - Guardrail thresholds (15% / 25% / 50%) are judgement calls; one faulty step (an age range of 25-55) slips under them.
@@ -251,6 +279,6 @@ app/         streamlit_app.py
 scripts/     make_gold_startup.py  check_llm.py  record_llm.py
 data/real/   the three real files, gold labels and labelling guide
 reports/     synthetic results; reports/real/ real-data results, cleaned files, hold-out record
-tests/       22 tests
+tests/       24 tests
 setup.bat  run_app.bat  run_benchmark.bat  record_llm_answers.bat
 ```

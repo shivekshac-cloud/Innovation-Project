@@ -1,8 +1,10 @@
 """Plan step. RulePlanner is deterministic; LLMPlanner asks a language model; HybridPlanner uses rules and
 asks the LLM only about rare category values the rules could not resolve."""
+from __future__ import annotations
 import json
 from dataclasses import dataclass, field
 
+from .categories import MULTI
 from .llm import extract_json
 from .tools import OPTIONAL, TOOL_DOCS, TOOLS
 
@@ -19,7 +21,14 @@ class Step:
     meta: dict = field(default_factory=dict)
 
     def key(self):
-        return (self.tool, self.args.get("col") or ",".join(self.args.get("subset", [])))
+        """Hashable identity of the step, even when an LLM sends malformed arguments."""
+        if self.meta.get("llm_suggestion"):
+            return ("map_values_llm", str(self.args.get("col")))
+        col = self.args.get("col") if isinstance(self.args, dict) else None
+        if col is None and isinstance(self.args, dict):
+            sub = self.args.get("subset", [])
+            col = ",".join(map(str, sub)) if isinstance(sub, list) else sub
+        return (str(self.tool), col if isinstance(col, str) else json.dumps(col, sort_keys=True, default=str))
 
     def label(self):
         a = {k: v for k, v in self.args.items() if k != "mapping"}
@@ -95,14 +104,24 @@ class RulePlanner:
             elif k == "category_variants":
                 mapping = {raw: v[0] for raw, v in iss.detail["mapping"].items()}
                 reasons = {raw: v[1] for raw, v in iss.detail["mapping"].items()}
-                if self.llm and iss.detail["unresolved"]:
-                    extra = self._ask_llm(c, iss.detail["unresolved"], iss.detail["canonical"])
-                    for raw, tgt in extra.items():
-                        mapping[raw], reasons[raw] = tgt, "LLM: alias or misspelling"
                 if mapping:
                     steps.append(Step("map_values", {"col": c, "mapping": mapping},
-                                      f"merge {len(mapping)} variant spellings into canonical values",
-                                      "hybrid" if self.llm else "rule", {"reasons": reasons}))
+                                      f"merge {len(mapping)} variant spellings into canonical values", "rule",
+                                      {"reasons": reasons}))
+                if self.llm and iss.detail["unresolved"] and ("map_values_llm", str(c)) not in done:  # ask once per column
+                    # LLM suggestions are a SEPARATE step: the guardrails judge them on their own, and a bad
+                    # suggestion can never cause the (reliable) rule merges to be thrown away with it
+                    extra = self._ask_llm(c, iss.detail["unresolved"], iss.detail["canonical"])
+                    # the same safety rules apply to LLM answers: never collapse a multi-valued entry
+                    # ('Bangalore / USA') into one value; and follow the rule renames ('Bangalore' -> 'Bengaluru')
+                    extra = {k: mapping.get(v, v) for k, v in extra.items()
+                             if not (MULTI.search(k) and not MULTI.search(v))}
+                    extra = {k: v for k, v in extra.items() if k != v}
+                    if extra:
+                        steps.append(Step("map_values", {"col": c, "mapping": extra},
+                                          f"LLM suggests {len(extra)} values are aliases or misspellings", "llm",
+                                          {"reasons": {k: f"LLM: alias or misspelling of {v}" for k, v in extra.items()},
+                                           "llm_suggestion": True}))
             elif k == "out_of_range":
                 steps.append(Step("fix_range", {"col": c, "lo": iss.detail["lo"], "hi": iss.detail["hi"]},
                                   f"{iss.count} values outside plausible range [{iss.detail['lo']}, {iss.detail['hi']}]"))
@@ -163,12 +182,13 @@ class LLMPlanner:
                 d["unmatched_rare_values"] = i.detail["unresolved"][:40]
             issue_view.append(d)
         user = (f"Columns:\n{json.dumps(cols, ensure_ascii=False)}\n\nDetected issues:\n{json.dumps(issue_view, ensure_ascii=False)}\n\n"
-                f"Steps already done: {json.dumps([list(k) for k in done])}\nPlan the next cleaning steps.")
+                f"Steps already done: {json.dumps(sorted(list(k) for k in done))}\nPlan the next cleaning steps.")
         try:
             reply = extract_json(self.llm.complete([{"role": "system", "content": SYSTEM.format(tools=tools)},
                                                     {"role": "user", "content": user}]))
             raw = reply.get("steps", [])
-            steps = [Step(s.get("tool", ""), s.get("args", {}) or {}, s.get("reason", ""), "llm") for s in raw if isinstance(s, dict)]
+            steps = [Step(str(s.get("tool", "")), s.get("args") if isinstance(s.get("args"), dict) else {}, str(s.get("reason", "")), "llm")
+                     for s in raw if isinstance(s, dict)] if isinstance(raw, list) else []
         except Exception as e:  # noqa: BLE001
             self.llm_errors.append(str(e))
             return [Step(s.tool, s.args, s.reason + " [fallback: LLM reply unusable]", "fallback", s.meta)

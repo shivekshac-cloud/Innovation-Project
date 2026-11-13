@@ -1,4 +1,5 @@
 """Act step: the only operations the agent (rule-based or LLM) is allowed to run. No free-form code."""
+from __future__ import annotations
 import re
 from dataclasses import dataclass, field
 

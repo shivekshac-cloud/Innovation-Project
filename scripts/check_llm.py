@@ -3,6 +3,7 @@
     python scripts/check_llm.py                      # uses CLEANAGENT_LLM_BASE_URL / CLEANAGENT_LLM_MODEL
     python scripts/check_llm.py --model qwen2.5:1.5b --url http://localhost:11434/v1
 """
+from __future__ import annotations
 import argparse
 import sys
 import time

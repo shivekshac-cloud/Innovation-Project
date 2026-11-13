@@ -5,6 +5,7 @@ Configure with environment variables (defaults point at LM Studio's local server
   CLEANAGENT_LLM_MODEL     the model name the server expects
   CLEANAGENT_LLM_API_KEY   only for hosted APIs
 """
+from __future__ import annotations
 import json
 import os
 import re
@@ -63,6 +64,7 @@ class CachedLLM:
             self.hits += 1
             return self.cache[key]["reply"]
         if self.mode == "replay" or self.llm is None:
+            self.misses += 1
             raise RuntimeError("prompt not in llm_cache.json (replay mode)")
         self.misses += 1
         reply = self.llm.complete(messages)

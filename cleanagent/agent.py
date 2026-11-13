@@ -1,4 +1,5 @@
 """The agent loop: observe (profile) -> plan -> act (whitelisted tool) -> verify (guardrails) -> repeat."""
+from __future__ import annotations
 from dataclasses import dataclass, field
 
 import pandas as pd

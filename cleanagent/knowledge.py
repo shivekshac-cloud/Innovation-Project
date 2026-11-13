@@ -3,6 +3,7 @@
 This is deliberately incomplete (it lists only common Indian city renames). The benchmark also uses
 older names that are NOT listed here, to measure what a rule-based agent misses and an LLM could fix.
 """
+from __future__ import annotations
 MISSING_TOKENS = {"", "na", "n/a", "n.a.", "nan", "null", "none", "-", "--", "?", "nil", "not available",
                   "unknown", "#n/a", "missing", "not applicable", "undisclosed",
                   "not disclosed", "n.a", "na."}

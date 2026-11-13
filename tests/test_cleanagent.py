@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import json
 
 import numpy as np
@@ -144,3 +146,25 @@ def test_llm_cache_records_and_replays(tmp_path):
     replay = CachedLLM(None, path, mode="replay")
     res = CleaningAgent(RulePlanner(llm=replay)).run(s)
     assert replay.hits == 1 and res.df.city.iloc[40] == "Pune"
+
+
+def test_malformed_llm_arguments_are_refused_not_crashing():
+    df = pd.DataFrame({"age": ["34", "NA", "41 yrs"] * 10, "city": ["Pune"] * 30})
+    bad = json.dumps({"steps": [{"tool": "parse_number", "args": {"col": ["age", "city"]}},
+                                {"tool": "drop_duplicates", "args": {"subset": "city"}},
+                                {"tool": "map_values", "args": "oops"}, "not a step",
+                                {"tool": "parse_number", "args": {"col": "age"}}]})
+    res = CleaningAgent(LLMPlanner(FakeLLM(bad)), max_iters=2).run(df)
+    assert [r["status"] for r in res.log][:3] == ["invalid", "invalid", "invalid"]
+    assert res.df.age.dropna().tolist()[:2] == [34.0, 41.0]
+
+
+def test_llm_suggestions_obey_the_same_safety_rules():
+    s = pd.DataFrame({"city": ["Bengaluru"] * 20 + ["Bangalore"] * 20 + ["Pune"] * 20 + ["Bangalore / USA", "Poona", "Kormangala"]})
+    llm = FakeLLM('{"mapping": {"Bangalore / USA": "Bangalore", "Poona": "Pune", "Kormangala": "Bangalore"}}')
+    res = CleaningAgent(RulePlanner(llm=llm)).run(s)
+    out = res.df.city.tolist()
+    assert out[60] == "Bangalore / USA"     # multi-city entry never collapsed, whoever suggests it
+    assert out[61] == "Pune"                # LLM world knowledge accepted
+    assert out[62] == "Bengaluru"           # LLM target follows the rule rename, old name not brought back
+    assert "Bangalore" not in out

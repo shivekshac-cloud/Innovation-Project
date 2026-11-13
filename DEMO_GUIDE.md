@@ -57,7 +57,7 @@ fails, open *Settings → Apps → Advanced app settings → App execution alias
 
 ---
 
-## Part C. Demo script (about 7 minutes)
+## Part C. Demo script (about 8 minutes)
 
 **1. The problem (30 s, no clicking).** "Real Indian data is messy: money written as ₹1,20,000 or 1.2 lakh or
 120k, dates where 05/03 means 5 March, Bangalore next to Bengaluru, junk like `\xc2\xa0` from bad exports,
@@ -90,13 +90,15 @@ only about two thirds: this is honest, and it is why we added the LLM mode"), an
 - CarDekho: "This was a blind test: we froze the code first. It made only safe, trivial fixes and missed units like
   kmpl. We report that as-is."
 
-**6. Close (20 s).** "It runs offline on this i3 laptop, never deletes data silently, explains every change, and we
-measured it honestly on both synthetic and real data."
+**6. LLM mode (1 min).** In the left sidebar choose **Hybrid: rules + LLM**, keep **Use recorded LLM answers** ticked,
+choose the synthetic dataset and run. Open *Before → after by column* → **city**, and show old names such as `Poona` → `Pune`
+with the reason "LLM: alias or misspelling". Say: "The rules don't know every old city name; a language model does. We
+ran gpt-oss-20b locally on a MacBook and recorded its answers. This laptop has 8 GB of RAM and can't run a 20-billion
+parameter model, so it replays them offline. The LLM is only asked a few short questions per file, and its answers go
+through the same safety rules and guardrails as everything else."
 
-**Optional, only if the file `llm_cache.json` exists in the folder:** in the left sidebar choose
-**Hybrid: rules + LLM**, keep **Use recorded LLM answers** ticked, and run the startup dataset again. Say: "In hybrid
-mode a small language model is asked only about values the rules could not match, like old city names. These are
-recorded answers from the model, replayed so the demo needs no internet." If the file does not exist, skip this.
+**7. Close (20 s).** "It runs offline on this i3 laptop, never deletes data silently, explains every change, and we
+measured it honestly on both synthetic and real data."
 
 ---
 
@@ -108,6 +110,11 @@ recorded answers from the model, replayed so the demo needs no internet." If the
   values needs Indian-format knowledge (lakh, crore, day-first dates, renamed cities).
 - **The startup score is 100%, isn't that suspicious?** Yes, and we say so: the rules were improved while looking at
   that file, so it is a development score. The blind test is CarDekho, where results were modest.
+- **How good is the LLM?** As a helper it fixed 95% of old city names the rules missed. Planning the whole cleaning by
+  itself it fixed only 10%, and on real data it merged some labels that should stay separate (`Crowd funding` into
+  `Debt Funding`). So we use it for knowledge, and keep rules and guardrails in charge.
+- **Why not run the LLM live?** A 20B model needs about 16 GB of RAM; this laptop has 8 GB. A small model like
+  Qwen2.5 1.5B could run here, but we used the stronger model for the recorded results.
 - **What if the LLM gives a wrong answer?** Its answer is used only if it maps to a value that already exists in the
   column, and every step must pass the guardrails. A deliberately faulty planner damaged 15% of cells without
   guardrails and 0.9% with them.

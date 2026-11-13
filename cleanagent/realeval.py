@@ -5,6 +5,7 @@
 2. Bengaluru house prices (13,320 real rows): does cleaning help a price model? Coverage and error on held-out houses.
 3. CarDekho used cars (8,128 real rows): blind hold-out, run once with the code frozen (see the frozen report).
 """
+from __future__ import annotations
 import json
 import re
 import time

@@ -1,4 +1,5 @@
 """python -m cleanagent messy.csv -o cleaned.csv [--report report.md] [--mode rule|hybrid|llm]"""
+from __future__ import annotations
 import argparse
 
 import pandas as pd

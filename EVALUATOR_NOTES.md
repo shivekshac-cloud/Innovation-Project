@@ -28,7 +28,11 @@ lenient city score that accepts old names.
 **Downstream.** On real house prices, cleaning did not improve the price model by itself. With the same row filter as
 a standard tutorial, accuracy was equal (−0.1 MAPE points) and coverage was 1.6% higher.
 
-**LLM.** The LLM and hybrid planners are implemented and tested with a simulated model. Results with a real model
-appear in `reports/RESULTS_llm.md` only if that file exists; otherwise, real-model performance has not been measured.
+**LLM.** Real-model results use gpt-oss-20b run locally in LM Studio on an M5 MacBook Air. Its answers were recorded
+once (`llm_cache.json`) and are replayed by the app and scripts; the demo laptop (i3, 8 GB RAM) cannot run a 20B model
+live. Results come from one model and, on synthetic data, 2 datasets (`--quick`). Several design changes were made
+after seeing the first LLM results (LLM suggestions became a separate step and follow the same safety rules); both the
+first and current numbers are reported. The "LLM plans everything" numbers are from the original live run, because a
+prompt-ordering bug (since fixed) made those prompts impossible to replay exactly.
 
-**Tools used.** Python, pandas, scikit-learn, Streamlit. Development was assisted by an AI coding assistant.
+**Tools used.** Python, pandas, scikit-learn, Streamlit. LM Studio, gpt-oss-20b. Development was assisted by an AI coding assistant.

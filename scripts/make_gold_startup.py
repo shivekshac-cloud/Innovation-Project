@@ -4,6 +4,7 @@ Written BEFORE running the improved agent on this file. Every city and funding-t
 labelled by hand in the tables below; irregular dates and amounts are labelled by hand too. Only plain
 dd/mm/yyyy dates and plain comma-grouped integers are converted mechanically. See data/real/LABELING_GUIDE.md.
 """
+from __future__ import annotations
 import re
 import sys
 

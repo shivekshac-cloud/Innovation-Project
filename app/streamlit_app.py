@@ -1,4 +1,5 @@
 """CleanAgent - run: streamlit run app/streamlit_app.py   (Windows: double-click run_app.bat)"""
+from __future__ import annotations
 import sys
 import time
 from pathlib import Path
@@ -77,11 +78,13 @@ with tab_demo:
         with st.spinner("Observing, planning, cleaning... (up to ~30 s for the house data on a laptop)"):
             res = CleaningAgent(planner, guard=Guard() if guard_on else None).run(dirty)
         st.session_state.update(res=res, secs=time.time() - t0, errs=getattr(planner, "llm_errors", []), shown_for=choice)
+        if mode != "Rules (offline)" and replay and not (ROOT / "llm_cache.json").exists():
+            st.warning("No recorded LLM answers found (llm_cache.json); the rules were used instead.")
 
     res = st.session_state.get("res")
     if res is not None and st.session_state.get("shown_for") == choice:
         if st.session_state["errs"]:
-            st.info(f"LLM unavailable for {len(st.session_state['errs'])} question(s); rules were used instead.")
+            st.info(f"{len(st.session_state['errs'])} LLM question(s) had no recorded answer; rules were used for those.")
         log = pd.DataFrame(res.log)
         m = st.columns(6)
         m[0].metric("Issues found", len(res.issues_before)); m[1].metric("Issues left", len(res.issues_after))
@@ -123,12 +126,17 @@ def show_report(md_path, images):
 
 with tab_syn:
     st.write("3,000 generated loan applications with errors injected on purpose, so every fix can be checked against the truth.")
+    llm_md = ROOT / "reports/RESULTS_llm.md"
+    if llm_md.exists():
+        with st.expander("With a real LLM: gpt-oss-20b, recorded on an M5 MacBook Air (click to open)"):
+            st.markdown(llm_md.read_text(encoding="utf-8"))
     show_report(ROOT / "reports/RESULTS.md", ["cell_accuracy.png", "by_error_type.png", "unseen_formats.png",
                                               "fairness_retention.png", "guardrails.png", "error_rate_sweep.png"])
 
 with tab_real:
     st.write("Three real Indian datasets: two used during development, one kept as a blind hold-out.")
     show_report(ROOT / "reports/real/REAL_RESULTS.md", [])
+    show_report(ROOT / "reports/real/LLM_REAL_RESULTS.md", [])
     err = ROOT / "reports/real/startup_agent_errors.csv"
     if err.exists() and err.stat().st_size > 5:
         with st.expander("Agent errors on the hand-labelled startup rows"):

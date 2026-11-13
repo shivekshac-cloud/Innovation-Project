@@ -1,4 +1,5 @@
 """Observe step: infer what each column is and list the data-quality issues in it."""
+from __future__ import annotations
 import re
 from dataclasses import dataclass, field
 

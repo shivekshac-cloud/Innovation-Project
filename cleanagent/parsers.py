@@ -1,4 +1,5 @@
 """Value-level parsers for Indian data formats. Each returns np.nan when a value cannot be parsed."""
+from __future__ import annotations
 import math
 import re
 from collections import Counter

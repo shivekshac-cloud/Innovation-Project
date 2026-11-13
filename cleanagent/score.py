@@ -1,4 +1,5 @@
 """Score a cleaned table against the ground truth recorded by the corrupter."""
+from __future__ import annotations
 import numpy as np
 import pandas as pd
 from sklearn.ensemble import HistGradientBoostingClassifier

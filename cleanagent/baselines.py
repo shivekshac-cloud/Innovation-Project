@@ -1,4 +1,5 @@
 """Baselines the agent is compared with, and a deliberately faulty planner to test the guardrails."""
+from __future__ import annotations
 import numpy as np
 import pandas as pd
 

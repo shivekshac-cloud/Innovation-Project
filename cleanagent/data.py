@@ -4,6 +4,7 @@ errors and records exactly what it changed (the ground truth for scoring).
 Simulation assumption, stated openly: applications from tier-3 towns are twice as likely to contain errors
 (more paper forms and assisted data entry). This lets us check whether cleaning harms one group more.
 """
+from __future__ import annotations
 import io
 
 import numpy as np

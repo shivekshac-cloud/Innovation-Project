@@ -1,6 +1,7 @@
 """python -m cleanagent.benchmark           rule-based agent vs baselines (offline; ~5 min, ~10 min on an i3 laptop)
 python -m cleanagent.benchmark --quick   2 datasets instead of 5 (~2 min on an i3)
 python -m cleanagent.benchmark --llm     also run the LLM and hybrid planners (needs an LLM server, see llm.py)"""
+from __future__ import annotations
 import argparse
 import json
 import time
@@ -37,7 +38,8 @@ def methods(seed, llm=None):
          "Faulty planner, no guardrails": lambda d: CleaningAgent(FaultyPlanner(seed), guard=None).run(d).df}
     if llm:
         m["Agent (hybrid: rules + LLM)"] = lambda d: CleaningAgent(RulePlanner(llm=llm)).run(d).df
-        m["Agent (LLM planner)"] = lambda d: CleaningAgent(LLMPlanner(llm)).run(d).df
+        if getattr(llm, "mode", "") != "replay":  # its multi-turn prompts were not replayable before v1.1
+            m["Agent (LLM planner)"] = lambda d: CleaningAgent(LLMPlanner(llm)).run(d).df
     return m
 
 
@@ -53,7 +55,9 @@ def main(use_llm=False, quick=False):
     llm = None
     if use_llm:
         from .llm import CachedLLM, OpenAICompatLLM
-        llm = CachedLLM(OpenAICompatLLM())
+        import os
+        replay = os.getenv("CLEANAGENT_LLM_REPLAY") == "1"  # re-score recorded answers without a model
+        llm = CachedLLM(None if replay else OpenAICompatLLM(), mode="replay" if replay else "auto")
     test, test_tier = make_clean(3000, 1000, id_offset=90000)
     tt = test_tier.to_numpy()
     rows, subtype_rows, tier_rows, timing, unseen_rows, unseen_sub = [], [], [], {}, [], []
@@ -109,6 +113,8 @@ def main(use_llm=False, quick=False):
                sweep={m: {str(r): {k: ms(g[k]) for k in ("cell_accuracy", "retention", "auc")} for r, g in d.groupby("rate")}
                       for m, d in sw.groupby("method", sort=False)})
     suffix = "_llm" if llm else ""
+    if llm:
+        res["settings"]["llm_cache_hits"], res["settings"]["llm_cache_misses_or_unrecorded"] = llm.hits, llm.misses
     json.dump(res, open(f"reports/results{suffix}.json", "w", encoding="utf-8"), indent=2)
     write_markdown(res, f"reports/RESULTS{suffix}.md")
     if not llm:
@@ -144,8 +150,8 @@ def write_markdown(res, path):
           "| Method | Correct cells | Fixable errors fixed | Clean cells damaged |", "|---|---|---|---|"]
     for m, v in res["unseen"].items():
         L.append(f"| {m} | {f(v['cell_accuracy'])} | {f(v['recoverable_fixed'])} | {f(v['collateral_damage'])} |")
-    seen_d = res["by_subtype"].get("Agent (rule planner)", {})
     for m, d in res["unseen_by_subtype"].items():
+        seen_d = res["by_subtype"].get(m, {})
         L += ["", f"| Error type ({m}) | Known formats | Unseen formats |", "|---|---|---|"]
         for k in ("money_format", "date_format", "phone_format", "variant", "num_text", "alias_unknown"):
             if k in d:
