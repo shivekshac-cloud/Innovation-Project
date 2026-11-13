@@ -1,0 +1,413 @@
+applicant_id,name,gender,age,city,state,pincode,phone,email,employment,monthly_income,loan_amount,credit_score,existing_emis,application_date,defaulted
+APP00146,Sneha Kumar,Female,45,Chennai,Tamil Nadu,nil,7028659333,sneha.kumar980@yahoo.co.in,Self-employed,28000.0,750000.0,742,--,2024-05-21,0
+APP00391,Lakshmi Pillai, Male,52,Jhansi,Uttar Pradesh,798285,8225279781,lakshmi.pillai199@yahoo.co.in,Salaried,36500.0,200k,735,1,2025-04-03,0
+APP00303,Divya Sharma,Female,34,Jhansi,Uttar Pradesh,389766,917456057323,divya.sharma341@outlook.com,Self-employed,26000.0,315000.0,999,--,2025-08-30,0
+APP00102,Vikram Joshi,Male,32 yrs,Kota,Rajasthan, 385848,8743716708,vikram.joshi431@outlook.com,Farmer,16500.0,180000.0,678,0,2024-09-08,0
+APP00193,Ritu Chauhan,Male,23,Nagpur,Maharashtra,362765,8192910951,ritu.chauhan851@yahoo.co.in,Salaried,Rs. 18500,475000.0,574,0,2024-10-01,1
+APP00015,Ayesha Sharma,Female,44,Gaya,Bihar, 180742,(+91) 75200 07620,ayesha.sharma749@outlook.com,Self-employed,15500.0,295000.0,-,nil,2024-09-29,1
+APP00254,Kavita Gupta,Male,41,Thiruvananthapuram,Kerala,151026,9374286736, kavita.gupta640@outlook.com ,Salaried,27000.0,550000.0,716,1,2024-04-21,0
+APP00304,MANISH BANERJEE, Male,28,Mumbai,Maharashtra,764232,9833778160,manish.banerjee397@gmail.com,,42500.0,415000.0,705,1,2024-01-20,1
+APP00016,Rohit Khan,Male,37,Pune,Maharashtra,826439,6329102624,rohit.khan151@gmail.com,Salaried,24000.0,335000.0,668,1,2025-04-24,0
+APP00330,Joseph Reddy,Female,64,Kochi,Kerala,401023,6152454256,joseph.reddy297@gmail.com,Retired,18000.0,125000.0,623,not available,2024-11-05,0
+APP00376,Fatima Verma,m,31,Ahmedabad,Gujarat, 304698,9897244222,fatima.verma375@gmail.com,Salaried,96000.0,1770000.0,764,,2025-09-05,0
+APP00088,Anjali Mehta,Female,28,Paatna,BR,183544,7352619822,anjali.mehta243@outlook.com,-,86500.0,1800000.0,671,,2024-12-02,0
+APP00061,Rohit Shetty,Male,21,Hubballi,Karnataka,360619.0,8117282314, rohit.shetty533@yahoo.co.in ,Farmer,51500.0,820000.0,639,1,2024-07-06,1
+APP00270,Sanjay Thomas,-,26,Durgapur,West Bengal,359545,9178616233,sanjay.thomas712@outlook.com,Salaried,43500.0,"INR 5,60,000/-",723,,2025-01-16,0
+APP00155,Sanjay Banerjee,Female,61,,Chhattisgarh,771942,9612386543,SANJAY.BANERJEE680@GMAIL.COM,Retired,62000.0,685000.0,651,1,2024-12-17,0
+APP00114,Amit Iyer,Female,460,Varanasi,Uttar Pradesh,451470,9791111285,amit.iyer954@yahoo.co.in,Salaried,15500.0,410000.0,626,1,2024-08-07,0
+APP00356,Anjali Das,Female,36,Thiruvananthapuram,Kerala,666258,8847942334,anjali.das435@outlook.com,Farmer,39000.0,1015000.0,759,0,2025-04-20,0
+APP00238,Imran Patel,Male,38,  Madras,Tamil Nadu,768526,7659981036,IMRAN.PATEL911@YAHOO.CO.IN,Business owner,78500.0,915000.0,629,0,2025-04-07,0
+APP00284,Arjun Sharma,Male,40yrs,Chennai ,TN,175821,+91 89315 93433,arjun.sharma452@gmail.com,Salaried,89500.0,870000.0,666,0,2024-01-09,0
+APP00390,Manish Kumar,Male,36,Indore,Madhya Pradesh,591232,6565837681,manish.kumar298@yahoo.co.in,Self-employed,2400000,710000.0,698,,2025-04-13,0
+APP00101,Divya Iyer,Female,48,Bhopal,Madhya Pradesh,574022,6027990853,divya.iyer159@yahoo.co.in,Salaried,21500.0,620000.0,750,0,2024-02-07,0
+APP00294,Sanjay Thomas,Female,38,Bhilai,Chhattisgarh,467875,7009989943,sanjay.thomas10@gmail.com,Self Employed,"Rs.26,500",765000.0,781,1,2024-03-05,0
+APP00191,Amit Rao,Male,41,Coimbatore,Tamil Nadu,302388,9471973147,amit.rao91@yahoo.co.in,Salaried,25500.0,630000.0,714,0,2024-09-16,1
+APP00083,Divya Reddy,male,54,Hosur,Tamil Nadu,507849,9762398079,divya.reddy685@outlook.com,Salaried,69000.0,1405000.0,,2,2024-04-12,0
+APP00105,Rohit Chauhan,Male,28,Indore,Madhya Pradesh,745000,9815307364,rohit.chauhan539@gmail.com,,27000.0,755000.0,658,1,2024-02-18,1
+APP00268,Meera Rao,MALE,--,Bhilai,Chhattisgarh,141661,63404-41684,meera.rao613@outlook.com,Salaried,43000.0,945000.0,789,1,2024-08-30,0
+APP00153,Meera Chauhan,Female,37,Kochi,Kerala,295554,8293048450,meera.chauhan246@gmail.com,Farmer,54000.0,1345000.0,647,2,2024-08-19,1
+APP00127,Sneha Thomas,Female,310,Jaipur,Rajasthan,229166,8447035678,sneha.thomas433@outlook.com ,Salaried,46500.0,220000.0,703,1,2025-07-03,0
+APP00154,Neha Das,Female,36,Coimbatore,TN,399981,6224727594,neha.das979@gmail.com ,Self-employed,15000.0,95000.0,735,2,2025-03-24,0
+APP00126,Rohit Reddy,Female,22,Varanasi,UTTAR PRADESH,803004,6991242646,rohit.reddy9@yahoo.co.in,Farmer,75000.0,385000.0,827,1,2025-09-11,0
+APP00324,Sneha Kumar, Female,38,Durgapur,WB,664250,9695409636,sneha.kumar120@outlook.com,Self-employed,5500000,1015000.0,732,,2025-05-15,0
+APP00196,Rahul Pillai,Male,29,Coimbatore,Tamil Nadu,361656,8957784046,rahul.pillai849@gmail.com,Business owner,nil,825000.0,743,0,2024-11-27,0
+APP00346,hARPREET sHARMA,Female,47,Mysuru,Karnataka,791 076,6294044658,harpreet.sharma99@gmail.com,Salaried,16000.0,,815,0,2024-03-03,0
+APP00073,Vikram Pillai,Male,44,Bareilly,Uttar Pradesh,585144,7647955684,vikram.pillai20@outlook.com,Salaried,22000.0,625000.0,784,0,2024-01-22,0
+APP00142,Kavita Khan,Female,66,Ahmedabad,Gujarat,276105,9500757333,KAVITA.KHAN99@YAHOO.CO.IN,Retired,30000.0,760000.0,583,0,2025-01-04,1
+APP00190,Divya Kumar,MALE,36,Bhopal,Madhya Pradesh,315456,7431730423,divya.kumar246@gmail.com,Salaried,71000.0,1745000.0,817,3,2024-01-27,0
+APP00251,Ritu Gupta,Male,35,Nagpur,Maharashtra,711026,6914855781,ritu.gupta970@yahoo.co.in,Farmer,18000.0,160000.0,737,2,2025-04-02,0
+APP00123,Rohit Khan,Female,41,Durgapur ,West Bengal,352500,7959185872,rohit.khan142@yahoo.co.in,Farmer,36000.0,390000.0,757,2,30-12-2024,0
+APP00116,Rahul Verma,Female,23,Bhopal,Madhya Pradesh,634408,7684527438,rahul.verma749@yahoo.co.in,Self-employed,15000.0,310000.0,584,0,2025-07-31,1
+APP00056,Anjali Verma,Male,22,Gurugram,Haryana,131632,6713842119,anjali.verma639@outlook.com,Self-employed,38000.0,250k,714,0,2025-09-19,0
+APP00067,Karthik Das,Male,38,  Calcutta,West Bengal,279381,7955113598,karthik.das509@gmail.com,Salaried,35500.0,695000.0,701,2,2024-11-21,0
+APP00371,Sanjay Gupta,Male,28,Kolkata,West Bengal,331631,6770034791,sanjay.gupta175@yahoo.co.in,Salaried,121000.0,1635000.0,754,2,2024-12-17,0
+APP00393,JOSEPH PILLAI,Female,42,Delhi,Delhi,594177,8531787133,JOSEPH.PILLAI312@YAHOO.CO.IN,Business owner,72500.0,365000.0,643,0,2024-03-18,0
+APP00305,Rahul Joshi,Female,,Nagpur,Maharashtra,111543,7475602255,rahul.joshi62@gmail.com,Business owner,"₹20,500",610000.0,690,1,04-Mar-24,1
+APP00128,Manish Rao,Female,36,Pune,Maharashtra,806781,6324271796,manish.rao445@outlook.com,Salaried,54000.0,415000.0,612,2,06 Mar 2024,1
+APP00334,MEERA KHAN,Male,45 years,Delhi,Delhi,404888,6075060769,meera.khan118@gmail.com,Salaried,30000.0,"INR 2,10,000/-",691,2,11/01/2024,0
+APP00024,Amit Iyer,Female,38,Ajmer,Rajasthan,560599,9197592623,amit.iyer292@outlook.com,Salaried,27000.0,270000.0,9999,0,2024-09-29,0
+APP00348,Joseph Mehta,Female,51,Ahmedabad,GJ,250068,7150700808,joseph.mehta742@gmail.com,Salaried,62500.0,945000.0,9999,1,2025-08-07,1
+APP00040,Lakshmi Thomas,female,41,  Sangli,Maharashtra,844169,918025964661,lakshmi.thomas843@gmail.com,Farmer,30500.0,640000.0,717,,2025-07-08,0
+APP00233,Neha Chauhan,Male,25,Bhopal,MP,637629,8192032175,neha.chauhan533@yahoo.co.in,Self-employed,35000.0,485000.0,745,0,2024-09-11,0
+APP00027,Suresh Khan,Male,55,Kota,Rajasthan,182586,7074667865,suresh.khan353@gmail.com,Salaried,11000.0,85000.0,675,1,2024-10-03,0
+APP00031,Divya  Sharma,Male,49,Bengaluru,Karnataka, 793659,8505493239,divya.sharma634@outlook.com,Salaried,144500.0,4295000.0,570,0,17/01/2025,1
+APP00333,Karthik Gupta,Male,49,Coibatore,Tamil Nadu,,6479156169,karthik.gupta545@outlook.com,Self-employed,39000.0,615000.0,739,2,2025-04-11,0
+APP00306,Ritu Verma,Male,37,Bhili,CG,419950,7734855466,ritu.verma162@gmail.com,Self-employed,52500.0,285000.0,633,2,2024-11-29,1
+APP00098,Sneha Banerjee,Female,28yrs, Varanasi ,Uttar Pradesh,177952,7261235089,sneha.banerjee727@outlook.com,Business owner,75500.0,1700000.0,862,2,2025-09-23,0
+APP00247,Kavita Das,female,36yrs,Coimbatore,  Tamil Nadu,257169,7018154859,kavita.das718@yahoo.co.in,Self-employed,48500.0,205000.0,678,1,2025-07-30,0
+APP00375,Harpreet Reddy,Male,46,Panta,Bihar,372185,6394743476,harpreet.reddy815@gmail.com,Farmer,111500.0,505000.0,664,5,2025-05-07,0
+APP00265,Sneha Shetty,Male,260,,Uttar Pradesh,653 638,7494267762,sneha.shetty879@yahoo.co.in,Salaried,23000.0,"Rs.95,000",854,1,2025-04-05,0
+APP00236,Ritu Sharma,Female,29 years, Ajmer ,Rajasthan,474462,75906-35913,ritu.sharma411@outlook.com,Salaried,27500.0,600000.0,699,,2025-03-09,0
+APP00282,Anjali Shetty,Female,40,Ahmedabad,Gujarat,789472,7582277439,anjali.shetty912@gmail.com,Farmer,52500.0,1460000.0,,0,2024-07-26,0
+APP00288,Imran Chauhan,Male,48,Lucknow,Uttar Pradesh,125073,9615763107,imran.chauhan598@gmail.com,Salaried,21500.0,600000.0,682,2,2024-05-30,0
+APP00066,Arjun Banerjee,Male,31,Hosur,Tamil Nadu,234200,6199905120,arjun.banerjee823@gmail.com,Self-employed,17500.0,"₹2,20,000",686,0,13 Feb 2025,0
+APP00372,Ayesha Gupta,Male,24,Bhilai,Chhattisgarh,853850,7954658077,ayesha.gupta126@outlook.com,Business owner,40500.0,845000.0,739,5,2024-11-09,0
+APP00299,Kavita Verma,Male,41,Hubballi,Karnataka,259147,8373816819,KAVITA.VERMA443@GMAIL.COM,Salaried,19000.0,275000.0,900,0,2024-04-28,0
+APP00037,Meera Nair,Male,41,Hubballi,Karnataka,818 735,9578134567,meera.nair207@yahoo.co.in,Business owner,3700000,855000.0,734,1,2024-07-23,0
+APP00370,Lakshmi Gupta,,41,Sangli,MH,301143,9865609848,  lakshmi.gupta434@yahoo.co.in,Farmer,"Rs.19,500",5.6 lakh,663,0,2025-06-08,1
+APP00103,Manish Kumar,Male,32,Kochi,Kerala,384816,8747726377,manish.kumar79@outlook.com,Salaried,21000.0,225000.0,714,1,2025-07-24,0
+APP00354,Ritu Gupta,Male,33,kota,Rajasthan,764184,8362056398,ritu.gupta978@gmail.com,Farmer,48000.0,"₹4,95,000",--,--,2024-10-26,0
+APP00263,Suresh Iyer,Male,43,Kolkata,West Bengal,231191,6398995887,suresh.iyer556@outlook.com,Salaried,43000.0,750000.0,749,1,2025-08-23,0
+APP00313,Rahul Sharma,Male,52,Gntur,ANDHRA PRADESH,381600,6875663024,rahul.sharma549@gmail.com ,Farmer,55000.0,260000.0,697,1,2024-05-13,0
+APP00161,Pooja Joshi,Male,37,gURUGRAM,Haryana, 385992,8144320898,  pooja.joshi160@outlook.com,salaried,19500.0,90000.0,,0,2025-07-27,0
+APP00278,Amit Thomas,Female,51,Thrissur,Kerala, 471186,8108187400,amit.thomas442@outlook.com,Salaried,"₹37,000",815000.0,686,0,2025-08-23,0
+APP00239,Manish Reddy,Male,40,Vadodara,Gujarat,670196,7690722816,manish.reddy448@yahoo.co.in,Business owner,Rs. 38500,150000.0,642,0,2024-06-18,0
+APP00081,Divya Khan,Female,44,Ahmedabad,Gujarat,151585,8305057073,divya.khan963@outlook.com,Salaried,40000.0,720000.0,9999,0,2025-09-30,0
+APP00368,Vikram Kumar,m,50,Ajmer,Rajasthan,763860,,vikram.kumar152@gmail.com,Business owner,17000.0,395000.0,764,1,2024-01-08,0
+APP00124,Karthik Das,Female,50,Durgapur,West Bengal,554312,9552996935,karthik.das351@yahoo.co.in,Self-employed ,22500.0,80000.0,847,0,2025-08-22,0
+APP00344,Imran Banerjee,Female,37,Bengaluru,Karnataka,163 758,6524450235,IMRAN.BANERJEE507@GMAIL.COM,Salaried,42500.0,570000.0,999,0,2024-07-10,0
+APP00055,Karthik Banerjee, Male,47,Pune,Maharashtra,117233,7963196994,karthik.banerjee701@yahoo.co.in,Farmer,63000.0,750000.0,,,2024-05-25,1
+APP00279,Vikram Chauhan,Female,?,Amer,Rajasthan,118633,8705377189,vikram.chauhan757@yahoo.co.in,Salaried,43500.0,,593,2,2024-07-02,1
+APP00112,Amit Patel,Male,63,Jaipur,Rajasthan,234248,7119510752,amit.patel822@gmail.com,rETIRED,11000.0,275000.0,780,,2025-01-19,0
+APP00261,Karthik Iyer,Female,22,Hyderabad,Telangana,632006,9585142161,karthik.iyer619@yahoo.co.in,Salaried,71000.0,735000.0,723,1,2025-08-15,0
+APP00345,Vikram Sharma,Male,45,Hyderabad,Telangana,168797,8802756688,vikram.sharma238@yahoo.co.in,Business owner,50000.0,550000.0,582,1,2025-08-08,1
+APP00230,Ritu Verma,Female,37,Pune,Maharashtra,313100,6882706256,ritu.verma516@outlook.com,Salaried,29000.0,605000.0,685,0,2025-05-05,0
+APP00157,Neha Das,Male,52, Chennai ,Tamil Nadu,368691,-,NEHA.DAS48@GMAIL.COM,Farmer,45500.0,1005000.0,599,1,2025-04-24,1
+APP00166,nEHA pILLAI,Female,41,Mumbai,Maharashtra,424681,9086336760,neha.pillai328@yahoo.co.in,Salaried,71500.0,20.25L,661,2,2024-07-02,0
+APP00209,Ayesha Nair,Male,51,Patna,Bihar,292514,6893887525,ayesha.nair272@outlook.com,Salaried,"₹19,500",440000.0,816,0,2024-12-03,0
+APP00395,Sneha Gupta,Male,30,Mysuru,Karnataka,488954,8805730954,sneha.gupta416@gmail.com,Salaried,57000.0,1525000.0,778,,2024-02-13,1
+APP00231,Neha Patel,Female,24,Bhilai,Chhattisgarh,369227,8938055167,neha.patel528@yahoo.co.in,Salaried,"Rs.28,500",640000.0,802,1,2024-03-05,0
+APP00357,Ritu Pillai,Female,39,Vadodara,Gujarat ,168209.0,8922141512,ritu.pillai234@yahoo.co.in,Salaried,44000.0,Rs. 315000,713,0,2025-05-01,0
+APP00273,Joseph Ansari,Female,65 years,Varanasi,Uttar Pradesh,400375,9468241722,joseph.ansari747@yahoo.co.in,Retired,36k,540000.0,688,1,2025-07-07,0
+APP00381,  Karthik Das,Male,48,Delhi,Delhi,481159,7252054593,karthik.das795@gmail.com,Salaried,132000.0,3900000.0,639,0,2025-06-29,0
+APP00197,Neha Iyer,not available,42,Ahmedabad,Gujarat,470616,7674005965,neha.iyer144@gmail.com,Salaried,22000.0,235000.0,776,1,2024-10-31,0
+APP00107,Suresh Nair,Male,39,Hubballi,Karnataka,592703,6165409140,suresh.nair934@gmail.com,Salaried,30000.0,110000.0,687,,31-07-2024,0
+APP00082,Kavita Shetty,Male,31,Varaansi,Uttar Pradesh,594630,6698113039,kavita.shetty990@yahoo.co.in,Self-employed,23000.0,185000.0,791,0,2025-04-10,0
+APP00053,Fatima Verma,Male,47,Pune,Maharashtra,567910,9910001997,fatima.verma799@gmail.com,Self-employed,49000.0,560000.0,762,2,2024-12-29,1
+APP00084,Ritu Thomas,Female,-,Gaya,Bihar,717 942,6295014242,ritu.thomas672@outlook.com,fARMER,9500.0,235000.0,714,0,2025-05-22,0
+APP00359,Karthik Nair ,Female,63,Delhi,Delhi,473176,83185-32624,karthik.nair408@outlook.com,Retired,217000.0,2870000.0,777,0,23-Feb-25,0
+APP00051,Arjun Ansari,Female,34,Chennai,Tamil Nadu,359570,8709427876,arjun.ansari169@yahoo.co.in,  Farmer,132500.0,3685000.0,728,1,2025-08-10,0
+APP00010,Pooja Kumar,Female,62,Lucknow,Uttar Pradesh,551626,7385553187,pooja.kumar91@gmail.com,Retired,49500.0,440000.0,678,2,2025-09-24,0
+APP00355,Vikram Joshi,Male,35,Vraanasi,Uttar Pradesh,535272,7092287392,vikram.joshi557@outlook.com,Farmer,"INR 26,000/-",745000.0,849,0,2025-08-30,0
+APP00136,Harpreet Das,Female,28,nil,Bihar,657993,8103642281,harpreet.das901@yahoo.co.in,Salaried,28000.0,310000.0,756,3,12.06.2025,0
+APP00074,Lakshmi  Reddy,Male,64,Delhi,Delhi,209067,(+91) 78529 91872,lakshmi.reddy355@yahoo.co.in,Retired,44000.0,375k,801,1,2024-08-11,0
+APP00210,ANJALI BANERJEE,Male,37 yrs,Delhi,Delhi,397600,7925364720,anjali.banerjee152@outlook.com,Self-employed,59000.0,910000.0,620,2,2025-01-30,1
+APP00194,Imran Gupta,Female,45,Bhopal ,Madhya Pradesh,618687,8204415309,imran.gupta222@outlook.com,Salaried,34000.0,2.85 lakh,813,1,2025-07-25,0
+APP00257,Divya Pillai ,-,37,Chennai,Tamil Nadu,347723,6415588197,divya.pillai98@outlook.com,salaried,39500.0,845000.0,625,1,15-Apr-24,0
+APP00260,Imran Joshi,Male,43,Jhansi,Uttar Pradesh,527528,9050359339,imran.joshi730@outlook.com,Farmer,"Rs.29,000",90000.0,649,1,--,1
+APP00023,Divya Khan,Male,33,Ahmedabad,Gujarat,430142,9257450912,divya.khan904@gmail.com,Salaried,19500.0,385000.0,-1,2,2024-08-24,0
+APP00240,Ritu Shetty,Male,46,nil,rj,442013,7928811433,ritu.shetty935@yahoo.co.in,Salaried,14500.0,300000.0,627,1,2025-01-12,0
+APP00134,Imran Thomas,female,42,Thiruvananthapuram,Kerala,602919,6097091610,imran.thomas420@outlook.com ,Salaried ,67500.0,1690000.0,690,,2024-08-26,0
+APP00144,Ritu Shetty,Female,38,Thrissur,Kerala,713858,8653365020,ritu.shetty866@yahoo.co.in,Business owner,80000.0,1510000.0,818,,2025-05-05,0
+APP00322,Fatima Kumar,Male,41,nAGPUR,Maharashtra,578865,8845430130,fatima.kumar337@yahoo.co.in,Salaried,73000.0,1590000.0,765,2,2025-02-12,0
+APP00329,Pooja Sharma,Female,29,Sangli,Maharashtra, 515659,6697915645,pooja.sharma852@yahoo.co.in,Self-employed,14000.0,Rs. 130000,575,0,2024-09-20,1
+APP00248,Rohit Ansari,Male,39,Jaipur,Rajasthan,589865,7105565157,rohit.ansari331@gmail.com ,Salaried,30000.0,,628,2,2025-06-14,0
+APP00059,Anjali Das,Male,49,Kolkata,West Bengal,350564,,anjali.das791@gmail.com,Salaried,23000.0,665000.0,657,2,2024-07-13,0
+APP00050,Amit Reddy,Male,29,Varanasi,Uttar Pradesh,766136,7804231869,amit.reddy219@gmail.com,Salaried,74000.0,1910000.0,730,1,2024-09-22,0
+APP00038,Vikram Pillai,Male,44,Patna,Bihar,500452,7427977249,vikram.pillai536@outlook.com,Business owner,24000.0,70000.0,753,3,2025-02-25,0
+APP00137,  Amit Ansari,Male,37,Bengaluru,KA,335 307,6942798051,amit.ansari521@yahoo.co.in,Farmer,79500.0,270000.0,646,0,2024-01-16,0
+APP00354,Ritu Gupta,Male,33,Kota,Rajasthan,764184,8362056398,ritu.gupta978@gmail.com,Farmer,48000.0,"₹4,95,000",--,--,2024-10-26,0
+APP00154,Neha Das,Female,36,Coimbatore,TN,399981,6224727594,neha.das979@gmail.com,Self-employed,15000.0,95000.0,735,2,2025-03-24,0
+APP00080,Ritu Banerjee,Female,34,Chennai,Tamil Nadu,809043,7791216885,ritu.banerjee347@gmail.com,Self-employed,36500.0,240000.0,677,nil,2024-10-31,1
+APP00224,Kavita Gupta,Female,41,Patna,Bihar,652428,8144621106,kavita.gupta319@gmail.com,Salaried,25500.0,490000.0,796,0,2025-08-07,0
+APP00130,Rohit Reddy,Male,46,Ahmedabad,Gujarat,368488,9286463921,rohit.reddy631@outlook.com,Salaried,62000.0,1640000.0,765,0,2024-02-01,0
+APP00321,Ayesha Kumar,MALE,36,Thiruvananthapuram,Kerala,376178,6610483406,  ayesha.kumar751@gmail.com,Salaried,44500.0,965000.0,867,1,2024-07-05,0
+APP00005,Priya Verma,Female,36,Thiruvananthapuram,Kerala,714191,8655825021,priya.verma304@gmail.com,Salaried,21000.0,95000.0,701,0,2024-02-07,0
+APP00075,Neha Mehta,Male,61,Lucknow,Uttar Pradesh,535631,8833334740,neha.mehta675@outlook.com,Salaried,88000.0,920000.0,577,3,2025-08-26,0
+APP00014,Fatima Verma,male,33,,Karnataka,489220,8628320495,fatima.verma794@outlook.com,-,Rs. 15500,"INR 3,30,000/-",666,3,2024-12-30,0
+APP00314,Ritu Ansari,Male,42,Bengaluru,KA,621562,6034195815,ritu.ansari772@gmail.com,Self-employed,11000.0,270000.0,723,0,2025-02-03,0
+APP00047,Harpreet Sharma,Male,37,Bengaluru,KA,378682,8126709035,harpreet.sharma521@outlook.com,Salaried ,42500.0,245000.0,826,1,2024-02-06,0
+APP00046,Neha Gupta,Male,66,Bhilai,Chhattisgarh,238269,90443-17889,neha.gupta121@outlook.com,Retired,26000.0,510000.0,662,3,2024-12-20,0
+APP00070,Ayesha Reddy,Female,--,Mysuru,Karnataka,475119,9845976761,ayesha.reddy100@outlook.com,Salaried,29000.0,710000.0,749,0,2025-06-25,0
+APP00079,Suresh Iyer,Male,32, Hosur ,Tamil Nadu, 608485,9285333100,suresh.iyer687@yahoo.co.in,Salaried,12000.0,210000.0,597,1,2025-06-29,0
+APP00030,Sneha Pillai,Male,54,Lucknow,UP,282124,8613272258,sneha.pillai141@outlook.com,Salaried,17500.0,505000.0,828,3,2024-03-06,0
+APP00227,Fatima Das,male,26,Thiruvananthapuram,Kerala,582954,7280244466,fatima.das746@gmail.com,Business-owner,16000.0,345000.0,597,1,2025-01-13,1
+APP00211,Ayesha Joshi,Female,26,Bhilai,Chhattisgarh,230971,8238223742,ayesha.joshi877@gmail.com,Salaried,"₹33,500",not available,729,0,2024-11-02,0
+APP00046,nEHA gUPTA,Male,66,Bhilai,Chhattisgarh,238269,90443-17889,neha.gupta121@outlook.com,Retired,26000.0,510000.0,662,3,2024-12-20,0
+APP00115,KARTHIK THOMAS,Male,26 yrs,Bengaluru,Karnataka,267581,8514943023,karthik.thomas698@outlook.com,Farmer,24500.0,625000.0,696,0,2024-05-06,0
+APP00025,Vikram Ansari,Male,46,Gurugram,Haryana,404076,not available,vikram.ansari338@gmail.com,Salaried,54500.0,1540000.0,822,,2024-01-21,0
+APP00065,Sanjay Patel,Male,27,Kolkata,West Bengal,120589,9067893093,sanjay.patel612@gmail.com,Business owner,35000.0,745000.0,999,1,2025-07-21,1
+APP00195,Neha Rao,Male,59,Gurugram,Haryana,240010,9803011903,neha.rao8@gmail.com,Retired,52500.0,540000.0,603,1,2025-01-14,0
+APP00332,Divya Patel,Female,58,Hyderabad,Telangana,437806,9216975869,divya.patel235@outlook.com ,Retired,12000.0,190000.0,748,,2024-02-03,0
+APP00214,Divya Chauhan,Male,41,Chennai,Tamil Nadu, 726779,7383569517,divya.chauhan46@gmail.com,Self employed,21000.0,330000.0,835,nil,2025-05-13,0
+APP00188,Lakshmi Verma,Male,39,Kota,Rajasthan,327 466,7491816530,lakshmi.verma420@gmail.com,sALARIED,"Rs.35,000",665000.0,695,1,2024-09-24,0
+APP00398,Arjun Nair,Female,53,Hubli,Karnataka,698088,9171179421,arjun.nair399@outlook.com,-,28000.0,480000.0,754,2,2025-06-18,0
+APP00068,Ritu Rao,Male,44,Gaya,Bihar,582982,9828612669, ritu.rao500@gmail.com ,Salaried,9000.0,60k,695,2,31-Jul-24,1
+APP00150,Priya  Thomas,Male,37,Bhopal,Madhya Pradesh,268600,62818-88180,priya.thomas973@yahoo.co.in,Salaried,14000.0,245000.0,733,0,2025-05-14,0
+APP00077,Priya Patel,Female,67,Kolkata,West Bengal,614767,6708079869,priya.patel989@outlook.com,Retired,48500.0,530000.0,673,0,2024-11-29,1
+APP00262,Priya Patel,Female,45,Pune,Maharashtra,211332,7971188550,priya.patel587@outlook.com,Salaried,62000.0,1455000.0,703,0,2024-01-16,0
+APP00339,Meera Reddy,Female,32,Mysuru,Karnataka,627918,6278334194,meera.reddy61@gmail.com,Salaried,10000.0,285000.0,821,0,2024-12-06,0
+APP00058,Fatima Iyer,Male,37,Mysuru,Karnataka,361344,7635812913,fatima.iyer718@yahoo.co.in,Farmer,23000.0,570000.0,696,2,2024-10-03,1
+APP00125,Imran Chauhan,Male,43,Pune,Maharashtra,567720,7438009881,imran.chauhan544@yahoo.co.in ,Salaried,14500.0,70000.0,631,1,2025-07-13,0
+APP00042,Ayesha Patel,,44,Nagpur,Maharashtra,208545,9054030416,ayesha.patel431@outlook.com,Self-employed,1200000,not available,674,2,2025-04-09,1
+APP00004,amit shetty,Female,42,Bengaluru,Karnataka, 385026,8364798461,AMIT.SHETTY521@GMAIL.COM,Farmer,30000.0,150000.0,832,4,2024-03-07,0
+APP00121,Fatima Sharma,FEMALE,31,Sangli,mh,657286,7659207904,fatima.sharma408@gmail.com,Self-employed,not available,270000.0,642,1,2025-03-25,0
+APP00186,Rohit  Ansari,Female,45,Mumbai,Maharashtra,236449,7179592263,rohit.ansari107@gmail.com,Self-employed,102000.0,640000.0,799,1,2024-05-21,0
+APP00159,Meera Das,Female,25,Bhilai,Chhattisgarh,342164,8565383459,meera.das492@outlook.com,Self-employed,"Rs.29,500",145000.0,9999,3,2024-10-11,0
+APP00326,Lakshmi Das,Male,--,Kochi,Kerala,576585,8243854764,lakshmi.das819@gmail.com,Farmer,64000.0,1510000.0,862,1,2024-01-28,0
+APP00266,Lakshmi Sharma,Female,24,Sagli,Maharashtra,606221,9781190492,lakshmi.sharma269@outlook.com,Salaried,19500.0,225000.0,661,1,2025-01-18,0
+APP00109,Rohit Das,Male,45,Lucknow,UP,456707,8739246734,rohit.das333@gmail.com,Salaried,2250000,600000.0,693,1,2025-01-27,0
+APP00118,Neha Iyer,Male,30,Gurugram,Haryana,736974,8101918251,neha.iyer79@yahoo.co.in,Farmer,32500.0,455000.0,750,0,2024-08-18,0
+APP00250,Rahul Kumar,Female,37,Gurugram,Haryana,506211,8838017000,rahul.kumar272@yahoo.co.in,Salaried,45500.0,900000.0,612,2,2025-02-08,0
+APP00189,Imran Ansari,Female,26,Nagpur,Maharashtra,448244,6289499377,imran.ansari861@gmail.com,Salaried,20500.0,470000.0,9999,0,2025-02-27,0
+APP00006,Meera Pillai,M,40,Varanasi,Uttar Pradesh,829610,6666363586,meera.pillai331@yahoo.co.in,Salaried,27500.0,"₹5,90,000",699,-,2024-02-11,0
+APP00296,Anjali Verma,FEMALE,41,Coimbatore,Tamil Nadu,835797,6761432069,anjali.verma914@outlook.com,Salaried,101000.0,2670000.0,780,0,2024-11-15,0
+APP00243,Rahul Nair,Male,34,Patna,Bihar,478260,8104098486,rahul.nair838@yahoo.co.in,Salaried,-,540000.0,744,0,2025-07-08,0
+APP00204,Sneha Iyer, Female,27,Hosuur,TN,659429,7521175294, sneha.iyer154@yahoo.co.in , Farmer ,6500000,1915000.0,763,1,2025-06-12,1
+APP00319,Imran Gupta,Female,36,Patna,Bihar,421692.0,9016507786,imran.gupta199@yahoo.co.in,Business owner,24500.0,255000.0,,0,2024-12-22,0
+APP00179,Rahul Rao,Female,300,Bareilly,Uttar Pradesh,491716,6351695668,rahul.rao511@outlook.com,FARMER,26000.0,530000.0,--,,2024-04-01,1
+APP00225,MANISH PATEL,Female,21,Mumbai,Maharashtra,,9525917145,MANISH.PATEL193@GMAIL.COM,Business owner,Rs. 55500,650000.0,702,0,2024-04-20,1
+APP00237,Pooja Chauhan,Male,41,nil,CG,559556,60131-43978,pooja.chauhan581@yahoo.co.in,Salaried,12500.0,330000.0,811,4,2024-02-01,0
+APP00201,Kavita Joshi,Male,39,Varanasi,Uttar Pradesh,702918,64542-50093,kavita.joshi526@gmail.com,Business owner,"₹34,000",295000.0,746,1,03-09-2025,0
+APP00364,Rahul Sharma,Male,46,Pune,Maharashtra,336403,9499125857,rahul.sharma266@yahoo.co.in,Salaried,56500.0,13.35 lakh,597,0,2025-04-12,1
+APP00003,Pooja Verma,Male,47 years,Gurugram,Haryana,177332,8694731427,pooja.verma126@outlook.com,Salaried,27000.0,370000.0,565,1,04-09-2024,0
+APP00185,Neha Banerjee,Male,21,Gaya,Bihar,748719,8053276342,neha.banerjee125@gmail.com,Salaried,31k,Rs. 95000,785,?,2024-12-28,0
+APP00122,Amit Mehta,Male,28,Hubballi,Karnataka,736243,9614129473,amit.mehta477@gmail.com,Farmer,36500.0,200000.0,606,2,17-07-2025,0
+APP00078,Joseph Singh,FEMALE,34,Hyderabad,Telangana,450129.0,7061556520,  joseph.singh25@gmail.com,Business owner,41000.0,190000.0,768,0,2024-10-29,0
+APP00327,Joseph Chauhan,Male,46,Mysuru,KA,369846.0,7106477592,JOSEPH.CHAUHAN465@YAHOO.CO.IN,Salaried,?,520000.0,not available,1,2025-09-28,0
+APP00064,Rohit Ansari,Male,27yrs,Thrissur,kl,?,+91 74707 05439,rohit.ansari536@yahoo.co.in,Self-employed,30000.0,595000.0,765,,2025-09-21,0
+APP00018,Rahul Khan,Male,39,Nagpur,Maharashtra,128562,7896751460,rahul.khan45@yahoo.co.in,Business owner,14500.0,310000.0,697,1,2024-10-25,0
+APP00286,Suresh Shetty,,60,gAYA,Bihar,785270,, suresh.shetty75@gmail.com ,Retired,41500.0,685000.0,0,2,2024-07-25,0
+APP00151,Kavita Banerjee,Female,41 yrs,Gutnur,Andhra Pradesh,583151.0,8820723036,kavita.banerjee437@yahoo.co.in,Business owner,17000.0,145000.0,610,0,2025-09-12,1
+APP00390,Manish Kumar,Male,36,Indore,Madhya Pradesh,591232,6565837681,  manish.kumar298@yahoo.co.in,Self-employed,2400000,710000.0,698,,2025-04-13,0
+APP00043,Anjali Reddy,Male,21,Durgapur,West Bengal,785826,7602059137,anjali.reddy161@outlook.com,Self-employed,14000.0,290000.0,796,1,2024-01-07,0
+APP00180,Harpreet Das,Female,35,Indore,Madhya Pradesh,602981,9934840487,harpreet.das38@yahoo.co.in,Salaried,31000.0,215000.0,not available,1,2025-04-25,0
+APP00291,Vikram Das,Male,28,Hubballi,Karnataka,597180,7979470173,vikram.das777@outlook.com,Self-employed,28000.0,505000.0,756,,2025-08-17,0
+APP00163,Anjali Joshi,male,30,Kota,Rajasthan, 181123,7040920297,anjali.joshi305@yahoo.co.in,Salaried,23000.0,175000.0,764,0,2024-08-28,0
+APP00353,Arjun Iyer ,M,48,Delhi,Delhi,272389,8847919986,arjun.iyer49@outlook.com ,Salaried,57000.0,1560000.0,722,1,2025-04-17,0
+APP00140,Kavita Ansari,m,66,Kochi,KL,260169,6190526836,kavita.ansari963@gmail.com,Retired,29500.0,315000.0,681,2,2024-06-24,0
+APP00378,aYESHA sHARMA,Male,57,Benagluru,Karnataka,279515,7665305128,ayesha.sharma238@yahoo.co.in,Self-employed,52500.0,1115000.0,768,1,15 Mar 2024,0
+APP00389,Pooja Kumar, Male,65,Indore,Madhya Pradesh,180572,6667262369,pooja.kumar16@outlook.com,Retired,"₹1,16,000",515k,775,3,2024-04-09,0
+APP00190,dIVYA kUMAR,MALE,36,Bhopal,Madhya Pradesh,315456,7431730423,divya.kumar246@gmail.com,Salaried,71000.0,1745000.0,817,3,2024-01-27,0
+APP00281,Sanjay Joshi,-,21,Coimbatore,Tamil Nadu,244 155,9333865270,sanjay.joshi94@gmail.com,Self-employed,,365000.0,634,,2024-11-10,1
+APP00307,Neha Das,Female,27,Hyderabad,Telangana,454395,6854109988,neha.das922@outlook.com,Self-employed,50000.0,340000.0,757,1,2024-01-29,0
+APP00292,Priya  Kumar,Male,66,,Delhi,379404,6595556705,priya.kumar204@yahoo.co.in,Retired,26000.0,105000.0,-,0,2025-06-28,0
+APP00168,Imran Gupta,Female,43,Kochi,Kerala,827545,7766300609,imran.gupta582@outlook.com,sALARIED,24000.0,505000.0,-,0,2024-08-14,0
+APP00340,Pooja Shetty,Female,53,Ajmer ,Rajasthan,302627,8949862613,pooja.shetty605@gmail.com,Self-employed,32000.0,440000.0,747,1,2024-10-30,0
+APP00045,Arjun Rao,Male,61,Kta,Rajasthan,837333,6286271959,arjun.rao518@outlook.com,Retired,24000.0,85000.0,807,2,2024-04-03,0
+APP00317,Divya Iyer,Female,38,Guntur,AP,369604,62274-64995,divya.iyer174@yahoo.co.in,Salaried,10000.0,Rs. 125000,0,1,24.03.2024,0
+APP00143,Rahul Sharma,Male,30,Kolkata,West Bengal,686348,7368703827,rahul.sharma897@outlook.com,Farmer,5600000,1340000.0,658,1,2024-05-04,1
+APP00228,Manish Gupta,Male,26,Thiruvananthapuram,Kerala,184083,7012284242,manish.gupta551@yahoo.co.in,Farmer,100500.0,27.6L,9999,3,2024-07-21,0
+APP00255,Sanjay Banerjee,Male,-,Thrissur,Kerala,661347,6322583150,sanjay.banerjee687@gmail.com,Farmer,28500.0,410000.0,705,0,2025-06-02,0
+APP00218,Pooja Nair,Male,61,Poona,Maharashtra,269109,6353746700,pooja.nair653@gmail.com,Salaried,56000.0,655000.0,658,0,19/07/2025,0
+APP00021,Imran Ansari,Female,26,Gaya,BR,729817,8675909874,imran.ansari894@yahoo.co.in,Farmer,69000.0,1530000.0,-1,0,2024-07-06,1
+APP00272,Priya Verma,Male,21,Thrissur,KL,493963,9447916814,priya.verma269@yahoo.co.in,Self-employed,89500.0,345000.0,707,0,2024-02-07,0
+APP00108,Rohit Thomas,Female,390,Lucknow,Uttar Pradesh,457091,9368626769,rohit.thomas997@yahoo.co.in,Salaried,nil,410000.0,642,0,2025-01-01,0
+APP00177,Kavita Singh,Female,35,Koat,rajasthan,840688,+91-9568338702,kavita.singh663@yahoo.co.in,Business owner,44500.0,900000.0,808,0,2025-08-18,0
+APP00057,Suresh Nair,Male,30,Kochi,Kerala,327474,9447946609,suresh.nair129@yahoo.co.in,Salaried,31000.0,545000.0,771,2,2024-12-18,0
+APP00374,Lakshmi Reddy,Male,23,Hyderabad,Telangana,256082,6834006170,lakshmi.reddy953@gmail.com,Salaried,Rs. 21500,85000.0,762,0,2025-09-30,0
+APP00203,Arjun Rao,Female,35,Bhopal,Madhya Pradesh,612067,6071605235,arjun.rao868@gmail.com,Self-employed,8k,115000.0,810,0,2025-02-01,0
+APP00290,Lakshmi Gupta,male,67,Snagli,Maharashtra, 432024,+91 70139 88683,lakshmi.gupta773@outlook.com,Retired,37500.0,"Rs.2,05,000",999,0,2024-09-03,0
+APP00271,Sanjay Pillai,Male,27,Durgapur,West Bengal,497611,7350728280,sanjay.pillai632@yahoo.co.in ,Business owner,80000.0,1780000.0,785,1,29.08.2025,0
+APP00382,Kavita Shetty,Female,27,Guntur,Andhra Pradesh,827775,+91 69767 02579,kavita.shetty894@gmail.com,Farmer,32000.0,460000.0,641,0,2024-05-01,0
+APP00170,Amit Iyer,?,36,Hyderabad, Telangana ,550125,+91 75370 20555,amit.iyer275@outlook.com ,Farmer,,410000.0,727,0,2024-02-18,0
+APP00029,Karthik Shetty,Female,36,Patna,Bihar,374032,9310810547,karthik.shetty474@outlook.com,Self-employed,13500.0,Rs. 320000,797,0,2024-03-11,0
+APP00162,Priya Rao,Male,45,Kolkata,West Bengal,557167,9491014434,priya.rao156@outlook.com,Self-employed,1200000,90000.0,734,1,2024-05-22,0
+APP00149,Vikram Chauhan,Female,52,Hyderabad,Telangana,113810,75549-18187,vikram.chauhan282@outlook.com,Farmer,22000.0,230000.0,604,1,2024-09-26,0
+APP00386,Neha Das,MALE,32,Bhilai,CG,455429,7092554213,neha.das995@yahoo.co.in,Salaried,Rs. 41000,1050000.0,569,1,07 Mar 2024,1
+APP00199,Vikram Nair,Female,not available,Mysuru,Karnataka,829216.0,9569131050,vikram.nair875@yahoo.co.in,Salaried,293000.0,6365000.0,727,1,2024-11-10,0
+APP00309,Ayesha Kumar,Female,53,Kochi,Kerala,603999,8450606062,ayesha.kumar340@gmail.com,Salaried,24500.0,695000.0,627,0,06 Jun 2024,1
+APP00094,Rohit Singh,,36,Coimbatore,Tamil Nadu,242867,8161455017,rohit.singh307@gmail.com,Business owner,22500.0,605000.0,751,0,2025-08-03,0
+APP00245,Anjali Sharma,Male,37,Visakhapatnam,Andhra Pradesh,425972,8927696406,anjali.sharma759@outlook.com,Business owner,55500.0,1305000.0,733,0,2024-11-26,0
+APP00369,Ayesha Joshi,Female,38,Indore,Madhya Pradesh,651638,8593974618,ayesha.joshi754@outlook.com,Salaried,39000.0,280000.0,700,--,2024-01-20,0
+APP00221,Neha Thomas,Female,nil,Chennai,Tamil Nadu,,9748875108,neha.thomas491@gmail.com,Self-employed,41500.0,920000.0,858,1,2024-02-02,0
+APP00085,Karthik Verma,m,36,Patna,Bihar, 403724,7506365316,karthik.verma497@outlook.com,Farmer,32000.0,210000.0,702,1,2025-02-24,0
+APP00132,Sneha Chauhan,Female,61,Gurugram,Haryana,477612,6413996099,sneha.chauhan679@yahoo.co.in,Retired,34500.0,150000.0,692,1,01/04/2024,0
+APP00187,Amit Pillai,Male,32,Jaipur,Rajasthan,492549,9862882503,amit.pillai736@gmail.com,Salaried,13500.0,125000.0,671,0,2025-09-17,0
+APP00229,Lakshmi Shetty,Male,42,Gurugram,Haryana,396807,6885704303, lakshmi.shetty882@gmail.com ,Salaried,28000.0,725000.0,734,1,2025-07-28,0
+APP00089,mEERA jOSHI,Male,59,Delhi,Delhi,362263,6898243057,meera.joshi930@outlook.com,Retired,20500.0,425000.0,659,2,2024-01-16,1
+APP00011,Imran Gupta,Female,26,Indoer,Madhya Pradesh,193060.0,6200942503,imran.gupta278@yahoo.co.in,Farmer,-,485000.0,679,3,2024-06-26,0
+APP00034,Vikram Iyer,Female,48, Kolkata ,WB,458685,918950364415,vikram.iyer262@outlook.com,Salaried,19500.0,135000.0,not available,0,2025-01-17,0
+APP00217,Ritu Ansari,Male,36,Kochhi,Kerala,570987,9709484791,ritu.ansari523@outlook.com, Salaried ,71500.0,450000.0,-1,0,2024-03-27,0
+APP00072,Meera Chauhan,Male,34,Bareilly,Uttar Pradesh,265602,6271419877,meera.chauhan769@yahoo.co.in,?,44500.0,1175000.0,730,--,2025-06-17,0
+APP00373,Lakshmi Nair,Male,40,Bengaluru,Karnataka,794560,7038612796,lakshmi.nair549@outlook.com,Farmer,41500.0,Rs. 400000,597,2,24-10-2024,0
+APP00241,Rohit Shetty,Male,36,Kolkata,West Bengal , 586892,6236219505,rohit.shetty544@outlook.com,Farmer,54000.0,"INR 7,75,000/-",861,2,2024-06-16,0
+APP00244,Priya Pillai,Female,53,Hubli,Karnataka, 231297,+91 65084 49914,priya.pillai33@outlook.com,Farmer,17000.0,150000.0,nil,4,13/12/2024,0
+APP00310,Kavita Singh,Male,28,Ahmeddabad,Gujarat,773417,919076922859,kavita.singh857@gmail.com,Salaried,38000.0,990000.0,659,2,2024-06-21,0
+APP00139,Imran Reddy,M,27,Indore,Madhya Pradesh,197312,6670855254,imran.reddy887@outlook.com,Salaried,33500.0,395000.0,587,1,23-06-2025,1
+APP00018,Rahul Khan ,Male,39,Nagpur,Maharashtra,128562,7896751460,rahul.khan45@yahoo.co.in,Business owner,14500.0,310000.0,697,1,2024-10-25,0
+APP00387,Harpreet Kumar,female,43yrs,Bareilly,Uttar Pradesh,432273,6290438805,HARPREET.KUMAR226@GMAIL.COM,Self-employed,43500.0,570000.0,-1,--,2025-09-15,0
+APP00111,Manish Das,Male,60,Lcknow,Uttar Pradesh,117708,8799893332,manish.das174@outlook.com,Retired,66500.0,675000.0,735,1,not available,0
+APP00358,Karthik Pillai,Male,340,Kota,Rajasthan,768783,6840854840,karthik.pillai197@gmail.com,Salaried,30000.0,nil,683,,2025-05-16,0
+APP00012,Rahul Thomas,Male,29,Thiruvananthapuram,Kerala,171083,7209927299,rahul.thomas853@gmail.com,Salaried,28500.0,745000.0,662,1,2024-04-27,0
+APP00220,Manish Mehta,Male,39,Coimbatore,Tamil Nadu,744469,7195383625,manish.mehta108@gmail.com,Salaried,28000.0,365000.0,669,2,2025-02-27,0
+APP00087,Sneha Das,Female,--,Bhopal,Madhya  Pradesh,396028,8289339944,sneha.das816@gmail.com,Salaried,43500.0,945000.0,647,0,2025-01-01,0
+APP00198,Arjun Mehta,Male,34,Coimbatore,Tamil Nadu,773555,9414325029,arjun.mehta293@outlook.com,Salaried,26500.0,360000.0,900,0,2024-04-09,0
+APP00213,Imran Gupta,Male,27 yrs,Gaya,Bihar,712886,7525111743,imran.gupta53@yahoo.co.in,Salaried ,26000.0,555000.0,652,0,nil,0
+APP00365,Sneha Banerjee,Male,58,Gurugram,Haryana,703231,7169972449,sneha.banerjee274@yahoo.co.in,Retired,55000.0,250000.0,642,,2025-03-30,0
+APP00234,Sanjay Banerjee,Female,30,Chennai,Tamil Nadu,703561,6609968172,sanjay.banerjee946@outlook.com,Self-employed,?,745000.0,615,,2024-09-30,1
+APP00349,Priya Kumar,Female,30,Jaipur,Rajasthan,340 828,8432179013,priya.kumar651@gmail.com,Salaried,35000.0,780000.0,not available,2,2025-06-02,0
+APP00164,Vikram Iyer,Male,44,Guntur,Andhra Pradesh,631694,6454923493,VIKRAM.IYER806@GMAIL.COM,Salaried,10500.0,60000.0,,1,nil,0
+APP00175,Pooja Rao,Female,48,Ahmedabad,Gujarat,478983,6316546990,pooja.rao298@outlook.com,Farmer,48000.0,510000.0,740,3,2024-01-21,1
+APP00328,Arjun  Das,Male,32,Mumbai,Maharashtra,657572,6601380823,arjun.das807@outlook.com,Self-employed,33000.0,110000.0,708,2,2024-07-07,0
+APP00323,Ayesha Das,Male,31,Vadodara,Gujarat,491138,7572269544,ayesha.das136@outlook.com,Salaried,59000.0,280000.0,750,2,2025-08-09,0
+APP00096,Rohit Gupta,Male,21,Bhopal,Madhya Pradesh,401258,8450719193,rohit.gupta280@gmail.com,Self-employed,19000.0,435000.0,674,0,2025-02-01,0
+APP00205,Rahul Joshi,Female,32,Vadodara,Gujarat,616204,81674-87755,rahul.joshi894@yahoo.co.in,Farmer,37500.0,155000.0,659,4,06/12/2024,1
+APP00259,Manish Khan,Female,-,Hosur,Tamil Nadu,546111,+91 95351 12106,manish.khan485@outlook.com,Farmer,Rs. 26500,90000.0,639,1,2024-12-13,1
+APP00041,Karthik Iyer,Female,34,Coimbaatore,TAMIL NADU,798593,9206450107,karthik.iyer80@outlook.com,Salaried,1950000,160000.0,708,2,2024-12-19,0
+APP00063,Suresh Rao,Male,37,Gurugram,Haryana,217327,97739-27815,suresh.rao678@yahoo.co.in,Salaried,33000.0,Rs. 395000,789,3,2024-10-20,0
+APP00222,Kavita Khan,Female,36,Varanasi,Uttar Pradesh,150087,6445658418,kavita.khan996@gmail.com,Salaried,"INR 20,500/-","INR 4,80,000/-",739,1,01 Sep 2024,0
+APP00095,Lakshmi Shetty,m,24,Indore,Madhya Pradesh, 261681,7607070457,lakshmi.shetty733@outlook.com,  Salaried,61500.0,560000.0,813,,2024-06-18,0
+APP00013,Arjun Thomas,Male,39,Gurugram,Haryana,646444,7657953939,arjun.thomas91@outlook.com,Salaried,68000.0,820000.0,846,0,2024-01-02,0
+APP00017,Rohit Singh,Male,32,Coimbatore,Tamil Nadu,774624,6030132107,rohit.singh5@gmail.com,Self-employed,48000.0,-,679,0,2025-05-31,0
+APP00297,Ayesha Reddy,Female,37,Bareilly,Uttar Pradesh,,8684051213,ayesha.reddy585@gmail.com,Farmer,13500.0,210000.0,779,2,14-Dec-24,0
+APP00246,Ayesha Singh,Male,62,Vadodara,Gujarat,126292,6976556278,AYESHA.SINGH219@OUTLOOK.COM,retired,33000.0,945000.0,562,1,2024-12-31,1
+APP00207,Meera Shetty,Male,-,Lucknow,uttar pradesh,437366,6555992192,meera.shetty210@yahoo.co.in,Salaried,65500.0,1055000.0,736,2,2025-07-07,0
+APP00090,Rohit Shetty,Male,38,Nagpur,Maharashtra,313176,8732592677,rohit.shetty667@yahoo.co.in,Salaried,22500.0,235000.0,772,0,2024-10-28,0
+APP00269,Neha Kumar,Female,64,  Vizag,Andhra Pradesh,361757,7860948339,neha.kumar272@gmail.com,Retired,27500.0,630000.0,663,1,2024-12-14,0
+APP00039,Ayesha Thomas,Male,34,Hyderabad,Telangana,712892,7638441046,ayesha.thomas553@gmail.com,Salaried,39500.0,600k,611,0,2024-04-09,0
+APP00086,Fatima Nair,,47,Hyderabad,Telangana,112223,6242099157,fatima.nair292@yahoo.co.in,Business owner,55000.0,1550000.0,741,1,2025-07-24,0
+APP00181,Harpreet Shetty,Male,64,Chennai,Tamil Nadu,652266,8126204372,  harpreet.shetty173@outlook.com,Retired,54000.0,495000.0,9999,2,2024-01-23,0
+APP00280,  Pooja Iyer,Female,47,Bombay,Maharashtra,489563,6150294995,pooja.iyer974@gmail.com,Salaried,50500.0,780000.0,--,1,2024-04-17,0
+APP00145,Rohit Sharma,Male,52,Hyderabad,Telangana,313957,+91 90363 31188,rohit.sharma144@outlook.com ,Salaried,53500.0,1380000.0,582,2,2024-05-07,1
+APP00158,Anjali Banerjee,male,36,Bhopal,Madhya Pradesh,469223,9705164761,anjali.banerjee698@yahoo.co.in,Farmer,48500.0,930000.0,nil,2,2024-02-04,0
+APP00338,Priya Verma,Female,45,Hubballi,Karnataka,387679,+91 60157 14487,priya.verma275@outlook.com,Business owner,28000.0,,795,2,2025-06-22,0
+APP00301,Rahul Nair,Male,21 yrs, Hyderabad ,Telangana,723495,8846067898,rahul.nair637@yahoo.co.in,Self-employed,62k,725000.0,827,1,2024-12-10,0
+APP00302,Anjali Reddy,Female,21,Kolkata,West Bengal,364100,7974368661,anjali.reddy374@gmail.com,Self-employed,29000.0,8.1 lakh,773,2,2025-08-12,0
+APP00287,Sneha Joshi,Female,39,Indore,Madhya Pradesh,489247,8304766664,sneha.joshi99@gmail.com,Salaried,"INR 78,000/-",1150000.0,613,0,2025-03-25,1
+APP00200,Rahul Nair,-,30,Bareilly,Uttar Pradesh,287914,+91 84913 16800,rahul.nair667@yahoo.co.in,Farmer,44500.0,340000.0,705,0,2024-11-16,0
+APP00071,Ayesha Ansari,Female,37yrs,Gayya,Bihar,259559,6162272721, ayesha.ansari592@yahoo.co.in ,Farmer,85500.0,695000.0,721,,2024-12-21,0
+APP00392,Vikram Ansari,Male,36,Inodre,Madhya Pradesh,616172,6496043215,vikram.ansari450@outlook.com,not available,63500.0,1680000.0,-,--,2025-02-10,1
+APP00347,Vikram Mehta,MALE,37,Hubballi,KARNATAKA,116443,9485901979,vikram.mehta317@yahoo.co.in,Self Employed,,1070k,714,1,2024-10-31,0
+APP00298,Kavita Thomas,Male,26,Vadodara,Gujarat,647803.0,7667958447,kavita.thomas833@outlook.com,Salaried,35500.0,635000.0,794,0,2024-01-21,0
+APP00325,Sneha Rao,Male,37,Chennai,Tamil Nadu,351226.0,9229851060,sneha.rao756@gmail.com,SALARIED,61000.0,1585000.0,694,0,2025-01-08,0
+APP00385,Ritu Nair,f,51,Kolkata,West Bengal,320211,6016293432,ritu.nair783@gmail.com,Salaried,11500.0,260000.0,601,2,2024-05-25,1
+APP00320,VIKRAM KHAN,Female,57,Mumbai,Maharashtra,--,(+91) 86838 16171, vikram.khan351@outlook.com ,Business owner,62500.0,345000.0,9999,2,12-11-2024,0
+APP00133,Arjun Patel,Female,34,Bengaluru,Karnataka,610263,8815500180,arjun.patel972@gmail.com,  Salaried,39000.0,305000.0,829,0,2025-01-26,0
+APP00060,Ayesha Pillai,m,31,Kolkata,West Bengal ,836976,6857642713,ayesha.pillai679@outlook.com,SALARIED,-,1570000.0,9999,0,2025-06-28,0
+APP00394,SURESH VERMA,Male,46,Delhi,Delhi,666771,7650480883,suresh.verma651@yahoo.co.in,Self-employed,"INR 35,500/-",690000.0,789,1,2024-01-13,0
+APP00397,Ritu Sharma,Male,52,Vadodara,Gujarat,417751,7738783390,ritu.sharma182@outlook.com,Salaried,77000.0,not available,801,0,2024-03-30,0
+APP00100,Sneha Shetty,Female,62,Varanasi,Uttar Pradesh,167510.0,918149356324,SNEHA.SHETTY123@YAHOO.CO.IN,Retired ,55000.0,570000.0,688,,2025-04-17,1
+APP00019,Anjali Das,,32,Pune,Maharashtra, 191987,8937517090,anjali.das828@gmail.com,Farmer,20500.0,605000.0,686,1,2025-09-20,0
+APP00383,Manish Patel,Male,31,Bareilly,Uttar Pradesh,498207,6789072925,manish.patel521@yahoo.co.in,Business-owner,13000.0,350000.0,791,2,06 Jun 2025,0
+APP00384,Vikram Sharma,Male,59,Lucknow,Uttar Pradesh,370373,7543379822,vikram.sharma341@yahoo.co.in,Retired,25500.0,5.95 lakh,750,0,2025-06-07,0
+APP00264,Neha Kumar,Female,53,Mysuru,Karnataka,821628,(+91) 97759 54847,NEHA.KUMAR682@GMAIL.COM,Salaried,37500.0,590000.0,697,1,13-Feb-24,0
+APP00276,Lakshmi Singh,Female,41,Kolkata,West Bengal,470679,9921805026,lakshmi.singh577@outlook.com,Self-employed,70000.0,2000000.0,675,,01 Jan 2025,1
+APP00008,Sneha Ansari,Female,43,Hubballi,KA,210483,9963220402,SNEHA.ANSARI264@GMAIL.COM,Salaried,18500.0,335000.0,677,,16/07/2024,0
+APP00283,Anjali Banerjee,Male,25,Chennai,TN,140340,6174625059,anjali.banerjee209@yahoo.co.in ,farmer,60000.0,765000.0,769,1,2025-06-16,0
+APP00092,Amit Thomas,f,41,Gurugram,Haryana,741 654,8713893751,amit.thomas942@outlook.com,Salaried ,37000.0,790000.0,623,1,2024-06-10,1
+APP00252,Sneha Banerjee,Male,29,INDORE,Madhya Pradesh,358772,6913507250,sneha.banerjee816@gmail.com,Salaried,11000.0,305000.0,677,not available,2024-12-04,1
+APP00032,Neha Ansari,Female,33,Coimbatore,Tamil Nadu,855090.0,8138203616, neha.ansari566@outlook.com ,Salaried,50000.0,815000.0,623,0,2025-09-03,0
+APP00135,Fatima Joshi,Male,42,lucknow,Uttar Pradesh,228396,8984395668,fatima.joshi886@gmail.com,Self-employed,26000.0,520000.0,755,0,2024-08-08,0
+APP00022,Pooja Kumar,F,29,AHMEDABAD,Gujarat,446879,8675543231,pooja.kumar395@gmail.com,Salaried,92500.0,1140000.0,729,1,2024-04-05,0
+APP00062,Ritu Chauhan,Male,42,Hubballi,Karnataka,,7087987824,ritu.chauhan211@yahoo.co.in,SALARIED,15000.0,190000.0,733,3,2024-05-21,0
+APP00399,Lakshmi Banerjee,Male,50,Pune,Maharashtra,110526,9302880959,lakshmi.banerjee172@outlook.com,Salaried,41000.0,225000.0,783,2,2024-02-24,0
+APP00215,Ayesha Chauhan,m,47,Bengaluru,Karnataka,737480,8254102349,AYESHA.CHAUHAN822@YAHOO.CO.IN,-,20000.0,"₹2,05,000",-,1,2025-08-29,0
+APP00342,Sanjay Chauhan,nil,64,Pune,Maharashtra,817696,7158731966,sanjay.chauhan566@yahoo.co.in,Retired,16500.0,135000.0,647,0,2025-06-25,0
+APP00351,Sneha Joshi,Female,54,Gaya,Bihar,473484,9588742151,sneha.joshi495@yahoo.co.in,Farmer,42000.0,915000.0,780,1,2025-05-10,0
+APP00257,Divya Pillai,-,37,Chennai,Tamil Nadu,347723,6415588197,divya.pillai98@outlook.com,salaried,39500.0,845000.0,625,1,15-Apr-24,0
+APP00052,Ritu Sharma,Male,36,Nagpur,Maharashtra,846114,6344605978,ritu.sharma359@outlook.com,Business owner,nil,240000.0,637,0,2024-03-29,1
+APP00343,Anjali Shetty,Male,38,Ahmedabad,Gujarat,192002,7227502349,anjali.shetty903@gmail.com,Salaried,Rs. 73000,915000.0,737,0,2024-05-03,0
+APP00173,Kavita Iyer,Male,39,Pune,mAHARASHTRA,409500,7309737459,kavita.iyer728@outlook.com,Self-employed,50000.0,1050000.0,672,1,2025-06-16,0
+APP00035,Joseph Chauhan,Male,40,Vadodara,Gujarat,187960,9669448223,joseph.chauhan563@yahoo.co.in,Salaried,44000.0,155000.0,625,1,2024-04-27,0
+APP00178,Karthik Rao,Male,39,Varanasi,Uttar Pradesh,508427,8805670174,KARTHIK.RAO660@OUTLOOK.COM,Salaried,53000.0,1515000.0,669,0,02 Feb 2025,0
+APP00167,Priya  Iyer,Female,42 yrs,Delhi,Delhi,798440,6653820358,priya.iyer761@outlook.com,Salaried,38000.0,1105000.0,?,3,2025-08-06,1
+APP00226,Pooja Verma,Female,51,Dugrapur,WB,724708,8972973081,pooja.verma804@gmail.com,not available,27000.0,405000.0,-1,0,2024-06-06,0
+APP00120,Fatima Khan,Female,48,Guntur,Andhra Pradesh,263966,06918799512,  fatima.khan114@outlook.com,Salaried,15000.0,145000.0,648,2,2025-01-22,0
+APP00275,Anjali Sharma,Male,41,Bhopal,Madhya Pradesh,273343,6875620451,anjali.sharma486@yahoo.co.in,Salaried,49500.0,1275000.0,738,3,2024-01-21,0
+APP00044,Karthik Iyer,Female,41,Thiruvananthapuram,Kerala, 624685,6471850592,karthik.iyer967@outlook.com,Self-employed,"₹23,500",420000.0,683,0,2025-03-27,1
+APP00300,Manish Das,Male,350,Bhopal,Madhya Pradesh,564672,917735329865,manish.das128@gmail.com,Salaried,37500.0,1020000.0,737,1,2025-07-13,0
+APP00076,VIKRAM KUMAR,Male,48,Bengaluru,Karnataka,126076,8387692393,vikram.kumar707@gmail.com,Self-employed,106500.0,1960000.0,999,1,2025-02-04,0
+APP00208,Ritu Khan,m,37,Jaipur,Rajasthan,213064,7162277329,ritu.khan802@yahoo.co.in,Self-employed,24500.0,165000.0,666,1,2024-11-21,0
+APP00212,Harpreet Reddy, Male,43,Bhilai,Chhattisgarh,491125,8142736248,harpreet.reddy51@yahoo.co.in,Self-employed,21000.0,410000.0,662,1,2024-09-01,0
+APP00267,Ayesha Sharma,Male,45,Kolkata ,West Bengal,--,74442-25473,ayesha.sharma79@gmail.com,Farmer,47500.0,820000.0,642,0,2024-01-01,1
+APP00311,Vikram Joshi, Male,45,Visakhapatnam,Andhra Pradesh,752803,6563469163,vikram.joshi249@outlook.com,Self Employed,38500.0,855000.0,628,1,2024-10-26,0
+APP00216,Vikram Ansari,Female,34,Ajmer,Rajasthan,502297,06510120933,vikram.ansari892@yahoo.co.in,Farmer,44000.0,935000.0,702,0,2025-08-24,0
+APP00361,Fatima Das,Male,49,Gaya, Bihar ,290458,8665216240,fatima.das727@yahoo.co.in,Farmer,20500.0,435000.0,684,not available,2025-01-18,0
+APP00009,Suresh Gupta,nil,34,Bengaluru,Karnataka,453220,7842157239,suresh.gupta440@yahoo.co.in,salaried,37000.0,1070000.0,738,1,2024-10-19,0
+APP00396,Meera Mehta,Female,50,Hubballi,Karnataka,629616,6435160890,meera.mehta715@yahoo.co.in,Salaried,37500.0,690000.0,560,0,2024-02-02,1
+APP00352,Anjali Kumar ,Female,38,Bengaluru,Karnataka,490993,6310639157, anjali.kumar3@gmail.com ,Business owner,90500.0,1970000.0,646,1,2025-08-16,1
+APP00285,Anjali Verma,Male,65,Bareilly,Uttar Pradesh,163676,919570836500, anjali.verma517@gmail.com , Retired ,34000.0,850000.0,682,1,2025-04-28,1
+APP00295,Ritu Das,Female,49,Varanasi,Uttar Pradesh,269440,6554704590,ritu.das616@outlook.com, Salaried ,20500.0,220000.0,810,not available,2024-07-26,0
+APP00104,fatima joshi,Male,37,Mumbai,Maharashtra,825008,9298017546,fatima.joshi887@gmail.com,Business owner,23500.0,615000.0,678,2,2024-01-04,0
+APP00312,Kavita Shetty,Female,41,Thiruvananthapuram,Kerala,809881,(+91) 87532 30800,kavita.shetty406@outlook.com,Salaried,27500.0,95000.0,,0,2025-04-03,0
+APP00388,Sanjay Singh,Male,38,Coimbatore,Tamil Nadu,771 401,8126609429,sanjay.singh47@yahoo.co.in,Business owner,97000.0,1095000.0,877,1,30/05/2024,0
+APP00268,Meera Rao,MALE,--,Bhilai,Chhattisgarh,141661,63404-41684,  meera.rao613@outlook.com,Salaried,43000.0,945000.0,789,1,2024-08-30,0
+APP00091,Kavita Kumar,Female,37,Lucknow,Uttar Pradesh,409777,8533804379,kavita.kumar305@outlook.com,Self-employed,36000.0,175000.0,716,0,2025-02-25,0
+APP00182,Ayesha Joshi, Female,40,Thiruvananthapuram,Kerala,141768.0,8599933445, ayesha.joshi133@gmail.com ,Business owner,71000.0,1385000.0,606,0,2024-02-07,0
+APP00315,Neha Das,Female,33,Guntur,ap,405506,6153095553,neha.das786@outlook.com,Self-employed,8500.0,2.1L,627,0,2024-01-05,0
+APP00377,Pooja Gupta,Male,40,,Karnataka,649663,6115886181,pooja.gupta247@outlook.com,Salaried,61000.0,1665000.0,754,0,13 Jul 2024,0
+APP00172,Joseph Singh,Male,24,Kochi,Kerala,592359,8220736852,joseph.singh738@yahoo.co.in,Business owner,14000.0,180000.0,730,2,2024-10-06,0
+APP00232,Fatima Shetty,Male,39 yrs,hyderabad,Telangana,632244,9563453711,fatima.shetty381@yahoo.co.in,Self-employed,27000.0,"INR 1,05,000/-",586,2,2024-02-13,1
+APP00036,Kavita Rao,Male,48,Ahmedabad,gj,726095,6242184649,kavita.rao358@gmail.com,SALARIED,31500.0,225000.0,733,1,2025-08-30,0
+APP00156,Fatima Das,female,31,JHANSI,Uttar Pradesh,850259,9076966065,fatima.das857@outlook.com,Self-employed,1700000,465000.0,718,0,2025-01-02,0
+APP00002,Harpreet Mehta,Male,25,Durgapur,WB,739641,8527155791,harpreet.mehta27@gmail.com ,sALARIED,76000.0,1905000.0,666,1,2024-06-15,0
+APP00242,Imran Banerjee,f,30,Kohci,Kerala,327267,6011882847,imran.banerjee950@yahoo.co.in,Salaried,44000.0,605000.0,753,2,2024-08-23,0
+APP00308,Joseph  Singh,Male,32,Delhi,Delhi,708696,7245156561,JOSEPH.SINGH696@GMAIL.COM,Self-employed,39000.0,755000.0,692,nil,2025-03-31,1
+APP00289,Karthik Thomas,Male,42,Indore,Madhya Pradesh,469255,7345903432,karthik.thomas437@gmail.com,Farmer,not available,150000.0,755,0,2024-12-31,0
+APP00048,Neha Ansari,Male,43,HOSUR,TN,618890,9387547419,neha.ansari356@yahoo.co.in,Salaried,35500.0,145000.0,822,2,29-Jan-25,0
+APP00141,Sanjay Thomas,Female,45,Coimbatore,Tamil Nadu,261330,9497199954,sanjay.thomas405@gmail.com,Self-employed,56500.0,1640000.0,735,1,06 Sep 2025,0
+APP00223,Karthik Mehta,Female,36,-,Tamil Nadu,125534,--,  karthik.mehta59@yahoo.co.in,Salaried,91000.0,2115000.0,760,0,2024-12-07,0
+APP00183,Suresh Rao,Female,27,Bhilai,Chhattisgarh,421653,7697030394,suresh.rao571@yahoo.co.in,Self-employed,46500.0,835000.0,694,1,2025-04-01,1
+APP00331,Arjun Mehta,Male,34,Hyderabad,Telangana,606707,6997373726,arjun.mehta31@outlook.com,Business owner,59500.0,785000.0,744,,2024-05-16,0
+APP00367,Kavita Thomas,Male,53,Bhopal,Madhya Pradesh,125954,7899202708,kavita.thomas211@yahoo.co.in,,30500.0,645000.0,820,0,2025-08-04,0
+APP00160,  Rohit Banerjee,Female,28,Delhi,DL,354543,7024704422,rohit.banerjee493@gmail.com,Self-employed,63500.0,320000.0,707,0,2025-04-16,0
+APP00336,Divya Ansari,Female,33,Ahmedabad,Gujarat,370649,9242658281,divya.ansari599@yahoo.co.in,Business owner,51000.0,465000.0,676,1,2025-05-27,0
+APP00219,Anjali Iyer,Female,39,Lucknow,Uttar Pradesh,409373,6133939028,anjali.iyer832@outlook.com,Self-employed,42500.0,825000.0,688,1,2024-09-23,0
+APP00099,Lakshmi Verma,Male,30 years,Bengaluru,Karnataka,440768,8672731124,lakshmi.verma450@outlook.com,Business owner,114000.0,2235000.0,691,1,2024-11-29,0
+APP00235,Arjun Khan,Female,22 yrs,Mysuru,KA,,9264879976,arjun.khan134@outlook.com,Salaried,not available,1040000.0,632,0,2025-08-12,0
+APP00117,Rahul Mehta,Male,44,Thrissur,kerala,652560,9488052676,rahul.mehta453@outlook.com,Salaried,45000.0,690000.0,729,1,03.03.2025,0
+APP00341,Harpreet Singh,Female,29,Nagpur,Maharashtra, 563014,6493785415,harpreet.singh183@outlook.com,Salaried,46000.0,1140000.0,676,2,2025-05-24,0
+APP00001,Manish Reddy, Male,29 yrs,HYDERABAD,Telangana,149728,07794711225, manish.reddy476@outlook.com ,Salaried,29000.0,305000.0,628,,2024-10-12,1
+APP00113,Joseph Ansari,Female,21,Jaipur,Rajasthan,135957,8249576824,joseph.ansari744@gmail.com,Salaried,39500.0,930000.0,839,0,2025-07-07,0
+APP00380,aNJALI iYER,Female,35,Mumbai ,Maharashtra,832392,9375115697,anjali.iyer785@outlook.com,self-employed,36500.0,130000.0,766,0,2024-08-09,0
+APP00174,Meera Mehta,Male,42,Patna,  Bihar,531700,7969591423,meera.mehta185@gmail.com,Salaried,"₹18,500",175000.0,704,0,2024-02-03,0
+APP00253,Lakshmi Singh,Male,28,Ahmedabad,gujarat,511041,9696946474,lakshmi.singh710@gmail.com,Salaried,44500.0,570000.0,not available,1,2024-06-26,0
+APP00366,Sneha Chauhan,Male,22,Kolkaat,West Bengal,738235,62538-34574,sneha.chauhan33@outlook.com,Farmer,35500.0,815000.0,774,0,2024-03-19,0
+APP00184,Sanjay Khan,Female,34,Gurugram,HR,734385,9364453930,sanjay.khan801@yahoo.co.in,Business owner,36500.0,"INR 4,85,000/-",809,0,2025-06-09,0
+APP00165,Arjun Chauhan,Female,32,Bhopal,Madhya Pradesh, 785593,6386029834,arjun.chauhan325@yahoo.co.in,Self-employed,24000.0,"INR 1,25,000/-",841,0,2024-09-18,0
+APP00274,Priya Mehta,Male,47,Mysuru,Karnataka,227910,9412042364,priya.mehta596@gmail.com,Salaried,63000.0,1310000.0,785,,2024-05-20,0
+APP00192,Priya Iyer,Male,47,Bhilai,Chhattisgarh,599598,7898279917,priya.iyer58@outlook.com,Salaried,24500.0,220000.0,643,1,2025-09-17,0
+APP00000,  Ritu Verma,Male,58,Bengaluru,Karnataka,782070,7471358612,ritu.verma168@gmail.com,Salaried,94000.0,1950000.0,789,0,2025-01-08,0
+APP00054,Fatima Rao,Male,290,Bhilai,cg,305510,8391910309,fatima.rao656@gmail.com,farmer,53000.0,435000.0,,1,10-May-24,0
+APP00028,sANJAY bANERJEE,Female,50,Mumbai,Maharashtra,216918,+91-8186428261,sanjay.banerjee22@yahoo.co.in,Self-employed,36500.0,905000.0,773,2,2024-04-21,0
+APP00206,Sanjay Mehta,Female,41,Vadodara,Gujarat,461088,8929947518,sanjay.mehta821@yahoo.co.in,Farmer,15500.0,85000.0,563,3,2024-12-22,1
+APP00049,Sanjay Singh,Male,29,Kochi,Kerala,723637,6087290732,sanjay.singh896@outlook.com,Salaried,21000.0,555000.0,647,0,,1
+APP00350,Arjun Ansari,Male,35,not available,WB,639070,89700-30048,arjun.ansari554@gmail.com,Salaried,16000.0,140000.0,651,2,2025-03-04,0
+APP00020,meera das,Male,22,Mumbai,Maharashtra,790014,8569492621,meera.das434@outlook.com,Salaried,89500.0,2415000.0,623,,2024-05-17,1
+APP00293,Anjali Mehta,Female,26,Hyderabad,Telangana,354173,9413550550,  anjali.mehta969@yahoo.co.in,Self-employed,79000.0,2130000.0,515,1,2024-12-10,1
+APP00176,Harpreet Kumar,M,37,Lucknow,UP,360692,+91 92675 37011,harpreet.kumar67@gmail.com,Self-employed,26000.0,170000.0,nil,0,2025-08-14,1
+APP00335,Harpreet Reddy,Male,21,Hyderabad,Telangana,519990,7687063914,harpreet.reddy479@yahoo.co.in,Salaried,68000.0,820000.0,664,1,2025-02-20,0
+APP00379,Rohit Shetty,Female,56,Barelly,Uttar Pradesh,331296,6434904394,rohit.shetty891@yahoo.co.in,Salaried,31500.0,140000.0,nil,0,2024-05-31,0
+APP00033,Rahul Shetty,Male,,Trichur,kl,147982,+91-9499498873,rahul.shetty953@yahoo.co.in,Farmer,12000.0,"₹80,000",665,0,2024-10-14,0
+APP00171,Sneha Chauhan,Male,42,Coimbatore,Tamil Nadu,,9376195761,sneha.chauhan211@outlook.com,Farmer,30000.0,440000.0,768,0,2025-09-24,0
+APP00007,Imran Rao,Male,34,Chennai,Tamil Nadu,332516,8471607639,imran.rao751@yahoo.co.in,Business owner,34000.0,990000.0,597,2,10-06-2025,1
+APP00318,Lakshmi Singh,Female,470,Ahmedabad,Gujarat,204750,6868428078,lakshmi.singh742@outlook.com,Salaried,44000.0,790000.0,698,,2025-02-18,1
+APP00177,Kavita Singh,Female,35,Koat,rajasthan,840688,+91-9568338702, kavita.singh663@yahoo.co.in ,Business owner,44500.0,900000.0,808,0,2025-08-18,0
+APP00106,Suresh Reddy,Male,43,Kolkata,WB,658157,(+91) 74244 78964,suresh.reddy672@yahoo.co.in,Salaried,88500.0,1325000.0,776,1,2024-08-12,0
+APP00097,Lakshmi Pillai,Male,,Kolkata,West Bengal,609282,9279856008,lakshmi.pillai348@gmail.com,Salaried,32k,730000.0,743,0,2024-09-06,0
+APP00110,Joseph Mehta,F,45,Ajmer,Rajasthan,284839,6504951305,joseph.mehta798@gmail.com,Business owner,14000.0,400000.0,-,1,2025-02-20,0
+APP00360,Vikram Das,Male,44,Gaya,Bihar,335401,06375069943,vikram.das395@yahoo.co.in,Salaried,35000.0,1050000.0,788,-,2024-12-16,0
+APP00069,Rohit Nair,Female,23,Vadodara,Gujarat,124896,7502791718,rohit.nair977@outlook.com,Business owner,33000.0,Rs. 150000,755,0,2025-08-25,0
+APP00346,Harpreet Sharma,Female,47,Mysuru,Karnataka,791 076,6294044658,harpreet.sharma99@gmail.com,Salaried,16000.0,,815,0,2024-03-03,0
+APP00129,Amit Iyer,Female,57,Gurugram,Haryana,223930,7082324714,AMIT.IYER489@GMAIL.COM,Self-employed,24500.0,175000.0,751,0,2024-01-03,0
+APP00316,  Neha Chauhan,female,42,Delhi,Delhi,699900,8409952203,neha.chauhan136@yahoo.co.in,Salaried,39500.0,1165000.0,640,0,2024-11-20,0
+APP00258,Imran  Kumar,Male,67,Mumbai,Maharashtra,325076,7799776307,imran.kumar324@outlook.com,Retired,not available,995000.0,667,0,2024-04-25,0
+APP00322,Fatima Kumar,Male,41,Nagpur,Maharashtra,578865,8845430130,fatima.kumar337@yahoo.co.in,Salaried,73000.0,1590000.0,765,2,2025-02-12,0
+APP00150,Priya Thomas,Male,37,Bhopal,Madhya Pradesh,268600,62818-88180,priya.thomas973@yahoo.co.in,Salaried,14000.0,245000.0,733,0,2025-05-14,0
+APP00337,Manish Chauhan,Male,45 yrs,Pune,Maharashtra,730966,7688724042,manish.chauhan668@gmail.com,Salaried,30000.0,780000.0,687,-,2025-03-20,1
+APP00026,Arjun Iyer,Male,43,Visakhapatnam,Andhra Pradesh,482890,6366546015,arjun.iyer167@outlook.com,Farmer,36500.0,760000.0,573,1,2024-01-24,1
+APP00093,Harpreet Chauhan,Female,31,Coimbatore,Tamil Nadu,714696,6035329441,harpreet.chauhan380@yahoo.co.in,Salaried,27500.0,365000.0,738,0,2025-04-08,0
+APP00148,Suresh Mehta,Female,40,Jaaipur,Rajasthan,660310,,suresh.mehta202@yahoo.co.in,Salaried,36500.0,515000.0,765,1,2024-11-10,0
+APP00119,Neha Nair,Female,34,Hubballi,Karnataka,317650,8892776932,neha.nair22@yahoo.co.in,Farmer,120000.0,2565k,-,-,2024-03-23,1
+APP00138,Karthik Iyer,Female,43,Kolkata,West Bengal,213988,9354935236,karthik.iyer546@yahoo.co.in,Salaried,49000.0,640000.0,not available,0,2025-05-16,1
+APP00169,Lakshmi Reddy,Female,33,Hosur,Tamil Nadu,637455,8902098419,lakshmi.reddy961@yahoo.co.in,  Farmer,14000.0,3.15 lakh,752,,2024-07-21,0
+APP00363,Divya Ansari,Female,44,Visakhapatnam,Andhra Pradesh,356485,7597960227,divya.ansari228@outlook.com,Farmer,20000.0,325000.0,705,nil,2024-08-19,0
+APP00202,AMIT PATEL,Male,37,Mumbai,Maharashtra,491622,6303704213,amit.patel180@yahoo.co.in,Farmer,58500.0,1140000.0,750,0,2024-08-28,0
+APP00147,Divya Nair,Male,29,Pue,Maharashtra,nil,6842217675,divya.nair375@gmail.com,Salaried,22000.0,410000.0,734,4,2025-04-22,0
+APP00277,Rohit Kumar,Male,33,Varanasi,UP,532101,9823906648,rohit.kumar661@outlook.com,Self-employed,56000.0,1245000.0,627,nil,2024-04-22,1
+APP00256,Vikram Joshi,,650,KOLKATA,West Bengal,451 609,8409816848,vikram.joshi953@gmail.com,Retired,63500.0,1380000.0,665,1,2024-06-29,0
+APP00131,Rohit Pillai,Female,46,Vadodara,Gujarat,836487,9535066763,rohit.pillai755@yahoo.co.in,Salaried,25000.0,440000.0,739,3,2024-06-04,0
+APP00249,Arjun Singh,Male,41,Coimbatore,Tamil Nadu,821888,8108530420,arjun.singh49@outlook.com,Self-employed,-,3.5L,862,0,2025-07-29,0
+APP00152,Ayesha Gupta,Female,63,Bengaluru,Karnataka,?,6833700665,ayesha.gupta763@yahoo.co.in,Self-employed,23500.0,190000.0,803,2,2024-06-23,0
+APP00362,Ayesha Rao,Female,38,Kochi,Kerala,338515.0,9074597030,ayesha.rao40@outlook.com,Self-employed,56500.0,390000.0,758,1,2025-01-16,0

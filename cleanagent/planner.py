@@ -1,0 +1,161 @@
+"""Plan step. RulePlanner is deterministic; LLMPlanner asks a language model; HybridPlanner uses rules and
+asks the LLM only about rare category values the rules could not resolve."""
+import json
+from dataclasses import dataclass, field
+
+from .llm import extract_json
+from .tools import OPTIONAL, TOOL_DOCS, TOOLS
+
+ORDER = ["standardize_missing", "parse_number", "parse_date", "normalize_phone", "normalize_pincode", "normalize_email",
+         "normalize_text", "map_values", "fix_range", "flag_outliers", "impute", "drop_duplicates"]
+
+
+@dataclass
+class Step:
+    tool: str
+    args: dict
+    reason: str = ""
+    source: str = "rule"
+    meta: dict = field(default_factory=dict)
+
+    def key(self):
+        return (self.tool, self.args.get("col") or ",".join(self.args.get("subset", [])))
+
+    def label(self):
+        a = {k: v for k, v in self.args.items() if k != "mapping"}
+        if "mapping" in self.args:
+            a["mapping"] = f"{len(self.args['mapping'])} values"
+        return f"{self.tool}({', '.join(f'{k}={v}' for k, v in a.items())})"
+
+
+def validate(step, df):
+    """Returns an error message, or None if the step is well-formed for this DataFrame."""
+    if step.tool not in TOOLS:
+        return f"unknown tool {step.tool!r}"
+    schema = TOOLS[step.tool]
+    for arg, typ in schema.items():
+        if arg not in step.args:
+            if arg in OPTIONAL.get(step.tool, set()):
+                continue
+            return f"missing argument {arg!r}"
+        if not isinstance(step.args[arg], typ):
+            return f"argument {arg!r} has wrong type"
+    extra = set(step.args) - set(schema)
+    if extra:
+        return f"unexpected arguments {sorted(extra)}"
+    if "col" in step.args and step.args["col"] not in df.columns:
+        return f"unknown column {step.args['col']!r}"
+    if "subset" in step.args and (not step.args["subset"] or any(c not in df.columns for c in step.args["subset"])):
+        return "bad subset"
+    if step.tool == "impute" and step.args["strategy"] not in ("median", "mode"):
+        return "strategy must be median or mode"
+    return None
+
+
+def _sorted(steps):
+    return sorted(steps, key=lambda s: ORDER.index(s.tool))
+
+
+class RulePlanner:
+    name = "rule"
+
+    def __init__(self, llm=None, impute=False):
+        self.llm, self.impute = llm, impute
+        self.llm_errors = []
+
+    def plan(self, df, prof, issues, done):
+        steps = []
+        for iss in issues:
+            c = iss.column
+            k, why = iss.kind, f"{iss.count} values: {iss.kind.replace('_', ' ')}"
+            if k == "disguised_missing":
+                steps.append(Step("standardize_missing", {"col": c}, why))
+            elif k == "number_stored_as_text":
+                steps.append(Step("parse_number", {"col": c}, f"{iss.detail['non_plain']} values in non-standard formats; column stored as text"))
+            elif k == "date_format":
+                steps.append(Step("parse_date", {"col": c, "dayfirst": True}, why + " (Indian day-first convention)"))
+            elif k in ("phone_format", "pincode_format", "email_format"):
+                steps.append(Step(f"normalize_{k.split('_')[0]}", {"col": c}, why))
+            elif k == "text_format":
+                steps.append(Step("normalize_text", {"col": c, "case": iss.detail["case"]}, why))
+            elif k == "category_variants":
+                mapping = {raw: v[0] for raw, v in iss.detail["mapping"].items()}
+                reasons = {raw: v[1] for raw, v in iss.detail["mapping"].items()}
+                if self.llm and iss.detail["unresolved"]:
+                    extra = self._ask_llm(c, iss.detail["unresolved"], iss.detail["canonical"])
+                    for raw, tgt in extra.items():
+                        mapping[raw], reasons[raw] = tgt, "LLM: alias or misspelling"
+                if mapping:
+                    steps.append(Step("map_values", {"col": c, "mapping": mapping},
+                                      f"merge {len(mapping)} variant spellings into canonical values",
+                                      "hybrid" if self.llm else "rule", {"reasons": reasons}))
+            elif k == "out_of_range":
+                steps.append(Step("fix_range", {"col": c, "lo": iss.detail["lo"], "hi": iss.detail["hi"]},
+                                  f"{iss.count} values outside plausible range [{iss.detail['lo']}, {iss.detail['hi']}]"))
+            elif k == "outlier":
+                steps.append(Step("flag_outliers", {"col": c, "z": iss.detail["z"]}, f"{iss.count} values are extreme (robust z > 5)"))
+            elif k == "duplicates":
+                steps.append(Step("drop_duplicates", {"subset": iss.detail["subset"]}, f"{iss.count} duplicate rows"))
+        if self.impute and not steps:
+            from .parsers import is_blank
+            for c in df.columns:
+                if df[c].map(is_blank).any():
+                    num = str(df[c].dtype).startswith(("float", "int"))
+                    steps.append(Step("impute", {"col": c, "strategy": "median" if num else "mode"}, "fill remaining gaps"))
+        return _sorted([s for s in steps if s.key() not in done])
+
+    def _ask_llm(self, col, unresolved, canonical):
+        prompt = (f"Column '{col}' of an Indian dataset has these canonical values:\n{json.dumps(canonical)}\n\n"
+                  f"These rare values did not match any of them:\n{json.dumps(unresolved[:60])}\n\n"
+                  "For each rare value that is an alias, old name, abbreviation or misspelling of a canonical value, "
+                  "map it to that canonical value. Leave out values you are not sure about. "
+                  'Reply with JSON only: {"mapping": {"rare value": "canonical value"}}')
+        try:
+            reply = extract_json(self.llm.complete([{"role": "user", "content": prompt}]))
+            m = reply.get("mapping", {})
+            return {str(k): v for k, v in m.items() if k in unresolved and v in canonical}
+        except Exception as e:  # noqa: BLE001 - any LLM failure falls back to rules only
+            self.llm_errors.append(str(e))
+            return {}
+
+
+SYSTEM = """You are a careful data-cleaning agent for Indian tabular data.
+You may ONLY use these tools (no other code):
+{tools}
+Rules: dates in India are day-first. Money may be written as '₹1,20,000', '1.2 lakh', '2 crore', '120k'.
+Prefer fixing to deleting. Never drop rows except exact duplicates of an ID. Do not repeat a step already done.
+Reply with JSON only: {{"steps": [{{"tool": "...", "args": {{...}}, "reason": "..."}}]}}. Return {{"steps": []}} when the data is clean."""
+
+
+class LLMPlanner:
+    """The LLM sees the profile and issues and proposes steps. Invalid steps are rejected; if the reply is not
+    usable at all, the agent falls back to the rule planner for that iteration."""
+    name = "llm"
+
+    def __init__(self, llm, fallback=None):
+        self.llm, self.fallback = llm, fallback or RulePlanner()
+        self.llm_errors = []
+
+    def plan(self, df, prof, issues, done):
+        tools = "\n".join(f"- {t}({', '.join(TOOLS[t])}): {TOOL_DOCS[t]}" for t in TOOLS)
+        cols = [dict(column=p.name, inferred_type=p.kind, missing=p.n_null, unique=p.n_unique,
+                     dtype=str(df[p.name].dtype), top_values=[str(v) for v, _ in p.top[:8]]) for p in prof.values()]
+        issue_view = []
+        for i in issues:
+            d = i.as_dict()
+            if i.kind == "category_variants":
+                d["canonical_values"] = i.detail["canonical"][:40]
+                d["unmatched_rare_values"] = i.detail["unresolved"][:40]
+            issue_view.append(d)
+        user = (f"Columns:\n{json.dumps(cols, ensure_ascii=False)}\n\nDetected issues:\n{json.dumps(issue_view, ensure_ascii=False)}\n\n"
+                f"Steps already done: {json.dumps([list(k) for k in done])}\nPlan the next cleaning steps.")
+        try:
+            reply = extract_json(self.llm.complete([{"role": "system", "content": SYSTEM.format(tools=tools)},
+                                                    {"role": "user", "content": user}]))
+            raw = reply.get("steps", [])
+            steps = [Step(s.get("tool", ""), s.get("args", {}) or {}, s.get("reason", ""), "llm") for s in raw if isinstance(s, dict)]
+        except Exception as e:  # noqa: BLE001
+            self.llm_errors.append(str(e))
+            return [Step(s.tool, s.args, s.reason + " [fallback: LLM reply unusable]", "fallback", s.meta)
+                    for s in self.fallback.plan(df, prof, issues, done)]
+        return [s for s in steps if s.key() not in done]
