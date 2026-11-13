@@ -4,7 +4,8 @@ This is deliberately incomplete (it lists only common Indian city renames). The 
 older names that are NOT listed here, to measure what a rule-based agent misses and an LLM could fix.
 """
 MISSING_TOKENS = {"", "na", "n/a", "n.a.", "nan", "null", "none", "-", "--", "?", "nil", "not available",
-                  "unknown", "#n/a", "missing", "not applicable"}
+                  "unknown", "#n/a", "missing", "not applicable", "undisclosed",
+                  "not disclosed", "n.a", "na."}
 
 CITY_ALIASES = {"bombay": "Mumbai", "bangalore": "Bengaluru", "madras": "Chennai", "calcutta": "Kolkata",
                 "gurgaon": "Gurugram", "mysore": "Mysuru", "baroda": "Vadodara", "newdelhi": "Delhi"}
@@ -26,7 +27,7 @@ NAME_HINTS = {
     "income": "money", "amount": "money", "salary": "money", "price": "money", "loan": "money",
     "fee": "money", "cost": "money", "balance": "money", "rent": "money",
     "age": "numeric", "score": "numeric", "count": "numeric", "qty": "numeric", "emis": "numeric",
-    "name": "name", "id": "id",
+    "name": "name", "id": "id", "sqft": "numeric", "bath": "numeric", "balcony": "numeric", "usd": "money",
 }
 
 # plausible ranges, matched on column-name tokens (first match wins)

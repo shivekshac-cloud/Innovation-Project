@@ -1,5 +1,6 @@
-"""python -m cleanagent.benchmark          rule-based agent vs baselines (offline, about 2 minutes)
-python -m cleanagent.benchmark --llm    also run the LLM and hybrid planners (needs an LLM server, see llm.py)"""
+"""python -m cleanagent.benchmark           rule-based agent vs baselines (offline; ~5 min, ~10 min on an i3 laptop)
+python -m cleanagent.benchmark --quick   2 datasets instead of 5 (~2 min on an i3)
+python -m cleanagent.benchmark --llm     also run the LLM and hybrid planners (needs an LLM server, see llm.py)"""
 import argparse
 import json
 import time
@@ -45,14 +46,17 @@ def ms(v):
     return [float(np.mean(v)), float(np.std(v))] if v else [float("nan"), float("nan")]
 
 
-def main(use_llm=False):
+def main(use_llm=False, quick=False):
+    global SEEDS
+    if quick:
+        SEEDS = range(2)
     llm = None
     if use_llm:
-        from .llm import OpenAICompatLLM
-        llm = OpenAICompatLLM()
+        from .llm import CachedLLM, OpenAICompatLLM
+        llm = CachedLLM(OpenAICompatLLM())
     test, test_tier = make_clean(3000, 1000, id_offset=90000)
     tt = test_tier.to_numpy()
-    rows, subtype_rows, tier_rows, timing = [], [], [], {}
+    rows, subtype_rows, tier_rows, timing, unseen_rows, unseen_sub = [], [], [], {}, [], []
     clean_auc = []
     for seed in SEEDS:
         clean, tier = make_clean(3000, seed)
@@ -71,10 +75,17 @@ def main(use_llm=False):
             if name in ("Agent (rule planner)", "Agent (hybrid: rules + LLM)", "Agent (LLM planner)"):
                 for k, v in s["by_subtype"].items():
                     subtype_rows.append(dict(method=name, seed=seed, subtype=k, ok=v))
+        # unseen-format test: same data, error formats the rules were never written for
+        dirty_h, ledger_h, dup_h = corrupt(clean, tier, rate=RATE, seed=seed, heldout=True)
+        for name in ["Agent (rule planner)"] + (["Agent (hybrid: rules + LLM)"] if llm else []):
+            s = score(methods(seed, llm)[name](dirty_h), clean, tier, ledger_h, dup_h)
+            unseen_rows.append(dict(method=name, seed=seed, **{k: v for k, v in s.items() if isinstance(v, float)}))
+            for k, v in s["by_subtype"].items():
+                unseen_sub.append(dict(method=name, seed=seed, subtype=k, ok=v))
     df = pd.DataFrame(rows)
     sweep = []
     for rate in SWEEP:
-        for seed in range(3):
+        for seed in range(1 if quick else 3):
             clean, tier = make_clean(3000, seed)
             dirty, ledger, dup_of = corrupt(clean, tier, rate=rate, seed=seed)
             for name in ("No cleaning", "Naive pandas (dropna)", "Agent (rule planner)"):
@@ -92,14 +103,17 @@ def main(use_llm=False):
                by_subtype={m: {k: ms(g.ok) for k, g in d.groupby("subtype")} for m, d in pd.DataFrame(subtype_rows).groupby("method")},
                by_tier={m: {int(t): {k: ms(g[k]) for k in ("retention", "fixed", "auc")} for t, g in d.groupby("tier")}
                         for m, d in pd.DataFrame(tier_rows).groupby("method", sort=False)},
+               unseen={m: {k: ms(g[k]) for k in ("cell_accuracy", "recoverable_fixed", "collateral_damage")}
+                       for m, g in pd.DataFrame(unseen_rows).groupby("method", sort=False)},
+               unseen_by_subtype={m: {k: ms(g.ok) for k, g in d.groupby("subtype")} for m, d in pd.DataFrame(unseen_sub).groupby("method")},
                sweep={m: {str(r): {k: ms(g[k]) for k in ("cell_accuracy", "retention", "auc")} for r, g in d.groupby("rate")}
                       for m, d in sw.groupby("method", sort=False)})
     suffix = "_llm" if llm else ""
-    json.dump(res, open(f"reports/results{suffix}.json", "w"), indent=2)
+    json.dump(res, open(f"reports/results{suffix}.json", "w", encoding="utf-8"), indent=2)
     write_markdown(res, f"reports/RESULTS{suffix}.md")
     if not llm:
         make_plots(res)
-    print(open(f"reports/RESULTS{suffix}.md").read())
+    print(open(f"reports/RESULTS{suffix}.md", encoding="utf-8").read())
 
 
 def f(v, pct=True):
@@ -123,6 +137,19 @@ def write_markdown(res, path):
         for k in SUBTYPE_NAMES:
             if k in d:
                 L.append(f"| {SUBTYPE_NAMES[k]} | {f(d[k])} |")
+    L += ["", "### Unseen formats: error formats the rules were never written for\n",
+          "Same data and error rate, but money like `Rs 1.2 Lakhs only` / `120000 rupees`, dates like `5th March 2024`, "
+          "phones like `Mob: 98765...`, cities like `Bombay (MH)`, gender like `Woman`, ages like `Age 34`. "
+          "Written after the rules; the rules were not changed after seeing these results.\n",
+          "| Method | Correct cells | Fixable errors fixed | Clean cells damaged |", "|---|---|---|---|"]
+    for m, v in res["unseen"].items():
+        L.append(f"| {m} | {f(v['cell_accuracy'])} | {f(v['recoverable_fixed'])} | {f(v['collateral_damage'])} |")
+    seen_d = res["by_subtype"].get("Agent (rule planner)", {})
+    for m, d in res["unseen_by_subtype"].items():
+        L += ["", f"| Error type ({m}) | Known formats | Unseen formats |", "|---|---|---|"]
+        for k in ("money_format", "date_format", "phone_format", "variant", "num_text", "alias_unknown"):
+            if k in d:
+                L.append(f"| {SUBTYPE_NAMES[k]} | {f(seen_d[k]) if k in seen_d else 'n/a'} | {f(d[k])} |")
     L += ["", "### Fairness: who loses data? (tier-3 towns have 2x the error rate in this simulation)\n",
           "| Method | Kept: tier 1 | Kept: tier 2 | Kept: tier 3 | Fixed: tier 1 | Fixed: tier 3 |", "|---|---|---|---|---|---|"]
     for m, d in res["by_tier"].items():
@@ -135,7 +162,7 @@ def write_markdown(res, path):
         L.append(f"| {float(r):.0%} | " + " | ".join(f(res['sweep'][m][r]['cell_accuracy']) for m in res["sweep"]) +
                  f" | {f(res['sweep']['Naive pandas (dropna)'][r]['retention'])} |")
     L += ["", "| Seconds per run | " + " | ".join(f"{m}: {v['seconds'][0]:.1f}" for m, v in res["methods"].items()) + " |"]
-    open(path, "w").write("\n".join(L) + "\n")
+    open(path, "w", encoding="utf-8").write("\n".join(L) + "\n")
 
 
 def make_plots(res):
@@ -176,6 +203,16 @@ def make_plots(res):
     ax.set(ylabel="Applicants kept (%)", ylim=(0, 105), title="Dropping dirty rows silently removes small-town applicants")
     ax.legend(frameon=False, loc="lower left"); fig.tight_layout(); fig.savefig("reports/fairness_retention.png", dpi=150); plt.close(fig)
 
+    keys = [k for k in ("money_format", "date_format", "phone_format", "variant", "num_text") if k in res["unseen_by_subtype"].get("Agent (rule planner)", {})]
+    if keys:
+        fig, ax = plt.subplots(figsize=(7, 3.6))
+        x = np.arange(len(keys))
+        ax.bar(x - .19, [res["by_subtype"]["Agent (rule planner)"][k][0] * 100 for k in keys], .38, label="Formats the rules know")
+        ax.bar(x + .19, [res["unseen_by_subtype"]["Agent (rule planner)"][k][0] * 100 for k in keys], .38, label="Unseen formats", color="#c0392b")
+        ax.set_xticks(x, ["Money", "Dates", "Phones", "Category\nvariants", "Age with\nunit"])
+        ax.set(ylabel="Fixed (%)", ylim=(0, 125), title="Rules generalise poorly to formats they were not written for")
+        ax.legend(frameon=False, loc="upper center", ncol=2, fontsize=8); fig.tight_layout(); fig.savefig("reports/unseen_formats.png", dpi=150); plt.close(fig)
+
     fig, ax = plt.subplots(figsize=(7, 3.4))
     show3 = ["Agent (rule planner)", "Faulty planner + guardrails", "Faulty planner, no guardrails"]
     v = [res["methods"][m]["collateral_damage"] for m in show3]
@@ -188,4 +225,6 @@ def make_plots(res):
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--llm", action="store_true", help="also benchmark LLM and hybrid planners")
-    main(ap.parse_args().llm)
+    ap.add_argument("--quick", action="store_true", help="2 datasets instead of 5 (for slow laptops)")
+    a = ap.parse_args()
+    main(a.llm, a.quick)

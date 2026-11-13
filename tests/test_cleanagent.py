@@ -91,3 +91,56 @@ def test_end_to_end_agent_beats_no_cleaning():
     assert s_agent["retention"] == 1.0 and s_agent["duplicate_groups_resolved"] > 0.9
     assert s_agent["collateral_damage"] < 0.005
     assert len(res.issues_after) < len(res.issues_before)
+
+
+def test_fuzzy_matching_never_merges_two_common_values_or_numbered_or_multi_values():
+    s = pd.Series(["Male"] * 30 + ["Female"] * 25 + ["Madhya Pradesh"] * 10 + ["Andhra Pradesh"] * 12
+                  + ["BTM 1st Stage"] * 9 + ["BTM 2nd Stage"] * 2 + ["Bangalore"] * 20 + ["Bangalore / USA"])
+    mapping, _, _ = category_mapping(s)
+    assert "Female" not in mapping and "Madhya Pradesh" not in mapping
+    assert "BTM 2nd Stage" not in mapping and "Bangalore / USA" not in mapping
+    s2 = pd.Series(["Series D"] * 12 + ["Series E", "Seed Funding Round"] + ["Seed Funding"] * 30 + ["21-Jun"] * 9 + ["21-Jan"]
+                   + ["Seed/ Angel Funding"] * 10 + ["Seed / Angle Funding"])
+    m2, _, _ = category_mapping(s2)
+    assert "Series E" not in m2 and "Seed Funding Round" not in m2 and "21-Jan" not in m2
+    assert m2["Seed / Angle Funding"][0] == "Seed/ Angel Funding"
+
+
+def test_real_world_artifacts():
+    from cleanagent.parsers import fix_text, date_order
+    assert parse_date("05/072018") == "2018-07-05" and parse_date("12/05.2015") == "2015-05-12"
+    assert parse_number("1133 - 1384") == pytest.approx(1258.5)
+    assert parse_number("34.46Sq. Meter") == pytest.approx(370.92, abs=0.01)
+    assert parse_number("14,342,000+") == 14342000
+    assert np.isnan(parse_number("98765-43210"))  # not a range: descending
+    assert fix_text("\\\\xc2\\\\xa0Bangalore") == "Bangalore" and fix_text("Seed\\\\nFunding") == "Seed Funding"
+    assert fix_text("Byju\\xe2\\x80\\x99s") == "Byju’s"
+    assert date_order(["13/01/2024", "05/02/2024"])[0] == "dayfirst"
+    assert date_order(["01/13/2024", "02/05/2024"])[0] == "monthfirst"
+
+
+def test_month_first_file_is_detected():
+    df = pd.DataFrame({"order_date": ["03/15/2024", "04/02/2024", "12/25/2023", "01/30/2024"] * 5})
+    res = CleaningAgent(RulePlanner()).run(df)
+    assert res.df.order_date.iloc[1] == "2024-04-02"  # 2 April, not 4 February
+
+
+def test_single_unit_columns_are_converted_and_mixed_units_only_flagged():
+    df = pd.DataFrame({"engine": ["1248 CC", "1197 CC", "796 CC"] * 30,
+                       "mileage": ["23.4 kmpl"] * 80 + ["26.6 km/kg"] * 10})
+    res = CleaningAgent(RulePlanner()).run(df)
+    assert res.df.engine.iloc[0] == 1248
+    assert res.df.mileage.iloc[0] == "23.4 kmpl"  # not converted: kmpl and km/kg are not comparable
+    assert any(i["kind"] == "mixed_units" for i in res.issues_after)
+
+
+def test_llm_cache_records_and_replays(tmp_path):
+    from cleanagent.llm import CachedLLM
+    path = tmp_path / "cache.json"
+    live = CachedLLM(FakeLLM('{"mapping": {"Poona": "Pune"}}'), path)
+    s = pd.DataFrame({"city": ["Mumbai"] * 20 + ["Pune"] * 20 + ["Poona"]})
+    CleaningAgent(RulePlanner(llm=live)).run(s)
+    assert live.misses == 1 and path.exists()
+    replay = CachedLLM(None, path, mode="replay")
+    res = CleaningAgent(RulePlanner(llm=replay)).run(s)
+    assert replay.hits == 1 and res.df.city.iloc[40] == "Pune"

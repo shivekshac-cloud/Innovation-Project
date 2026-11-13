@@ -1,0 +1,205 @@
+{
+ "startup": {
+  "scores": {
+   "No cleaning": {
+    "date": 0.0,
+    "city": 0.7,
+    "city_lenient": 0.9857142857142858,
+    "investment_type": 0.9785714285714285,
+    "amount_usd": 0.9714285714285714,
+    "all": 0.6625,
+    "rows_kept": 1.0
+   },
+   "Typical pandas notebook": {
+    "date": 0.6214285714285714,
+    "city": 0.4357142857142857,
+    "city_lenient": 0.6071428571428571,
+    "investment_type": 0.6,
+    "amount_usd": 0.6214285714285714,
+    "all": 0.5696428571428571,
+    "rows_kept": 0.6214285714285714
+   },
+   "Published human cleaning (GitHub)": {
+    "date": 0.9642857142857143,
+    "city": 0.5714285714285714,
+    "city_lenient": 0.8571428571428571,
+    "investment_type": 0.9571428571428572,
+    "amount_usd": 0.7071428571428572,
+    "all": 0.8,
+    "rows_kept": 0.9714285714285714
+   },
+   "Agent (rule planner)": {
+    "date": 1.0,
+    "city": 1.0,
+    "city_lenient": 1.0,
+    "investment_type": 1.0,
+    "amount_usd": 1.0,
+    "all": 1.0,
+    "rows_kept": 1.0
+   }
+  },
+  "facts": {
+   "rows": 3044,
+   "seconds": 2.9019887447357178,
+   "distinct_cities_before": 112,
+   "distinct_cities_after": 99,
+   "distinct_rounds_before": 55,
+   "distinct_rounds_after": 42,
+   "amounts_usable_before": 1,
+   "amounts_usable_after": 2073,
+   "dates_parsed": 3043,
+   "human_amounts_imputed_with_mean": 974,
+   "human_mean_value": 18429897.27,
+   "bengaluru_share_before": 0.046320630749014456,
+   "bengaluru_share_after": 0.27660972404730616,
+   "cells_changed": 7048,
+   "steps": 20,
+   "issues_before": 20,
+   "issues_after": 4
+  },
+  "agent_errors": []
+ },
+ "house": {
+  "summary": {
+   "No cleaning": {
+    "coverage": [
+     1.0,
+     0.0
+    ],
+    "mae_own": [
+     32.188670613346076,
+     1.7142161094478496
+    ],
+    "mape_own": [
+     0.24868888692826402,
+     0.015378758412718744
+    ],
+    "mae_common": [
+     31.960792129026515,
+     1.7448642220562836
+    ],
+    "mape_common": [
+     0.24559098964545117,
+     0.015199526997477479
+    ],
+    "mape_dropped_rows": [
+     NaN,
+     NaN
+    ]
+   },
+   "Typical tutorial recipe": {
+    "coverage": [
+     0.9774824081313526,
+     0.0007101603645263699
+    ],
+    "mae_own": [
+     30.746176050806593,
+     1.2189368495902388
+    ],
+    "mape_own": [
+     0.22562365349345637,
+     0.006156620423600106
+    ],
+    "mae_common": [
+     30.750277487347354,
+     1.216086403639419
+    ],
+    "mape_common": [
+     0.22564668503351976,
+     0.0061315221000988835
+    ],
+    "mape_dropped_rows": [
+     NaN,
+     NaN
+    ]
+   },
+   "Agent (rule planner)": {
+    "coverage": [
+     0.9998436278342455,
+     0.0002141214063741658
+    ],
+    "mae_own": [
+     31.910389141489578,
+     2.133369785596855
+    ],
+    "mape_own": [
+     0.24403549491414486,
+     0.016225108445031108
+    ],
+    "mae_common": [
+     31.679984765701704,
+     1.9446677436424025
+    ],
+    "mape_common": [
+     0.24144115130858484,
+     0.014669537296272567
+    ],
+    "mape_dropped_rows": [
+     NaN,
+     NaN
+    ]
+   },
+   "Agent + same row filter as tutorial": {
+    "coverage": [
+     0.9932759968725566,
+     0.0010847878753332235
+    ],
+    "mae_own": [
+     30.421983128008804,
+     1.0057451585523198
+    ],
+    "mape_own": [
+     0.2247962179348328,
+     0.0061688048609596716
+    ],
+    "mae_common": [
+     30.511919807065123,
+     1.0687924435703104
+    ],
+    "mape_common": [
+     0.22448729769847803,
+     0.006422205947103079
+    ],
+    "mape_dropped_rows": [
+     0.2423689126114768,
+     0.05503805939712372
+    ]
+   },
+   "paired::Agent (rule planner)": [
+    0.01579446627506506,
+    0.009830319449020831,
+    0,
+    5
+   ],
+   "paired::Agent + same row filter as tutorial": [
+    -0.0011593873350417116,
+    0.0017001256759588673,
+    4,
+    5
+   ]
+  },
+  "facts": {
+   "rows": 12791,
+   "seconds": 7.038841247558594,
+   "sqft_ranges": 200,
+   "sqft_units": 46,
+   "sqft_recovered": 246,
+   "locations_before": 1305,
+   "locations_after": 1283
+  }
+ },
+ "holdout": {
+  "freeze": "7a376f4a6226",
+  "cell_changes": 72,
+  "dups": 1202,
+  "posthoc": {
+   "converted": [
+    "engine",
+    "max_power"
+   ],
+   "flagged": [
+    "mileage"
+   ]
+  }
+ }
+}

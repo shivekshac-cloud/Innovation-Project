@@ -1,6 +1,7 @@
-numpy
-pandas
-scikit-learn
-matplotlib
-streamlit
-pytest
+# Python 3.10+. Tested with pandas 2.2 and 3.0, scikit-learn 1.5+, streamlit 1.50+.
+numpy>=1.26
+pandas>=2.2
+scikit-learn>=1.5
+matplotlib>=3.8
+streamlit>=1.50
+pytest>=8

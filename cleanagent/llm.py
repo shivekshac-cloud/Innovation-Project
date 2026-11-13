@@ -38,3 +38,34 @@ def extract_json(text):
     if start == -1 or end <= start:
         raise ValueError("no JSON object in reply")
     return json.loads(text[start:end + 1])
+
+
+class CachedLLM:
+    """Wraps an LLM and stores every reply in a JSON file, keyed by the exact prompt.
+
+    mode="auto":   use the cache when possible, otherwise ask the model and save the answer.
+    mode="replay": never contact a model (offline demo); a prompt not in the cache raises an error,
+                   and the agent then falls back to rules.
+    Run once at home with the model, commit llm_cache.json, and the presentation works with no model running.
+    """
+
+    def __init__(self, llm=None, path="llm_cache.json", mode="auto"):
+        import hashlib
+        from pathlib import Path
+        self.llm, self.path, self.mode, self._h = llm, Path(path), mode, hashlib.sha256
+        self.cache = json.loads(self.path.read_text(encoding="utf-8")) if self.path.exists() else {}
+        self.hits = self.misses = 0
+        self.model = getattr(llm, "model", "cache")
+
+    def complete(self, messages):
+        key = self._h(json.dumps(messages, sort_keys=True, ensure_ascii=False).encode("utf-8")).hexdigest()
+        if key in self.cache:
+            self.hits += 1
+            return self.cache[key]["reply"]
+        if self.mode == "replay" or self.llm is None:
+            raise RuntimeError("prompt not in llm_cache.json (replay mode)")
+        self.misses += 1
+        reply = self.llm.complete(messages)
+        self.cache[key] = {"model": self.model, "prompt": messages[-1]["content"][:300], "reply": reply}
+        self.path.write_text(json.dumps(self.cache, ensure_ascii=False, indent=1), encoding="utf-8")
+        return reply

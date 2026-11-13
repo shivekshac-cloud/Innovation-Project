@@ -1,14 +1,16 @@
 """Act step: the only operations the agent (rule-based or LLM) is allowed to run. No free-form code."""
+import re
 from dataclasses import dataclass, field
 
 import numpy as np
 import pandas as pd
 
-from .parsers import (apply_case, fingerprint, is_blank, is_missing_token, is_null, is_plain_number, normalize_email, normalize_phone,
+from .parsers import (apply_case, fix_text, fingerprint, is_blank, is_missing_token, is_null, is_plain_number, normalize_email, normalize_phone,
                       normalize_pincode, parse_date, parse_number)
 
 # tool -> {arg: type}. Used to validate LLM output.
 TOOLS = {
+    "fix_encoding": {"col": str},
     "standardize_missing": {"col": str},
     "normalize_text": {"col": str, "case": (str, type(None))},
     "parse_number": {"col": str},
@@ -17,13 +19,15 @@ TOOLS = {
     "normalize_pincode": {"col": str},
     "normalize_email": {"col": str},
     "map_values": {"col": str, "mapping": dict},
+    "extract_number": {"col": str, "unit": str},
     "fix_range": {"col": str, "lo": (int, float, type(None)), "hi": (int, float, type(None))},
-    "flag_outliers": {"col": str, "z": (int, float)},
+    "flag_outliers": {"col": str, "z": (int, float), "above": (int, float)},
     "drop_duplicates": {"subset": list},
     "impute": {"col": str, "strategy": str},
 }
-OPTIONAL = {"normalize_text": {"case"}, "parse_date": {"dayfirst"}, "fix_range": {"lo", "hi"}, "flag_outliers": {"z"}}
+OPTIONAL = {"normalize_text": {"case"}, "parse_date": {"dayfirst"}, "fix_range": {"lo", "hi"}, "flag_outliers": {"z", "above"}}
 TOOL_DOCS = {
+    "fix_encoding": "repair export damage: literal \\xc2\\xa0 escapes, literal \\n, non-breaking spaces, mojibake",
     "standardize_missing": "turn placeholders like NA, -, ?, null, 'not available' into real missing values",
     "normalize_text": "trim/collapse spaces and set case ('title', 'lower', 'upper' or null)",
     "parse_number": "convert text like '₹1,20,000', '1.2 lakh', '120k', '34 yrs' to numbers",
@@ -32,12 +36,13 @@ TOOL_DOCS = {
     "normalize_pincode": "6-digit PIN code; invalid -> missing",
     "normalize_email": "lowercase/trim email; invalid -> missing",
     "map_values": "replace raw category values using {raw: canonical}",
+    "extract_number": "turn '1248 CC' into 1248 when every value uses the same `unit`; other values -> missing",
     "fix_range": "set numeric values outside [lo, hi] to missing",
-    "flag_outliers": "set extreme values (robust log z-score above z) of a positive money column to missing",
+    "flag_outliers": "blank values with robust log z-score above z AND above `above` (order-of-magnitude errors)",
     "drop_duplicates": "drop rows whose normalized values in `subset` repeat an earlier row",
     "impute": "fill missing values with 'median' (numbers) or 'mode'",
 }
-PARSE_TOOLS = {"parse_number", "parse_date", "normalize_phone", "normalize_pincode", "normalize_email"}
+PARSE_TOOLS = {"extract_number", "parse_number", "parse_date", "normalize_phone", "normalize_pincode", "normalize_email"}
 
 
 @dataclass
@@ -46,6 +51,7 @@ class StepInfo:
     n_nullified: int = 0
     rows_dropped: int = 0
     n_nonnull_before: int = 0
+    n_rewritten: int = 0
     examples: list = field(default_factory=list)
     changed_index: list = field(default_factory=list)
 
@@ -64,7 +70,9 @@ def run_tool(df, tool, args):
     c = args.get("col")
     if c is not None and c not in df.columns:
         raise ValueError(f"unknown column {c!r}")
-    if tool == "standardize_missing":
+    if tool == "fix_encoding":
+        df[c] = _apply(df[c], fix_text)
+    elif tool == "standardize_missing":
         df[c] = _apply(df[c], lambda v: np.nan if is_missing_token(v) else v)
     elif tool == "normalize_text":
         df[c] = _apply(df[c], lambda v: apply_case(v, args.get("case")) if isinstance(v, str) else v)
@@ -78,6 +86,13 @@ def run_tool(df, tool, args):
         df[c] = _apply(df[c], normalize_pincode)
     elif tool == "normalize_email":
         df[c] = _apply(df[c], normalize_email)
+    elif tool == "extract_number":
+        u = args["unit"].strip().lower()
+
+        def ex(v):
+            m = re.match(r"^\s*([-+]?\d+(?:\.\d+)?)\s*(.*?)\s*$", str(v))
+            return float(m.group(1)) if m and m.group(2).strip().lower() in (u, "") else np.nan
+        df[c] = pd.Series([np.nan if is_blank(v) else ex(v) for v in df[c]], index=df.index, dtype=float)
     elif tool == "map_values":
         m = {str(k): (v[0] if isinstance(v, (list, tuple)) else v) for k, v in args["mapping"].items()}
         df[c] = _apply(df[c], lambda v: m.get(str(v), m.get(str(v).strip(), v)))
@@ -92,7 +107,7 @@ def run_tool(df, tool, args):
         lx = np.log(pos)
         mad = 1.4826 * np.median(np.abs(lx - np.median(lx))) or 1.0
         z = np.abs(np.log(x.where(x > 0)) - np.median(lx)) / mad
-        df[c] = x.mask((z > args.get("z", 5.0)) | (x <= 0))
+        df[c] = x.mask(((z > args.get("z", 5.0)) & (x > args.get("above", 0))) | (x <= 0))
     elif tool == "drop_duplicates":
         sub = args["subset"]
         if not sub or any(col not in df.columns for col in sub):
@@ -131,6 +146,9 @@ def diff(before, after, tool, args):
     changed = ~same
     info.n_nonnull_before = int((~old_null).sum())
     info.n_changed = int(changed.sum())
+    # changes beyond case/spacing/punctuation: what the guard counts as rewriting a value
+    info.n_rewritten = int((changed & (old.map(lambda v: fingerprint(fix_text(v)) if isinstance(v, str) else v)
+                                        != new.map(lambda v: fingerprint(v) if isinstance(v, str) else v))).sum())
     info.n_nullified = int((~old_null & new_null).sum())
     info.changed_index = list(old.index[changed])
     info.examples = [(i, old[i], new[i]) for i in info.changed_index[:5]]

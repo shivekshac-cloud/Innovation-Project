@@ -21,8 +21,8 @@ class Guard:
         if info.n_nonnull_before and info.n_nullified > self.max_nullify * info.n_nonnull_before:
             return f"would blank {info.n_nullified} of {info.n_nonnull_before} values"
         if step.tool in ("map_values", "normalize_text") and info.n_nonnull_before and \
-                info.n_changed > self.max_change * info.n_nonnull_before:
-            return f"would rewrite {info.n_changed} of {info.n_nonnull_before} values"
+                info.n_rewritten > self.max_change * info.n_nonnull_before:
+            return f"would rewrite {info.n_rewritten} of {info.n_nonnull_before} values"
         return None
 
 

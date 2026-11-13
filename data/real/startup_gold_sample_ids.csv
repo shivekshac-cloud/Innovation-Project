@@ -1,0 +1,141 @@
+Sr No,Date dd/mm/yyyy,City  Location,InvestmentnType,Amount in USD
+8,12/12/2019,Pune,Series A,"60,00,000"
+37,04/09/2019,Mumbai,Series A,"33,00,000"
+57,21/08/2019,Bengaluru,Series C,"65,90,000"
+63,02/07/2019,Singapore,Pre-Series A,"25,00,000"
+117,03/01/2019,Jaipur,Series C,"11,00,00,000"
+159,06/09/2018,Mumbai,Private Equity,"10,00,00,000"
+193,05/072018,Mumbai,Private Equity,"62,50,000"
+194,06/07/2018,Gurugram,Private Equity,"2,77,00,000"
+247,20/06/2018,Mumbai,Private Equity,"1,50,00,000"
+264,14/05/2018,Mumbai,Private Equity,"2,40,00,000"
+267,21/05/2018,Gurugram,Private Equity,"70,00,000"
+286,05/04/2018,Hyderabad,Seed / Angel Funding,"1,50,000"
+357,06/02/2018,Bengaluru,Private Equity,"31,00,000"
+376,15/02/2018,Ahemadabad,Private Equity,"62,30,000"
+383,21/02/2018,Gurugram,Private Equity,"21,00,000"
+386,26/02/2018,Chennai,Private Equity,"10,40,000"
+397,09/01/2018,Mumbai,Seed/Angel Funding,"25,00,000"
+421,29/01/2018,Hyderabad,Private Equity,"15,00,000"
+445,12/12/2017,Delhi,Private Equity,"18,00,000"
+451,13/12/2017,Bengaluru,Private Equity,"72,00,000"
+464,20/12/2017,Bengaluru,Private Equity,"10,00,000"
+482,07/11/2017,Mumbai,Private Equity,"50,00,000"
+497,15/11/2017,Bangalore,Angel Funding,N/A
+532,06/10/2017,Bangalore,Private Equity,"80,00,000"
+539,09/10/2017,New Delhi,Seed Funding,"3,36,000"
+592,08/09/2017,Bangalore,Seed Funding,N/A
+616,22/09/2017,Gurgaon,Debt Funding,"1,54,00,000"
+638,03/08/2017,Mumbai,Seed Funding,"3,00,000"
+668,23/08/2017,Bangalore,Seed Funding,"5,00,000"
+708,21/07/2017,Gurgaon,Seed Funding,"2,00,000"
+718,28/07/2017,Mumbai,Seed Funding,N/A
+765,21/06/2017,Hyderabad,Seed Funding,"2,15,000"
+808,09/05/2017,Pune,Private Equity,N/A
+834,20/05/2017,New Delhi,Private Equity,N/A
+841,24/05/2017,Mumbai,Seed Funding,"5,80,000"
+856,03/04/2017,Mumbai,Private Equity,N/A
+893,17/04/2017,New Delhi,Seed Funding,N/A
+896,17/04/2017,New Delhi,Seed Funding,"6,20,000"
+922,28/04/2017,New Delhi,Seed Funding,"7,50,000"
+944,07/03/2017,Pune,Private Equity,"1,00,00,000"
+947,07/03/2017,New Delhi,Seed Funding,"30,000"
+1011,10/02/2017,Mumbai,Seed Funding,N/A
+1035,22/02/2017,Bangalore,Seed Funding,"40,000"
+1038,24/02/2017,Noida,Seed Funding,N/A
+1051,06/01/2017,Mumbai,Private Equity,"1,30,00,000"
+1145,13/12/2016,Gurgaon,Private Equity,"1,00,00,000"
+1198,04/11/2016,New Delhi,Seed Funding,"1,50,000"
+1231,22/11/2016,Bangalore,Seed Funding,N/A
+1255,30/11/2016,Pune,Seed Funding,"1,00,000"
+1308,18/10/2016,New Delhi,Seed Funding,"1,50,000"
+1375,15/09/2016,Bangalore,Private Equity,"50,00,000"
+1388,21/09/2016,Ahmedabad,Seed Funding,"2,98,000"
+1429,08/08/2016,Mumbai,Seed Funding,"40,000"
+1454,17/08/2016,Bangalore,Seed Funding,N/A
+1458,18/08/2016,Kozhikode,Private Equity,N/A
+1463,22/08/2016,Mumbai,Private Equity,"3,70,00,000"
+1476,24/08/2016,Mumbai,Private Equity,"30,00,000"
+1537,13/07/2016,Gurgaon,Seed Funding,N/A
+1593,10/06/2016,Gurgaon,Seed Funding,N/A
+1749,05/04/2016,Mumbai,Private Equity,N/A
+1752,06/04/2016,Bangalore,Seed Funding,"5,00,000"
+1762,11/04/2016,Gurgaon,Seed Funding,"3,00,000"
+1782,18/04/2016,Bangalore,Seed Funding,N/A
+1796,20/04/2016,New Delhi,Seed Funding,N/A
+1831,04/03/2016,Chennai,Private Equity,"10,00,000"
+1838,07/03/2016,Noida,Seed Funding,"5,00,000"
+1902,30/03/2016,Bangalore,Seed Funding,"4,00,000"
+1908,02/02/2016,Bangalore,Seed Funding,"22,500"
+2012,05/01/2016,Noida,Seed Funding,N/A
+2016,06/01/2016,Gurgaon,Seed Funding,N/A
+2098,29/01/2016,New Delhi,Seed Funding,N/A
+2113,01/12/2015,New Delhi,Seed Funding,"5,00,000"
+2128,07/12/2015,Hyderabad,Private Equity,"45,00,000"
+2148,10/12/2015,Mumbai,Private Equity,"7,00,00,000"
+2247,18/11/2015,New Delhi,Private Equity,"40,00,000"
+2281,27/11/2015,Chennai,Seed Funding,N/A
+2305,06/10/2015,Pune,Seed Funding,N/A
+2324,09/10/2015,New Delhi,Seed Funding,"77,000"
+2351,21/10/2015,Mumbai,Private Equity,"15,30,000"
+2384,01/09/2015,Chandigarh,Private Equity,N/A
+2385,01/09/2015,Mumbai,Private Equity,"10,00,000"
+2427,17/09/2015,Mumbai,Seed Funding,N/A
+2441,22/09/2015,Mumbai,Private Equity,"30,00,000"
+2515,12/08/2015,Bangalore,Private Equity,"5,00,00,000"
+2621,15/07/2015,New Delhi,Seed Funding,N/A
+2626,20/07/2015,New Delhi,Private Equity,"1,50,00,000"
+2733,23/06/2015,Hyderabad,Seed Funding,N/A
+2769,08/05/2015,Bangalore,Seed Funding,"10,00,000"
+2785,18/05/2015,Ahmedabad,Seed Funding,N/A
+2872,29/04/2015,Chennai,Seed Funding,"5,00,000"
+2902,18/03/2015,nan,Private Equity,"50,00,000"
+2915,24/03/2015,nan,Seed Funding,"1,60,000"
+2926,28/03/2015,nan,Seed Funding,"1,15,000"
+2948,05/02/2015,nan,Private Equity,"1,80,00,000"
+2970,18/02/2015,nan,Private Equity,"50,00,000"
+2977,23/02/2015,nan,Private Equity,"1,00,00,000"
+2998,06/01/2015,nan,Private\\nEquity,"10,00,000"
+3004,07/01/2015,nan,Private Equity,"50,00,000"
+3034,22/01/2015,nan,Private Equity,"3,10,00,000"
+3041,29/01/2015,nan,Private Equity,"8,25,000"
+179,16/08/2018,Ahemadabad,Seed/ Angel Funding,"1,14,811"
+393,04/01/2018,Pune,Private,"1,57,00,000"
+2935,02/02/2015,nan,Seed\\nFunding,"16,600"
+2832,13/04.2015,Mumbai,Seed Funding,"5,00,000"
+1105,02/01/2017,Udupi,Seed Funding,N/A
+3001,07/01/2015,nan,Crowd funding,"1,25,000"
+2611,13/07/2015,\\xc2\\xa0New Delhi,Private Equity,"\\xc2\\xa010,000,000"
+229,05/06/2018,Nagpur,Seed/ Angel Funding,N/A
+1045,03/01/2017,Panaji,Seed Funding,"8,25,000"
+1108,26/01/2017,Kochi,Seed Funding,N/A
+66,01/07/2019,Taramani,Series C,"3,80,80,000"
+2070,20/01/2016,New Delhi / US,Private Equity,"40,00,000"
+2964,13/02/2015,nan,Seed\\nFunding,N/A
+136,19/11/2018,California,Series B,"30,00,00,000"
+27,11/11/2019,Amritsar,Seed,"3,00,000"
+111,17/04/2019,Gurugram,Venture Round,"50,00,000"
+1859,10/03/2016,Pune/Seattle,Private Equity,"1,50,00,000"
+2841,17/04/2015,Udupi,Private Equity,"1,20,00,000"
+2350,21/10/2015,New York/ India,Seed Funding,"29,50,000"
+244,18/06/2018,Delhi & Cambridge,Seed/ Angel Funding,"17,00,000"
+2207,03/11/2015,USA/India,Private Equity,"1,66,00,000"
+2971,19/05/2015,nan,Seed\\nFunding,"8,00,000"
+82,06/06/2019,Nairobi,,"27,39,034.68"
+84,06/06/2019,Bengaluru,Series B,"1,51,09,500.00"
+141,23/11/2018,Mumbai/Bengaluru,Series A,"34,00,000"
+2587,06/07/2015,Nagpur,Seed Funding,N/A
+47,01/08/2019,Bengaluru,Seed Funding Round,"16,00,000"
+359,08/02/2018,Pune,Seed / Angle Funding,"10,00,00,000"
+1427,06/08/2016,Kerala,Seed Funding,"27,000"
+59,19/08/2019,Gurgaon,Series A,Undisclosed
+2984,25/02/2015,nan,Seed\\nFunding,"3,20,000"
+7,10/01/2020,Gurgaon,Private Equity Round,"15,00,00,000"
+2603,09/07/2015,\\xc2\\xa0Noida,Private Equity,"\\xc2\\xa020,000,000"
+18,13/11/2019,San Francisco,Series H,"15,00,00,000"
+68,10/07/2019,Bengaluru,Private Equity Round,"15,00,00,000"
+21,17/11/2019,Gurgaon,Venture,undisclosed
+1755,07/04/2016,London,Private Equity,N/A
+2400,07/09/2015,Bhopal,Private Equity,"18,00,000"
+13,16/12/2019,Bengaluru,Series E,"3,00,00,000"
+2071,20/01/2016,Mumbai / UK,Seed Funding,"40,000"

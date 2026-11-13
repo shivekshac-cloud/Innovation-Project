@@ -1,0 +1,363 @@
+{
+ "freeze": "7a376f4a6226",
+ "seconds": 6.456232786178589,
+ "rows_in": 8128,
+ "rows_out": 6926,
+ "issues_before": [
+  {
+   "column": "name",
+   "kind": "text_format",
+   "count": 1,
+   "examples": [
+    "Audi A6 2.0 TDI  Design Edition"
+   ]
+  },
+  {
+   "column": "year",
+   "kind": "number_stored_as_text",
+   "count": 8128,
+   "examples": [
+    "2014",
+    "2006",
+    "2010",
+    "2007",
+    "2017"
+   ]
+  },
+  {
+   "column": "selling_price",
+   "kind": "number_stored_as_text",
+   "count": 8128,
+   "examples": [
+    "450000",
+    "370000",
+    "158000",
+    "225000",
+    "130000"
+   ]
+  },
+  {
+   "column": "km_driven",
+   "kind": "number_stored_as_text",
+   "count": 8128,
+   "examples": [
+    "145500",
+    "120000",
+    "140000",
+    "127000",
+    "45000"
+   ]
+  },
+  {
+   "column": "owner",
+   "kind": "category_variants",
+   "count": 5,
+   "examples": []
+  },
+  {
+   "column": "mileage",
+   "kind": "category_variants",
+   "count": 1695,
+   "examples": []
+  },
+  {
+   "column": "engine",
+   "kind": "category_variants",
+   "count": 496,
+   "examples": []
+  },
+  {
+   "column": "max_power",
+   "kind": "category_variants",
+   "count": 1464,
+   "examples": [
+    " bhp -> bhp"
+   ]
+  },
+  {
+   "column": "torque",
+   "kind": "text_format",
+   "count": 17,
+   "examples": [
+    "135 Nm at 2500  rpm ",
+    "190 Nm at 1750 rpm ",
+    "190 Nm at 1750  rpm ",
+    "96  Nm at 3000  rpm "
+   ]
+  },
+  {
+   "column": "torque",
+   "kind": "category_variants",
+   "count": 53,
+   "examples": [
+    "90nm@ 3500rpm -> 90Nm@ 3500rpm",
+    "400nm@ 1750-2500rpm -> 400Nm@ 1750-2500rpm",
+    "113.75Nm@ 4000rpm -> 113.75nm@ 4000rpm",
+    "250nm@ 1500-3000rpm -> 250Nm@ 1500-3000rpm",
+    "151NM@ 4850rpm -> 151Nm@ 4850rpm"
+   ]
+  },
+  {
+   "column": "seats",
+   "kind": "number_stored_as_text",
+   "count": 7907,
+   "examples": [
+    "5",
+    "4",
+    "7",
+    "8",
+    "6"
+   ]
+  },
+  {
+   "column": null,
+   "kind": "duplicates",
+   "count": 1202,
+   "examples": [
+    "291",
+    "296",
+    "370",
+    "371",
+    "372"
+   ]
+  }
+ ],
+ "issues_after": [
+  {
+   "column": "owner",
+   "kind": "category_variants",
+   "count": 5,
+   "examples": []
+  },
+  {
+   "column": "engine",
+   "kind": "category_variants",
+   "count": 426,
+   "examples": []
+  },
+  {
+   "column": "max_power",
+   "kind": "category_variants",
+   "count": 1298,
+   "examples": []
+  }
+ ],
+ "log": [
+  {
+   "iteration": 1,
+   "step": "parse_number(col=year)",
+   "tool": "parse_number",
+   "column": "year",
+   "reason": "0 values in non-standard formats; column stored as text",
+   "source": "rule",
+   "status": "applied",
+   "why": "",
+   "n_changed": 0,
+   "n_blanked": 0,
+   "rows_dropped": 0,
+   "examples": []
+  },
+  {
+   "iteration": 1,
+   "step": "parse_number(col=selling_price)",
+   "tool": "parse_number",
+   "column": "selling_price",
+   "reason": "0 values in non-standard formats; column stored as text",
+   "source": "rule",
+   "status": "applied",
+   "why": "",
+   "n_changed": 0,
+   "n_blanked": 0,
+   "rows_dropped": 0,
+   "examples": []
+  },
+  {
+   "iteration": 1,
+   "step": "parse_number(col=km_driven)",
+   "tool": "parse_number",
+   "column": "km_driven",
+   "reason": "0 values in non-standard formats; column stored as text",
+   "source": "rule",
+   "status": "applied",
+   "why": "",
+   "n_changed": 0,
+   "n_blanked": 0,
+   "rows_dropped": 0,
+   "examples": []
+  },
+  {
+   "iteration": 1,
+   "step": "parse_number(col=seats)",
+   "tool": "parse_number",
+   "column": "seats",
+   "reason": "0 values in non-standard formats; column stored as text",
+   "source": "rule",
+   "status": "applied",
+   "why": "",
+   "n_changed": 0,
+   "n_blanked": 0,
+   "rows_dropped": 0,
+   "examples": []
+  },
+  {
+   "iteration": 1,
+   "step": "normalize_text(col=name, case=None)",
+   "tool": "normalize_text",
+   "column": "name",
+   "reason": "1 values: text format",
+   "source": "rule",
+   "status": "applied",
+   "why": "",
+   "n_changed": 1,
+   "n_blanked": 0,
+   "rows_dropped": 0,
+   "examples": [
+    [
+     "59",
+     "Audi A6 2.0 TDI  Design Edition",
+     "Audi A6 2.0 TDI Design Edition"
+    ]
+   ]
+  },
+  {
+   "iteration": 1,
+   "step": "normalize_text(col=torque, case=None)",
+   "tool": "normalize_text",
+   "column": "torque",
+   "reason": "17 values: text format",
+   "source": "rule",
+   "status": "applied",
+   "why": "",
+   "n_changed": 17,
+   "n_blanked": 0,
+   "rows_dropped": 0,
+   "examples": [
+    [
+     "472",
+     "135 Nm at 2500  rpm ",
+     "135 Nm at 2500 rpm"
+    ],
+    [
+     "849",
+     "190 Nm at 1750 rpm ",
+     "190 Nm at 1750 rpm"
+    ],
+    [
+     "1405",
+     "190 Nm at 1750  rpm ",
+     "190 Nm at 1750 rpm"
+    ],
+    [
+     "1622",
+     "135 Nm at 2500  rpm ",
+     "135 Nm at 2500 rpm"
+    ],
+    [
+     "1624",
+     "135 Nm at 2500  rpm ",
+     "135 Nm at 2500 rpm"
+    ]
+   ]
+  },
+  {
+   "iteration": 1,
+   "step": "map_values(col=max_power, mapping=1 values)",
+   "tool": "map_values",
+   "column": "max_power",
+   "reason": "merge 1 variant spellings into canonical values",
+   "source": "rule",
+   "status": "applied",
+   "why": "",
+   "n_changed": 1,
+   "n_blanked": 0,
+   "rows_dropped": 0,
+   "examples": [
+    [
+     "4933",
+     " bhp",
+     "bhp"
+    ]
+   ]
+  },
+  {
+   "iteration": 1,
+   "step": "map_values(col=torque, mapping=13 values)",
+   "tool": "map_values",
+   "column": "torque",
+   "reason": "merge 13 variant spellings into canonical values",
+   "source": "rule",
+   "status": "applied",
+   "why": "",
+   "n_changed": 53,
+   "n_blanked": 0,
+   "rows_dropped": 0,
+   "examples": [
+    [
+     "59",
+     "400Nm@ 1750-3000rpm",
+     "400nm@ 1750-3000rpm"
+    ],
+    [
+     "443",
+     "113.75Nm@ 4000rpm",
+     "113.75nm@ 4000rpm"
+    ],
+    [
+     "900",
+     "114.73nm@ 4000rpm",
+     "114.73Nm@ 4000rpm"
+    ],
+    [
+     "922",
+     "138nm@ 4400rpm",
+     "138Nm@ 4400rpm"
+    ],
+    [
+     "1030",
+     "113.75Nm@ 4000rpm",
+     "113.75nm@ 4000rpm"
+    ]
+   ]
+  },
+  {
+   "iteration": 1,
+   "step": "drop_duplicates(subset=['name', 'year', 'selling_price', 'km_driven', 'fuel', 'seller_type', 'transmission', 'owner', 'mileage', 'engine', 'max_power', 'torque', 'seats'])",
+   "tool": "drop_duplicates",
+   "column": null,
+   "reason": "1202 duplicate rows",
+   "source": "rule",
+   "status": "applied",
+   "why": "",
+   "n_changed": 0,
+   "n_blanked": 0,
+   "rows_dropped": 1202,
+   "examples": [
+    [
+     "291",
+     "row",
+     "dropped"
+    ],
+    [
+     "296",
+     "row",
+     "dropped"
+    ],
+    [
+     "370",
+     "row",
+     "dropped"
+    ],
+    [
+     "371",
+     "row",
+     "dropped"
+    ],
+    [
+     "372",
+     "row",
+     "dropped"
+    ]
+   ]
+  }
+ ]
+}

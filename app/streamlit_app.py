@@ -1,6 +1,6 @@
-"""CleanAgent - run: streamlit run app/streamlit_app.py"""
-import json
+"""CleanAgent - run: streamlit run app/streamlit_app.py   (Windows: double-click run_app.bat)"""
 import sys
+import time
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -9,98 +9,147 @@ sys.path.insert(0, str(ROOT))
 import pandas as pd
 import streamlit as st
 
-from cleanagent.agent import CleaningAgent
+from cleanagent.agent import CleaningAgent, Guard
 from cleanagent.data import corrupt, make_clean
-from cleanagent.llm import OpenAICompatLLM
+from cleanagent.llm import CachedLLM, OpenAICompatLLM
 from cleanagent.planner import LLMPlanner, RulePlanner
 from cleanagent.report import changes_frame, to_markdown
 
 st.set_page_config(page_title="CleanAgent", layout="wide")
 st.title("CleanAgent: an AI agent that cleans messy Indian data")
-st.caption("Observe, plan, act, verify. The agent can only call whitelisted cleaning tools, every step is checked by "
-           "guardrails, and every changed cell is logged with a reason.")
+st.caption("Observe → plan → act → verify. The agent may only call 14 whitelisted cleaning tools, every step passes "
+           "guardrails, and every changed cell is logged with a reason. Runs fully offline on a laptop CPU.")
+
+DATASETS = {
+    "Real: Indian startup funding (3,044 rows)": ROOT / "data/real/startup_funding.csv",
+    "Real: Bengaluru house prices (13,320 rows)": ROOT / "data/real/bengaluru_house.csv",
+    "Real: CarDekho used cars (8,128 rows, blind hold-out)": ROOT / "data/real/cardekho_cars.csv",
+    "Synthetic: messy loan applications (with known truth)": None,
+    "Upload your own CSV": "upload",
+}
 
 with st.sidebar:
     st.header("Planner")
     mode = st.radio("Who plans the steps?", ["Rules (offline)", "Hybrid: rules + LLM", "LLM"],
-                    help="Hybrid asks the LLM only about rare category values the rules could not match.")
+                    help="Hybrid asks the LLM only about rare values the rules could not match: few, small prompts, "
+                         "which suits a laptop CPU.")
     if mode != "Rules (offline)":
-        base_url = st.text_input("LLM server (OpenAI-compatible)", "http://localhost:1234/v1",
-                                 help="LM Studio: http://localhost:1234/v1. Ollama: http://localhost:11434/v1")
-        model = st.text_input("Model name", "local-model")
-        api_key = st.text_input("API key (hosted APIs only)", type="password")
+        replay = st.checkbox("Use recorded LLM answers (no model needed)", True,
+                             help="Replays answers saved in llm_cache.json. Untick to call a running model live.")
+        base_url = st.text_input("LLM server", "http://localhost:11434/v1", help="Ollama: http://localhost:11434/v1 · LM Studio: http://localhost:1234/v1")
+        model = st.text_input("Model", "qwen2.5:1.5b")
     st.header("Options")
-    impute = st.checkbox("Fill remaining gaps (median / most common)", False)
     guard_on = st.checkbox("Guardrails", True)
+    impute = st.checkbox("Fill remaining gaps (median / most common)", False)
 
-src = st.radio("Data", ["Demo: messy loan applications", "Upload CSV"], horizontal=True)
-if src == "Upload CSV":
-    up = st.file_uploader("CSV file", type="csv")
-    if not up:
-        st.stop()
-    dirty = pd.read_csv(up, dtype=str).astype(object)
-else:
-    c1, c2 = st.columns(2)
-    rate = c1.slider("Share of cells corrupted", 0.02, 0.3, 0.08, 0.01)
-    seed = c2.number_input("Seed", 0, 999, 7)
+tab_demo, tab_syn, tab_real, tab_how = st.tabs(["Live demo", "Results: synthetic data", "Results: real data", "How it works"])
 
-    @st.cache_data
-    def demo(rate, seed):
-        clean, tier = make_clean(1500, seed)
-        d, _, _ = corrupt(clean, tier, rate=rate, seed=seed)
-        return d.reset_index(drop=True)
-    dirty = demo(rate, int(seed))
+with tab_demo:
+    choice = st.selectbox("Dataset", list(DATASETS))
+    src = DATASETS[choice]
+    if src == "upload":
+        up = st.file_uploader("CSV file", type="csv")
+        if not up:
+            st.stop()
+        dirty = pd.read_csv(up, dtype=str).astype(object)
+    elif src is None:
+        c1, c2 = st.columns(2)
+        rate = c1.slider("Share of cells corrupted", 0.02, 0.3, 0.08, 0.01)
+        seed = c2.number_input("Seed", 0, 999, 7)
 
-st.subheader("Input")
-st.dataframe(dirty.head(15), width="stretch")
+        @st.cache_data
+        def demo(rate, seed):
+            clean, tier = make_clean(1500, seed)
+            d, _, _ = corrupt(clean, tier, rate=rate, seed=seed)
+            return d.reset_index(drop=True)
+        dirty = demo(rate, int(seed))
+    else:
+        dirty = pd.read_csv(src, dtype=str, encoding="utf-8").astype(object)
+    st.dataframe(dirty.head(12), width="stretch")
 
-if st.button("Run the agent", type="primary"):
-    planner = RulePlanner(impute=impute)
-    if mode != "Rules (offline)":
-        llm = OpenAICompatLLM(base_url, model, api_key)
-        planner = RulePlanner(llm=llm, impute=impute) if mode.startswith("Hybrid") else LLMPlanner(llm, RulePlanner(impute=impute))
-    from cleanagent.agent import Guard
-    with st.spinner("Observing, planning, cleaning..."):
-        res = CleaningAgent(planner, guard=Guard() if guard_on else None).run(dirty)
-    st.session_state["res"] = res
-    st.session_state["llm_errors"] = getattr(planner, "llm_errors", [])
+    if st.button("Run the agent", type="primary"):
+        planner = RulePlanner(impute=impute)
+        if mode != "Rules (offline)":
+            llm = CachedLLM(None if replay else OpenAICompatLLM(base_url, model), ROOT / "llm_cache.json",
+                            mode="replay" if replay else "auto")
+            planner = RulePlanner(llm=llm, impute=impute) if mode.startswith("Hybrid") else LLMPlanner(llm, RulePlanner(impute=impute))
+        t0 = time.time()
+        with st.spinner("Observing, planning, cleaning... (up to ~30 s for the house data on a laptop)"):
+            res = CleaningAgent(planner, guard=Guard() if guard_on else None).run(dirty)
+        st.session_state.update(res=res, secs=time.time() - t0, errs=getattr(planner, "llm_errors", []), shown_for=choice)
 
-res = st.session_state.get("res")
-if res is None:
-    st.stop()
-if st.session_state.get("llm_errors"):
-    st.warning(f"LLM problems (rules were used instead): {st.session_state['llm_errors'][0][:200]}")
+    res = st.session_state.get("res")
+    if res is not None and st.session_state.get("shown_for") == choice:
+        if st.session_state["errs"]:
+            st.info(f"LLM unavailable for {len(st.session_state['errs'])} question(s); rules were used instead.")
+        log = pd.DataFrame(res.log)
+        m = st.columns(6)
+        m[0].metric("Issues found", len(res.issues_before)); m[1].metric("Issues left", len(res.issues_after))
+        m[2].metric("Cells changed", sum(1 for c in res.changes if c[1] is not None))
+        m[3].metric("Rows dropped", sum(1 for c in res.changes if c[1] is None))
+        m[4].metric("Steps rejected", int((log.status != "applied").sum()) if len(log) else 0)
+        m[5].metric("Seconds", f"{st.session_state['secs']:.1f}")
+        t1, t2, t3, t4 = st.tabs(["Agent trace", "Before → after by column", "Cleaned data", "Issues left"])
+        with t1:
+            st.dataframe(log[["iteration", "step", "source", "status", "n_changed", "n_blanked", "rows_dropped", "reason", "why"]],
+                         hide_index=True, width="stretch")
+            st.caption("Iteration 2+ exists because the agent re-profiles after acting: ranges can only be checked once text "
+                       "has become numbers. 'rejected' = stopped by a guardrail.")
+        with t2:
+            ch = changes_frame(res)
+            cols = sorted(ch.column.dropna().unique().tolist())
+            if cols:
+                col = st.selectbox("Column", cols)
+                v = ch[ch.column == col].astype(str).groupby(["before", "after", "reason"]).size().reset_index(name="rows")
+                st.dataframe(v.sort_values("rows", ascending=False).head(300), hide_index=True, width="stretch")
+        with t3:
+            st.dataframe(res.df.head(200), width="stretch")
+            a, b = st.columns(2)
+            a.download_button("Download cleaned CSV", res.df.to_csv(index=False).encode("utf-8-sig"), "cleaned.csv")
+            b.download_button("Download cleaning report", to_markdown(res), "cleaning_report.md")
+        with t4:
+            st.write("Left for a human or an LLM (the rules deliberately do not guess these):")
+            st.dataframe(pd.DataFrame(res.issues_after), hide_index=True, width="stretch")
 
-log = pd.DataFrame(res.log)
-cells = sum(1 for c in res.changes if c[1] is not None)
-dropped = sum(1 for c in res.changes if c[1] is None)
-m = st.columns(5)
-m[0].metric("Issues found", len(res.issues_before)); m[1].metric("Issues left", len(res.issues_after))
-m[2].metric("Cells changed", cells); m[3].metric("Rows dropped", dropped)
-m[4].metric("Steps rejected", int((log.status != "applied").sum()) if len(log) else 0)
 
-t1, t2, t3, t4 = st.tabs(["Agent trace", "Changed cells", "Cleaned data", "Issues before / after"])
-with t1:
-    st.dataframe(log[["iteration", "step", "source", "status", "n_changed", "n_blanked", "rows_dropped", "reason", "why"]],
-                 hide_index=True, width="stretch")
-    st.caption("Iteration 2+ happens because the agent re-profiles the data after acting. For example, ranges can only be "
-               "checked once text has been parsed into numbers.")
-with t2:
-    ch = changes_frame(res)
-    col = st.selectbox("Column", ["(all)"] + sorted(ch.column.dropna().unique().tolist()))
-    view = ch if col == "(all)" else ch[ch.column == col]
-    st.dataframe(view.astype(str).head(500), hide_index=True, width="stretch")
-with t3:
-    st.dataframe(res.df.head(200), width="stretch")
-    a, b = st.columns(2)
-    a.download_button("Download cleaned CSV", res.df.to_csv(index=False), "cleaned.csv")
-    b.download_button("Download cleaning report (Markdown)", to_markdown(res), "cleaning_report.md")
-with t4:
-    a, b = st.columns(2)
-    a.write("Before"); a.dataframe(pd.DataFrame(res.issues_before), hide_index=True, width="stretch")
-    b.write("After"); b.dataframe(pd.DataFrame(res.issues_after), hide_index=True, width="stretch")
+def show_report(md_path, images):
+    if md_path.exists():
+        st.markdown(md_path.read_text(encoding="utf-8"))
+    for img in images:
+        p = ROOT / "reports" / img
+        if p.exists():
+            st.image(str(p))
 
-rp = ROOT / "reports" / "results.json"
-if rp.exists():
-    with st.expander("Benchmark results"):
-        st.markdown((ROOT / "reports" / "RESULTS.md").read_text())
+
+with tab_syn:
+    st.write("3,000 generated loan applications with errors injected on purpose, so every fix can be checked against the truth.")
+    show_report(ROOT / "reports/RESULTS.md", ["cell_accuracy.png", "by_error_type.png", "unseen_formats.png",
+                                              "fairness_retention.png", "guardrails.png", "error_rate_sweep.png"])
+
+with tab_real:
+    st.write("Three real Indian datasets: two used during development, one kept as a blind hold-out.")
+    show_report(ROOT / "reports/real/REAL_RESULTS.md", [])
+    err = ROOT / "reports/real/startup_agent_errors.csv"
+    if err.exists() and err.stat().st_size > 5:
+        with st.expander("Agent errors on the hand-labelled startup rows"):
+            st.dataframe(pd.read_csv(err), hide_index=True)
+
+with tab_how:
+    st.markdown("""
+**Observe.** Profile every column: guess its type (money, date, phone, PIN, category, free text...) and list issues.
+
+**Plan.** Rules turn issues into steps. In hybrid mode, values the rules cannot match are sent to an LLM
+(e.g. `Poona` → `Pune`), and its answer is accepted only if it maps to a value that already exists in the column.
+
+**Act.** Only whitelisted tools run, never code written by the LLM.
+
+**Verify.** Guardrails reject any step that would drop >15% of rows, blank >25% of a column or rewrite >50% of it.
+Every change is logged with before, after, tool and reason.
+
+**Repeat** until nothing fixable is left (at most 4 rounds).
+
+Safety rules learned from real data: never merge two common values (`Female`/`Male`), never merge different codes or
+numbers (`Series E`/`Series D`, `Phase 1`/`Phase 2`), never merge a multi-city entry into one city
+(`Bangalore / USA`), never mix units (`kmpl`/`km/kg`), and blank only order-of-magnitude outliers (real luxury
+houses are kept).
+""")

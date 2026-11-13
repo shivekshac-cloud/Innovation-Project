@@ -132,7 +132,37 @@ def _typo(v, rng):
     return s + "a"
 
 
-def corrupt_value(col, v, kind, rng):
+def heldout_value(col, v, kind, rng):
+    """Formats the rules were NOT written for (used only by the unseen-format test)."""
+    if kind == "money_format":
+        forms = [f"{inr(v)} INR", f"{int(v)} rupees", f"Rs {inr(v)}.00 only", f"₹ {inr(v)}.00"]
+        if v % 1000 == 0 and v >= 100000:
+            forms += [f"Rs {v / 1e5:g} Lakhs only", f"{v / 1e5:g} lakh rupees", f"₹{v / 1e5:g} Lac"]
+        return rng.choice(forms)
+    if kind == "date_format":
+        d = pd.Timestamp(v)
+        sfx = {1: "st", 2: "nd", 3: "rd", 21: "st", 22: "nd", 23: "rd", 31: "st"}.get(d.day, "th")
+        return rng.choice([d.strftime("%Y/%m/%d"), d.strftime("%B %d, %Y"), f"{d.day}{sfx} {d.strftime('%B %Y')}",
+                           d.strftime("%d %b, %Y"), d.strftime("%d%m%Y"), f"{d.year}-{d.month}-{d.day}"])
+    if kind == "phone_format":
+        return rng.choice([f"+91.{v[:5]}.{v[5:]}", f"{v[:5]} {v[5:8]} {v[8:]}", f"+91 ({v[:5]}) {v[5:]}", f"Mob: {v}", f"0091-{v}"])
+    if kind == "alias":
+        a = rng.choice(ALL_ALIASES[v])
+        return rng.choice([f"{a} ({STATE_CODE.get(dict((c, st) for c, st, _ in CITIES)[v], '')})", f"{v.upper()} CITY", f"{v}, India"])
+    if kind == "variant":
+        if col == "gender":
+            return rng.choice({"Male": ["Man", "M.", "Gents", "boy"], "Female": ["Woman", "F.", "Ladies", "girl"]}[v])
+        return rng.choice([f"{v} employee", f"{v} (job)", v.replace("-", "")])
+    if kind == "num_text":
+        return rng.choice([f"{v} Y", f"Age {v}", f"{v} yrs old", f"{v}y"])
+    return None
+
+
+def corrupt_value(col, v, kind, rng, heldout=False):
+    if heldout:
+        hv = heldout_value(col, v, kind, rng)
+        if hv is not None:
+            return hv
     if kind == "missing":
         return rng.choice(MISSING_FORMS)
     if kind == "case_space":
@@ -175,7 +205,7 @@ def corrupt_value(col, v, kind, rng):
     raise ValueError(kind)
 
 
-def corrupt(clean, tier, rate=0.06, dup_rate=0.03, tier3_mult=2.0, seed=0):
+def corrupt(clean, tier, rate=0.06, dup_rate=0.03, tier3_mult=2.0, seed=0, heldout=False):
     """Returns (dirty, ledger, dup_of). dirty is read back from CSV as text, like a real file.
 
     ledger: one row per corrupted cell (rid, column, kind, subtype, dirty value).
@@ -192,7 +222,7 @@ def corrupt(clean, tier, rate=0.06, dup_rate=0.03, tier3_mult=2.0, seed=0):
             opts = [(k, w) for k, w in kinds if not (k == "alias" and v not in ALL_ALIASES)]
             ks, ws = zip(*opts)
             kind = rng.choice(ks, p=np.array(ws) / sum(ws))
-            dv = corrupt_value(col, v, kind, rng)
+            dv = corrupt_value(col, v, kind, rng, heldout)
             if dv == str(v):
                 continue
             sub = kind

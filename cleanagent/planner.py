@@ -6,7 +6,7 @@ from dataclasses import dataclass, field
 from .llm import extract_json
 from .tools import OPTIONAL, TOOL_DOCS, TOOLS
 
-ORDER = ["standardize_missing", "parse_number", "parse_date", "normalize_phone", "normalize_pincode", "normalize_email",
+ORDER = ["fix_encoding", "standardize_missing", "extract_number", "parse_number", "parse_date", "normalize_phone", "normalize_pincode", "normalize_email",
          "normalize_text", "map_values", "fix_range", "flag_outliers", "impute", "drop_duplicates"]
 
 
@@ -68,16 +68,30 @@ class RulePlanner:
         for iss in issues:
             c = iss.column
             k, why = iss.kind, f"{iss.count} values: {iss.kind.replace('_', ' ')}"
-            if k == "disguised_missing":
+            if k == "encoding_artifacts":
+                steps.append(Step("fix_encoding", {"col": c}, f"{iss.count} values contain export junk such as \\xc2\\xa0"))
+            elif k == "disguised_missing":
                 steps.append(Step("standardize_missing", {"col": c}, why))
             elif k == "number_stored_as_text":
                 steps.append(Step("parse_number", {"col": c}, f"{iss.detail['non_plain']} values in non-standard formats; column stored as text"))
             elif k == "date_format":
-                steps.append(Step("parse_date", {"col": c, "dayfirst": True}, why + " (Indian day-first convention)"))
+                order = iss.detail.get("order", "unknown")
+                ev = iss.detail.get("evidence", {})
+                note = {"dayfirst": f"day-first: {ev.get('dayfirst', 0)} dates have a day above 12",
+                        "monthfirst": f"month-first: {ev.get('monthfirst', 0)} dates have a day above 12 in second place",
+                        "unknown": "order not provable from the data; assuming Indian day-first"}[order]
+                if ev.get("dayfirst") and ev.get("monthfirst"):
+                    note += f" (conflicting evidence {ev})"
+                steps.append(Step("parse_date", {"col": c, "dayfirst": order != "monthfirst"}, f"{why}; {note}"))
             elif k in ("phone_format", "pincode_format", "email_format"):
                 steps.append(Step(f"normalize_{k.split('_')[0]}", {"col": c}, why))
             elif k == "text_format":
                 steps.append(Step("normalize_text", {"col": c, "case": iss.detail["case"]}, why))
+            elif k == "number_with_unit":
+                steps.append(Step("extract_number", {"col": c, "unit": iss.detail["unit"]},
+                                  f"every value is a number in '{iss.detail['unit']}'; store the number, unit noted here"))
+            elif k == "mixed_units":
+                pass  # reported, not fixed: converting needs knowledge of how the units relate (ask a human or an LLM)
             elif k == "category_variants":
                 mapping = {raw: v[0] for raw, v in iss.detail["mapping"].items()}
                 reasons = {raw: v[1] for raw, v in iss.detail["mapping"].items()}
@@ -93,7 +107,8 @@ class RulePlanner:
                 steps.append(Step("fix_range", {"col": c, "lo": iss.detail["lo"], "hi": iss.detail["hi"]},
                                   f"{iss.count} values outside plausible range [{iss.detail['lo']}, {iss.detail['hi']}]"))
             elif k == "outlier":
-                steps.append(Step("flag_outliers", {"col": c, "z": iss.detail["z"]}, f"{iss.count} values are extreme (robust z > 5)"))
+                steps.append(Step("flag_outliers", {"col": c, "z": iss.detail["z"], "above": iss.detail["above"]},
+                                  f"{iss.count} values are 10x above the normal range (likely extra zeros or wrong unit)"))
             elif k == "duplicates":
                 steps.append(Step("drop_duplicates", {"subset": iss.detail["subset"]}, f"{iss.count} duplicate rows"))
         if self.impute and not steps:
