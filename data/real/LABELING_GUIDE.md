@@ -18,3 +18,12 @@ are lower than on the full file.
 | amount | Number in USD. `N/A`, `undisclosed`, `unknown` -> blank (never a made-up number). |
 
 Comparison ignores letter case and repeated spaces, nothing else.
+
+## Review record
+
+All 140 rows were re-checked against the raw file and these rules: both irregular dates (`05/072018`,
+`13/04.2015`) and every amount match their raw values; every city and round follows the table above. Judgement calls
+to be aware of: `New Delhi` -> `Delhi`; `Taramani` (a Chennai neighbourhood) and `Kerala` (a state) kept as written
+because they are not city names; `Seed`, `Seed Funding Round`, `Angel Funding` kept separate from `Seed Funding`;
+`Crowd funding` vs `Crowd Funding` is a tie in the raw data (comparison ignores case, so it does not matter).
+The review was done by the same AI assistant that drafted the labels, so it is not independent.

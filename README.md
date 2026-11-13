@@ -20,8 +20,8 @@ No GPU, no internet and no paid API needed.
 | Full synthetic benchmark / `--quick` | 5 min / 2 min | ~10-15 min / ~3-5 min |
 | Real-data evaluation | 1 min | ~2-3 min |
 
-**Windows setup:** install Python 3.10+ from python.org (tick *Add python.exe to PATH*), then double-click
-`setup.bat` once and `run_app.bat` to start the demo. Results are pre-computed, so the app opens instantly.
+**Presenting?** Follow `DEMO_GUIDE.md`: step-by-step setup on Windows, a 7-minute demo script, likely questions
+and fixes. Evaluators: see `EVALUATOR_NOTES.md`. LLM answers: see `LLM_SETUP.md`.
 
 The optional LLM uses **Ollama with `qwen2.5:1.5b`** (about 1 GB download, about 1.5 GB RAM, CPU only). In hybrid mode the
 LLM is asked only a few short questions per file (rare values the rules could not match), which suits a slow CPU.
@@ -225,8 +225,9 @@ Run once with the code frozen (fingerprint `7a376f4a6226`) before anyone looked 
 
 Still open, and worth saying in the presentation:
 
-- The startup gold labels were drafted with an AI assistant from the written rules in `data/real/LABELING_GUIDE.md`.
-  **Review all 140 rows yourself before presenting** (`data/real/startup_gold.csv`).
+- The startup gold labels were drafted with an AI assistant from the written rules in `data/real/LABELING_GUIDE.md`
+  and checked row by row against them. Some rules are judgement calls shared with the agent's dictionary
+  (`New Delhi` → `Delhi`), so a lenient city score is also reported. See `EVALUATOR_NOTES.md`.
 - The startup and house files were used during development, so their scores are development scores. Only the CarDekho
   run is blind.
 - Mixed units (`kmpl` with `km/kg`) and old names missing from the dictionary (`Poona`) are left for a human or the LLM.
