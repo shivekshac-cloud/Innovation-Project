@@ -57,7 +57,7 @@ streamlit run app/streamlit_app.py            # demo app
 python -m cleanagent data/real/startup_funding.csv -o cleaned.csv    # clean any CSV
 python -m cleanagent.benchmark [--quick] [--llm]                     # synthetic benchmark -> reports/
 python -m cleanagent.realeval                                        # real-data evaluation -> reports/real/
-pytest -q tests                                                      # 25 tests
+pytest -q tests                                                      # 26 tests
 ```
 
 ## Results on synthetic data (known truth)
@@ -279,6 +279,6 @@ app/         streamlit_app.py
 scripts/     make_gold_startup.py  check_llm.py  record_llm.py
 data/real/   the three real files, gold labels and labelling guide
 reports/     synthetic results; reports/real/ real-data results, cleaned files, hold-out record
-tests/       25 tests
+tests/       26 tests
 setup.bat  run_app.bat  run_benchmark.bat  record_llm_answers.bat
 ```

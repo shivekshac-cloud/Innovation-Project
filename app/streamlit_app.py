@@ -13,6 +13,7 @@ import streamlit as st
 from cleanagent.agent import CleaningAgent, Guard
 from cleanagent.data import corrupt, make_clean
 from cleanagent.llm import CachedLLM, OpenAICompatLLM
+from cleanagent.io import neutralize_formulas, read_csv_safely
 from cleanagent.explain import attribution, explain_cell, explain_steps
 from cleanagent.planner import LLMPlanner, RulePlanner
 from cleanagent.report import changes_frame, to_markdown
@@ -53,7 +54,11 @@ with tab_demo:
         up = st.file_uploader("CSV file", type="csv")
         if not up:
             st.stop()
-        dirty = pd.read_csv(up, dtype=str).astype(object)
+        try:
+            dirty = read_csv_safely(up)
+        except ValueError as e:
+            st.error(str(e))
+            st.stop()
     elif src is None:
         c1, c2 = st.columns(2)
         rate = c1.slider("Share of cells corrupted", 0.02, 0.3, 0.08, 0.01)
@@ -109,7 +114,7 @@ with tab_demo:
         with t3:
             st.dataframe(res.df.head(200), width="stretch")
             a, b = st.columns(2)
-            a.download_button("Download cleaned CSV", res.df.to_csv(index=False).encode("utf-8-sig"), "cleaned.csv")
+            a.download_button("Download cleaned CSV", neutralize_formulas(res.df).to_csv(index=False).encode("utf-8-sig"), "cleaned.csv")
             b.download_button("Download cleaning report", to_markdown(res), "cleaning_report.md")
         with t4:
             st.write("Left for a human or an LLM (the rules deliberately do not guess these):")

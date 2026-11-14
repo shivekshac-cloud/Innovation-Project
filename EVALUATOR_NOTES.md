@@ -28,6 +28,11 @@ what triggered it, the evidence from the data, the share of all changed cells it
 is a stated rule (deterministic reformat = High; LLM-chosen, blanked or removed rows = Medium; stopped by a guardrail = Blocked),
 not a probability. We did not run SHAP on the downstream models.
 
+**Robustness.** Uploaded CSVs are read as text with Windows/Excel encodings (UTF-8, cp1252, Latin-1) and `,`/`;`/tab separators;
+empty, one-column or oversized (>300,000 rows) files get a plain error message instead of a crash. Downloaded CSVs have text cells
+that start with `=`, `+`, `-` or `@` prefixed with an apostrophe so a spreadsheet cannot run them as formulas (genuine numbers
+are untouched). The benchmark uses fixed seeds, and the agent code never reads the gold labels or the error ledger.
+
 **Generalisation.** On synthetic error formats the rules were not written for, the agent fixed 66% of fixable errors
 (99% on known formats), without damaging any correct value.
 

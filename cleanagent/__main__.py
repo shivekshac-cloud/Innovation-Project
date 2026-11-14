@@ -5,6 +5,7 @@ import argparse
 import pandas as pd
 
 from .agent import CleaningAgent
+from .io import neutralize_formulas, read_csv_safely
 from .planner import LLMPlanner, RulePlanner
 from .report import to_markdown
 
@@ -20,7 +21,7 @@ if a.mode != "rule":
     from .llm import OpenAICompatLLM
     llm = OpenAICompatLLM()
     planner = RulePlanner(llm=llm, impute=a.impute) if a.mode == "hybrid" else LLMPlanner(llm)
-res = CleaningAgent(planner, verbose=True).run(pd.read_csv(a.csv, dtype=str, encoding="utf-8").astype(object))
-res.df.to_csv(a.out, index=False, encoding="utf-8-sig")  # -sig so Excel on Windows shows ₹ correctly
+res = CleaningAgent(planner, verbose=True).run(read_csv_safely(a.csv))
+neutralize_formulas(res.df).to_csv(a.out, index=False, encoding="utf-8-sig")  # -sig so Excel on Windows shows ₹ correctly
 open(a.report, "w", encoding="utf-8").write(to_markdown(res))
 print(f"Wrote {a.out} and {a.report}")

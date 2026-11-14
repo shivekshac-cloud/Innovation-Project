@@ -181,3 +181,16 @@ def test_explainability_covers_every_step_and_attribution_sums_to_100():
     assert abs(attribution(res)["share_%"].sum() - 100) < 0.5
     i, c, old, new, *_ = next(ch for ch in res.changes if ch[1] is not None)
     assert explain_cell(res, i, c)[0]["after"] == str(new)
+
+
+def test_upload_reader_handles_windows_encoding_and_rejects_bad_files(tmp_path):
+    import io as _io
+    from cleanagent.io import neutralize_formulas, read_csv_safely
+    cp = "name,city\nAsha,Pune\nRavi,Chennai \n".encode("cp1252")
+    df = read_csv_safely(_io.BytesIO(cp))
+    assert list(df.columns) == ["name", "city"] and len(df) == 2
+    for bad in (b"", b"onlyonecolumn\n1\n2\n"):
+        with pytest.raises(ValueError):
+            read_csv_safely(_io.BytesIO(bad))
+    d = neutralize_formulas(pd.DataFrame({"a": ["=HYPERLINK(\"http://x\")", "@cmd", "-5", "+91 98765 43210", "ok"]}))
+    assert d.a.tolist()[:2] == ["'=HYPERLINK(\"http://x\")", "'@cmd"] and d.a.tolist()[2:] == ["-5", "+91 98765 43210", "ok"]
