@@ -168,3 +168,16 @@ def test_llm_suggestions_obey_the_same_safety_rules():
     assert out[61] == "Pune"                # LLM world knowledge accepted
     assert out[62] == "Bengaluru"           # LLM target follows the rule rename, old name not brought back
     assert "Bangalore" not in out
+
+
+def test_explainability_covers_every_step_and_attribution_sums_to_100():
+    from cleanagent.explain import attribution, explain_cell, explain_steps
+    clean, tier = make_clean(600, seed=3)
+    dirty, _, _ = corrupt(clean, tier, rate=0.06, seed=3)
+    res = CleaningAgent(RulePlanner()).run(dirty)
+    ex = explain_steps(res)
+    assert len(ex) == len(res.log) and (ex.evidence.str.len() > 0).all()
+    assert set(ex.confidence) <= {"High", "Medium", "Blocked", "Refused", "No effect"}
+    assert abs(attribution(res)["share_%"].sum() - 100) < 0.5
+    i, c, old, new, *_ = next(ch for ch in res.changes if ch[1] is not None)
+    assert explain_cell(res, i, c)[0]["after"] == str(new)

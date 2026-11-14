@@ -22,6 +22,12 @@ lenient city score that accepts old names.
   output was reported unchanged. It made only trivial, correct fixes and missed unit columns (`kmpl`, `CC`, `bhp`).
   A unit tool was added afterwards and is reported separately as a post-hoc fix.
 
+**Explainability.** The handout suggests SHAP, LIME or Grad-CAM, which explain a model's predictions. CleanAgent has no
+predictive model of its own; it makes decisions. So each decision is explained instead (the *Why?* tab, `cleanagent/explain.py`):
+what triggered it, the evidence from the data, the share of all changed cells it caused, and a confidence label. The label
+is a stated rule (deterministic reformat = High; LLM-chosen, blanked or removed rows = Medium; stopped by a guardrail = Blocked),
+not a probability. We did not run SHAP on the downstream models.
+
 **Generalisation.** On synthetic error formats the rules were not written for, the agent fixed 66% of fixable errors
 (99% on known formats), without damaging any correct value.
 

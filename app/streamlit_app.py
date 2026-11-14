@@ -13,6 +13,7 @@ import streamlit as st
 from cleanagent.agent import CleaningAgent, Guard
 from cleanagent.data import corrupt, make_clean
 from cleanagent.llm import CachedLLM, OpenAICompatLLM
+from cleanagent.explain import attribution, explain_cell, explain_steps
 from cleanagent.planner import LLMPlanner, RulePlanner
 from cleanagent.report import changes_frame, to_markdown
 
@@ -92,7 +93,7 @@ with tab_demo:
         m[3].metric("Rows dropped", sum(1 for c in res.changes if c[1] is None))
         m[4].metric("Steps rejected", int((log.status != "applied").sum()) if len(log) else 0)
         m[5].metric("Seconds", f"{st.session_state['secs']:.1f}")
-        t1, t2, t3, t4 = st.tabs(["Agent trace", "Before → after by column", "Cleaned data", "Issues left"])
+        t1, t2, t3, t4, t5 = st.tabs(["Agent trace", "Before → after by column", "Cleaned data", "Issues left", "Why? (explainability)"])
         with t1:
             st.dataframe(log[["iteration", "step", "source", "status", "n_changed", "n_blanked", "rows_dropped", "reason", "why"]],
                          hide_index=True, width="stretch")
@@ -113,6 +114,27 @@ with tab_demo:
         with t4:
             st.write("Left for a human or an LLM (the rules deliberately do not guess these):")
             st.dataframe(pd.DataFrame(res.issues_after), hide_index=True, width="stretch")
+        with t5:
+            st.write("Every decision the agent made: **what triggered it**, the **evidence** from your data, how much of the "
+                     "result it is **responsible for**, and how far to **trust** it. (SHAP explains a model's prediction; "
+                     "this agent makes decisions, so each decision is explained instead.)")
+            ex = explain_steps(res)
+            st.dataframe(ex, hide_index=True, width="stretch")
+            st.caption("Confidence is a rule, not a probability: High = deterministic reformat that passed all guardrails; "
+                       "Medium = LLM-chosen, blanked unreadable values, or removed duplicates; Blocked = a guardrail stopped it.")
+            at = attribution(res)
+            if len(at):
+                st.write("**Which operations did the work** (share of all changed cells):")
+                st.bar_chart(at.set_index("tool")["share_%"])
+            ch2 = changes_frame(res)
+            if len(ch2):
+                st.write("**Trace one cell:** pick a row and column to see every change made to it and why.")
+                c1, c2 = st.columns(2)
+                ccol = c1.selectbox("Column ", sorted(ch2.column.dropna().unique().tolist()), key="why_col")
+                rows = ch2[ch2.column == ccol].row.tolist() if "row" in ch2.columns else []
+                if rows:
+                    rr = c2.selectbox("Row ", rows[:500], key="why_row")
+                    st.dataframe(pd.DataFrame(explain_cell(res, rr, ccol)), hide_index=True, width="stretch")
 
 
 def show_report(md_path, images):

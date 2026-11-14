@@ -45,7 +45,7 @@ via Ollama or LM Studio (`LLM_SETUP.md`).
 |---|---|
 | Scope it | One problem (cleaning tabular data), synthetic benchmark plus 3 real datasets, 4-6 methods compared |
 | Deploy it | Streamlit app (live demo on the real files, results pages), CLI, Windows one-click scripts |
-| Explain it | Full audit trail: every changed cell with before, after, tool and reason; downloadable report |
+| Explain it | Full audit trail (every changed cell with before, after, tool and reason) plus a **Why? tab**: for every decision the trigger, evidence from the data, share of all changes it is responsible for, and a rule-based confidence label; trace any single cell. SHAP explains a model's prediction; this agent makes decisions, so each decision is explained instead (`cleanagent/explain.py`) |
 | Localize it | Lakh/crore money, day-first dates, +91 phones, PIN codes, state codes, renamed Indian cities, Indian area units (guntha, cents, grounds, perch, acres) |
 | Measure it | Ground truth on synthetic data, hand-labelled gold rows on real data, a downstream model, a blind hold-out, and a fairness check |
 
@@ -57,7 +57,7 @@ streamlit run app/streamlit_app.py            # demo app
 python -m cleanagent data/real/startup_funding.csv -o cleaned.csv    # clean any CSV
 python -m cleanagent.benchmark [--quick] [--llm]                     # synthetic benchmark -> reports/
 python -m cleanagent.realeval                                        # real-data evaluation -> reports/real/
-pytest -q tests                                                      # 24 tests
+pytest -q tests                                                      # 25 tests
 ```
 
 ## Results on synthetic data (known truth)
@@ -279,6 +279,6 @@ app/         streamlit_app.py
 scripts/     make_gold_startup.py  check_llm.py  record_llm.py
 data/real/   the three real files, gold labels and labelling guide
 reports/     synthetic results; reports/real/ real-data results, cleaned files, hold-out record
-tests/       24 tests
+tests/       25 tests
 setup.bat  run_app.bat  run_benchmark.bat  record_llm_answers.bat
 ```

@@ -32,7 +32,7 @@ Do not run anything from inside the ZIP without extracting it; it will not work.
 2. If Windows shows **"Windows protected your PC"**, click **More info**, then **Run anyway**. (This appears for
    any downloaded script; it is expected.)
 3. A black window opens and downloads the libraries. This takes 5-15 minutes. Do not close it.
-4. It is finished when you see **`22 passed`** and **"Setup done"**. Press any key to close.
+4. It is finished when you see **`25 passed`** and **"Setup done"**. Press any key to close.
 
 If it says **"Python not found"** even though you installed Python: restart the laptop and try again. If it still
 fails, open *Settings → Apps → Advanced app settings → App execution aliases* and switch **off** the two
@@ -73,6 +73,7 @@ and every change is logged with a reason."
 - Open **Before → after by column**, choose **City  Location**: show `Bangalore → Bengaluru`,
   `Ahemadabad → Ahmedabad` (a misspelling), and the junk-character fixes.
 - Choose **Amount in USD**: show `20,00,00,000 → 200000000` and that `undisclosed` becomes blank, not a made-up number.
+- Open **Why? (explainability)**: "SHAP explains a model's prediction; this agent makes decisions, so every decision is explained: what triggered it, the evidence from the data, how much of the result it caused, and how far to trust it. Pick any cell to see its full history." Show the bar chart of which operations did the work.
 - Open **Issues left**: "Entries like `Bangalore / USA` are deliberately not merged into one city. The agent leaves
   what it cannot be sure about for a human."
 
