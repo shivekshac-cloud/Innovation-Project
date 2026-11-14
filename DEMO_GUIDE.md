@@ -22,7 +22,7 @@ The project page is https://github.com/shivekshac-cloud/Innovation-Project
 3. Open your Downloads folder, right-click **Innovation-Project-main.zip**, choose **Extract All...**, set the
    destination to your **Desktop**, and click **Extract**.
 4. You now have a folder `Desktop\Innovation-Project-main\Innovation-Project-main`. Open the inner folder: it
-   contains `setup.bat`, `run_app.bat` and `README.md`. Work only inside this folder. (Ignore the `archive` folder.)
+   contains `setup.bat`, `run_app.bat` and `README.md`. Work only inside this folder.
 
 Do not run anything from inside the ZIP without extracting it; it will not work.
 
